@@ -41,7 +41,7 @@
 						<id>exec-npm-install</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<workingDirectory>./src/main/ngapp</workingDirectory>
+							<workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
 							<executable>npm</executable>
 							<arguments>
 								<argument>install</argument>
@@ -56,9 +56,10 @@
 						<id>exec-npm-ng-build</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<workingDirectory>./src/main/ngapp</workingDirectory>
-							<executable>ng</executable>
+							<workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
+							<executable>sudo</executable>
 							<arguments>
+								<argument>ng</argument>
 								<argument>build</argument>
 								<argument>--base-href=/TexasCheatum/ng/</argument>
 							</arguments>
