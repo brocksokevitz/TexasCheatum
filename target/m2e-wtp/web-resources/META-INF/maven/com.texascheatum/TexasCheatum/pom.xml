@@ -38,21 +38,6 @@
 				<version>1.6.0</version>
 				<executions>
 					<execution>
-						<id>exec-npm-install-node-sass</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
-							<executable>npm</executable>
-							<arguments>
-								<argument>install</argument>
-								<argument>node-sass</argument>
-							</arguments>
-						</configuration>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-					<execution>
 						<id>exec-npm-install</id>
 						<phase>generate-sources</phase>
 						<configuration>
@@ -60,6 +45,7 @@
 							<executable>npm</executable>
 							<arguments>
 								<argument>install</argument>
+								<argument>--unsafe-perm</argument>
 							</arguments>
 						</configuration>
 						<goals>
