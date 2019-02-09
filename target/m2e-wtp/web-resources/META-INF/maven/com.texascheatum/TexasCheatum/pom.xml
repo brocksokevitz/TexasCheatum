@@ -59,7 +59,7 @@
 							<executable>ng</executable>
 							<arguments>
 								<argument>build</argument>
-								<argument>--base-href=/TexasCheatum/ng/</argument>
+								<argument>--base-href=/TexasCheatum/</argument>
 							</arguments>
 						</configuration>
 						<goals>
