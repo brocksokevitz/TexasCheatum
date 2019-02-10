@@ -32,7 +32,7 @@ public class FrontController extends DefaultServlet {
 		log.info(request.getMethod() + " " + uri);
 		
 		if (uri.equals("/TexasCheatum/") || uri.equals("/TexasCheatum"))
-			request.getRequestDispatcher("/TexasCheatum/ng/").forward(request, response);
+			request.getRequestDispatcher("/ng/").forward(request, response);
 		else if (uri.equals("/TexasCheatum/ng/") ||
 				(uri.lastIndexOf('.') > -1 && fileExts.contains(uri.substring(uri.lastIndexOf('.')))))
 			super.doGet(request, response);
