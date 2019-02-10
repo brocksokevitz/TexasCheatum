@@ -27,10 +27,10 @@ public class FrontController extends DefaultServlet {
 			throws IOException, ServletException {
 		String uri = request.getRequestURI();
 		
-		if (uri.equals("/TexasCheatum/"))
+		if (uri.equals("/TexasCheatum/") || uri.equals("/TexasCheatum/"))
 			request.getRequestDispatcher("/TexasCheatum/ng/").forward(request, response);
 		else if (uri.equals("/TexasCheatum/ng/") ||
-				fileExts.contains(uri.substring(uri.lastIndexOf('.'))))
+				(uri.lastIndexOf('.') > -1 && fileExts.contains(uri.substring(uri.lastIndexOf('.')))))
 			super.doGet(request, response);
 	}
 }
