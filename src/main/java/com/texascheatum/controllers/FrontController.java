@@ -23,6 +23,7 @@ public class FrontController extends DefaultServlet {
 		fileExts.add(".html");
 		fileExts.add(".js");
 		fileExts.add(".ico");
+		fileExts.add(".map");
 	}
 	
 	@Override
