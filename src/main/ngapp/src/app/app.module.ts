@@ -25,6 +25,6 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [LoginComponent]
 })
 export class AppModule { }
