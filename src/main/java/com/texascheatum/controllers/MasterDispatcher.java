@@ -18,9 +18,6 @@ public class MasterDispatcher {
 		String uri = uriStrings[uriStrings.length - 1];
 		
 		switch(uri) {
-		case "ng":
-			request.getRequestDispatcher("/ng/index.html").forward(request, response);
-			break;
 		default:
 			log.error("URI not recognized");
 		}
