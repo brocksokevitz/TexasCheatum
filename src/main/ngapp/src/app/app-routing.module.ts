@@ -9,7 +9,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
 
 const routes: Routes = [
   {
-    path: "ng",
+    path: "",
     component: LoginComponent
   },
   {
