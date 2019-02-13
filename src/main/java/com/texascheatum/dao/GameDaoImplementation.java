@@ -27,13 +27,14 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean createGame(String username) {
+	public boolean createGame(int gameId, String username) {
 		Connection conn = null;
 		conn = cu.getConnection();
 		
 		try {
-			CallableStatement cs = conn.prepareCall("{call create_game(?)}");	
-			cs.setString(1, username);
+			CallableStatement cs = conn.prepareCall("{call create_game(?,?)}");	
+			cs.setInt(1, gameId);
+			cs.setString(2, username);
 
 			boolean output = cs.execute();
 			
