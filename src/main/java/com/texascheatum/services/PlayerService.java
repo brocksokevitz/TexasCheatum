@@ -15,6 +15,22 @@ public class PlayerService {
 	private PlayerService() { }
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
+	public static void register(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		JsonNode userJson = mapper.readTree(request.getReader());
+		if (UserDaoImplementation.getUserDao().insertUser(
+				userJson.get("username").asText(),
+				userJson.get("email").asText(),
+				userJson.get("password").asText())) {
+			User user = UserDaoImplementation.getUserDao().getUser(
+					userJson.get("username").asText(),
+					userJson.get("password").asText());
+			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("gameID", user.getUsername());
+		} else
+			response.sendError(403);;
+	}
+	
 	public static void login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode userJson = mapper.readTree(request.getReader());

@@ -20,6 +20,9 @@ public class MasterDispatcher {
 		String uri = uriStrings[uriStrings.length - 1];
 		
 		switch(uri) {
+		case "register":
+			PlayerService.register(request, response);
+			break;
 		case "login":
 			PlayerService.login(request, response);
 			break;
