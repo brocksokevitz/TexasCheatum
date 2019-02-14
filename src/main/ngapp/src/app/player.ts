@@ -1,5 +1,5 @@
 export class Player {
     username: string;
-    gameId: number;
+    gameId: string;
     money: number;
 }
