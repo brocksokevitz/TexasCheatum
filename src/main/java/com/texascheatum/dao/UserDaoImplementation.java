@@ -22,7 +22,7 @@ public class UserDaoImplementation implements UserDao{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static UserDaoImplementation getReimbursementDao() {
+	public static UserDaoImplementation getUserDao() {
 		
 		if(userDao == null)
 			userDao = new UserDaoImplementation();

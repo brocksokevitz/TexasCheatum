@@ -17,7 +17,7 @@ public class PlayerService {
 	public static void login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = mapper.readValue(request.getReader(), User.class);
-		user = UserDaoImplementation.getReimbursementDao().getUser(user.getUsername(), user.getPassword());
+		user = UserDaoImplementation.getUserDao().getUser(user.getUsername(), user.getPassword());
 		
 		if (user.getUsername() != null && !user.getUsername().equals("")) {
 			request.getSession().setAttribute("user", user);

@@ -18,7 +18,7 @@ public class GameDaoImplementation implements GameDao{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static GameDaoImplementation getReimbursementDao() {
+	public static GameDaoImplementation getGameDao() {
 		
 		if(gameDao == null)
 			gameDao = new GameDaoImplementation();

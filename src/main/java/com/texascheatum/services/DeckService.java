@@ -23,7 +23,7 @@ public class DeckService {
 			throws ServletException, IOException {
 		String gameID = getNewGameID();
 		if (gameID != null) {
-			GameDaoImplementation.getReimbursementDao().createGame(gameID,
+			GameDaoImplementation.getGameDao().createGame(gameID,
 					((User) request.getSession().getAttribute("user")).getUsername());
 			request.getSession().setAttribute("gameID", gameID);
 			response.getWriter().write(gameID);
