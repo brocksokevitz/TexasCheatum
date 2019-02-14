@@ -9,6 +9,7 @@ export class CredentialsService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.post<any>("/servlet/login", {username: username, password: password});
+    console.log("inside the login method in credential service");
+    return this.http.post<any>("/TexasCheatum/servlet/login", {username: username, password: password});
   }
 }

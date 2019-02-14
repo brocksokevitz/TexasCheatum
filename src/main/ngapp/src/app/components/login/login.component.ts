@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log("inside the login method in login.component");
     this.credService.login(this.credentials.username, this.credentials.password).subscribe(
       data => {
         if(data !== null) {
