@@ -9,6 +9,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
 
 const routes: Routes = [
   {
+    //path: "",
     path: "TexasCheatum",
     component: LoginComponent
   },
