@@ -19,6 +19,20 @@ public class FrontController extends DefaultServlet {
 	}
 	
 	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String uri = request.getRequestURI();
+		log.info(request.getMethod() + " " + uri);
+		
+		if (uri.contains("/servlet/"))
+			MasterDispatcher.processPOST(request, response);
+		else if (uri.equals("/TexasCheatum/") || uri.equals("/TexasCheatum"))
+			request.getRequestDispatcher("/ng/index.html").forward(request, response);
+		else
+			super.doGet(request, response);
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		String uri = request.getRequestURI();
