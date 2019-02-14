@@ -19,7 +19,7 @@ public class PlayerService {
 		User user = mapper.readValue(request.getReader(), User.class);
 		user = UserDaoImplementation.getReimbursementDao().getUser(user.getUsername(), user.getPassword());
 		
-		if (user != null) {
+		if (user.getUsername() != null && !user.getUsername().equals("")) {
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("gameID", user.getCurrentGame());
 			
