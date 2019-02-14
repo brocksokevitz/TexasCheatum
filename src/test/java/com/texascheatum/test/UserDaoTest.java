@@ -1,10 +1,6 @@
 package com.texascheatum.test;
 
-import java.util.ArrayList;
-
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.texascheatum.dao.UserDaoImplementation;
