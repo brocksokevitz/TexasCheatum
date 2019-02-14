@@ -43,10 +43,13 @@ create table users
 (   
     user_id number not null,
     username varchar(25) not null,
+    balance Decimal(15,2) default(10000) not null,
     email varchar(50) not null,
     password varchar(150) not null,
     superuser number not null,
     current_game number not null,
+    total_games number not null,
+    total_wins number not null,
     --
     constraint user_id_pk primary key(user_id),
     constraint unq_username unique (username),
@@ -76,16 +79,16 @@ end;
 create or replace procedure insert_user(username varchar, email varchar, password varchar)
 as
 begin
-insert into users values(new_user_id.nextval, username, email, encrypt_password(username, password), 0, 0);
+insert into users values(new_user_id.nextval, username, 10000.00, email, encrypt_password(username, password), 0, 0, 0, 0);
 commit;-- saves changes
 end;
 /
 
 create or replace procedure get_user(input_username in varchar, input_password in varchar, 
-output_id out number, output_email out varchar, output_superuser out number, output_game out number)
+output_id out number, output_email out varchar, output_superuser out number, output_game out number, output_balance out number, output_total out number, output_wins out number)
 as
 begin
-select user_id, email, superuser, current_game into output_id, output_email, output_superuser, output_game  from users where username=input_username and password=encrypt_password(input_username, input_password);
+select user_id, balance, email, superuser, current_game, total_games, total_wins into output_id, output_balance, output_email, output_superuser, output_game, output_total, output_wins  from users where username=input_username and password=encrypt_password(input_username, input_password);
 commit;-- saves changes
 end;
 /
