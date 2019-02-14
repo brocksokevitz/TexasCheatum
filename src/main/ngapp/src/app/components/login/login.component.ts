@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.credService.login(this.credentials.username, this.credentials.password).subscribe(
       data => {
         if(data !== null) {
-          console.log(data);
+          console.log(data.username);
           this.router.navigateByUrl("/home");
         }
         else if(data === ""){
