@@ -1,5 +1,7 @@
 <div>
-  <form action="" class="form-group">
-     <button routerLink="/home">Login</button>
+  <form class="form-group" (ngSubmit)="login()" method="POST">
+    <input type="text" name="username" [(ngModel)]="credentials.username" #username="ngModel" placeholder="username">
+    <input type="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" placeholder="password">
+    <button class="btn btn-outline-info">Login</button>
   </form>
 </div>
