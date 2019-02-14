@@ -63,14 +63,20 @@ public class UserDaoImplementation implements UserDao{
 			cs.registerOutParameter(4, Types.VARCHAR);
 			cs.registerOutParameter(5, Types.INTEGER);
 			cs.registerOutParameter(6, Types.INTEGER);
+			cs.registerOutParameter(7, Types.DOUBLE);
+			cs.registerOutParameter(8, Types.INTEGER);
+			cs.registerOutParameter(9, Types.INTEGER);
 			cs.execute();
 			
 			int userId = cs.getInt(3);
 			String email = cs.getString(4);
 			int superuser = cs.getInt(5);
 			int currentGame = cs.getInt(6);
+			double balance = cs.getDouble(7);
+			int totalGames = cs.getInt(8);
+			int totalWins = cs.getInt(9);
 			
-			return new User(userId, username, email, superuser, currentGame);
+			return new User(userId, username, balance, email, password, superuser, currentGame, totalGames, totalWins);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
