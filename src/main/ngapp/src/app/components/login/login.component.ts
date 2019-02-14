@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl("/home");
         }
         else {
-          this.router.navigateByUrl("")
+          this.router.navigateByUrl("/TexasCheatum")
         }
       }
     );
