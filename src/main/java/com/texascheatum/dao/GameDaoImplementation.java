@@ -27,13 +27,13 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean createGame(int gameId, String username) {
+	public boolean createGame(String gameId, String username) {
 		Connection conn = null;
 		conn = cu.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call create_game(?,?)}");	
-			cs.setInt(1, gameId);
+			cs.setString(1, gameId);
 			cs.setString(2, username);
 
 			boolean output = cs.execute();
@@ -49,13 +49,13 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean updateGame(int gameId, String status) {
+	public boolean updateGame(String gameId, String status) {
 		Connection conn = null;
 		conn = cu.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call update_game(?,?)}");	
-			cs.setInt(1, gameId);
+			cs.setString(1, gameId);
 			cs.setString(2, status);
 
 			boolean output = cs.execute();
