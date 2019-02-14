@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         if(data !== null) {
           this.router.navigateByUrl("/home");
         }
-        else {
+        else if(data === ""){
           this.router.navigateByUrl("/TexasCheatum")
         }
       }
