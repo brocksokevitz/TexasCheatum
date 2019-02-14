@@ -34,8 +34,10 @@ public class DeckService {
 		return apiResp.get("deck_id").asText();
 	}
 	
-	public static void getGame(HttpServletRequest request, HttpServletResponse response) {
-		
+	public static void getGame(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		getHand(request, response);
+		getTable(request, response);
 	}
 
 	public static void getHand(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +75,24 @@ public class DeckService {
 		if (piles.has("table"))
 			response.getWriter().write(getCardString(piles.get("table")));
 	}
-
+	
+	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		JsonNode apiResp = makeHttpRequest(
+				request.getSession().getAttribute("gameID")
+				+ "/draw/?count=3");
+		
+		addCardsToPile(request, "table", getCardString(apiResp));
+		getTable(request, response);
+	}
+	public static void turn_river(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		JsonNode apiResp = makeHttpRequest(
+				request.getSession().getAttribute("gameID")
+				+ "/draw/?count=1");
+		
+		addCardsToPile(request, "table", getCardString(apiResp));
+		getTable(request, response);
+	}
+	
 	private static void addCardsToPile(HttpServletRequest request, String pile, String cards) throws IOException {
 		makeHttpRequest(
 				request.getSession().getAttribute("gameID")

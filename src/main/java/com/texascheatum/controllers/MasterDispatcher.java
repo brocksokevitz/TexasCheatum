@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.texascheatum.services.DeckService;
 import com.texascheatum.services.PlayerService;
 
 public class MasterDispatcher {
@@ -45,12 +46,16 @@ public class MasterDispatcher {
 			PlayerService.logout(request, response);
 			break;
 		case "getHand":
+			DeckService.getHand(request, response);
 			break;
 		case "getFlop":
+			DeckService.flop(request, response);
 			break;
 		case "getTurn":
+			DeckService.turn_river(request, response);
 			break;
 		case "getRiver":
+			DeckService.turn_river(request, response);
 			break;
 		case "cheat":
 			break;
