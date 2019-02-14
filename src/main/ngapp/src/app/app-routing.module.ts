@@ -9,8 +9,8 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
 
 const routes: Routes = [
   {
-    // path: "ng",
-    path: "",
+    //path: "",
+    path: "TexasCheatum",
     component: LoginComponent
   },
   {
