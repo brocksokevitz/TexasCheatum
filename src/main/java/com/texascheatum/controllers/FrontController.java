@@ -29,7 +29,7 @@ public class FrontController extends DefaultServlet {
 		else if (uri.equals("/TexasCheatum/") || uri.equals("/TexasCheatum"))
 			request.getRequestDispatcher("/ng/index.html").forward(request, response);
 		else
-			super.doGet(request, response);
+			super.doPost(request, response);
 	}
 	
 	@Override
