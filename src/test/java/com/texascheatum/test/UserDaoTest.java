@@ -15,6 +15,7 @@ public class UserDaoTest {
 		User testUser = UserDaoImplementation.getUserDao().getUser("super", "superpass");
 		Assert.assertEquals(1, testUser.getUserId());
 		Assert.assertEquals("super", testUser.getUsername());
+		Assert.assertEquals(0, Double.compare(10000, testUser.getBalance()));
 		Assert.assertEquals("fuksyr@gmail.com", testUser.getEmail());
 		Assert.assertEquals(25, testUser.getSuperuser());
 	}
