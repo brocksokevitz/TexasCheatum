@@ -18,17 +18,10 @@ public class PlayerService {
 	public static void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode userJson = mapper.readTree(request.getReader());
-		if (UserDaoImplementation.getUserDao().insertUser(
+		UserDaoImplementation.getUserDao().insertUser(
 				userJson.get("username").asText(),
 				userJson.get("email").asText(),
-				userJson.get("password").asText())) {
-			User user = UserDaoImplementation.getUserDao().getUser(
-					userJson.get("username").asText(),
-					userJson.get("password").asText());
-			request.getSession().setAttribute("user", user);
-			request.getSession().setAttribute("gameID", user.getUsername());
-		} else
-			response.sendError(403);;
+				userJson.get("password").asText());
 	}
 	
 	public static void login(HttpServletRequest request, HttpServletResponse response)

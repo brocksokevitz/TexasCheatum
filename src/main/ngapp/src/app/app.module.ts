@@ -11,6 +11,7 @@ import { GameSettingsComponent } from './components/game-settings/game-settings.
 import { HomeComponent } from './components/home/home.component';
 import { RulesComponent } from './components/rules/rules.component';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     GameSettingsComponent,
     HomeComponent,
     RulesComponent,
-    OptionsMenuComponent
+    OptionsMenuComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

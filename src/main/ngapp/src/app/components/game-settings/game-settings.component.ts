@@ -12,4 +12,7 @@ export class GameSettingsComponent implements OnInit {
   ngOnInit() {
   }
 
+  newGame() {}
+
+  joinGame() {}
 }
