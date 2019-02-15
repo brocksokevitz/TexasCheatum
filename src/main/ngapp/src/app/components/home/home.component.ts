@@ -22,9 +22,7 @@ export class HomeComponent implements OnInit {
     this.credService.logout().subscribe(
       data => {
         console.log(data);
-        
         this.router.navigateByUrl("/TexasCheatum");
-        
       }
     );
   }
