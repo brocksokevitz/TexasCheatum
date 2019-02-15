@@ -57,8 +57,7 @@ create table users
     constraint game_id_fk foreign key (current_game) references games(game_id)
 ); -- for tables, you put ;
 
---hashing function that combines password and extra word get_customer_hash(?) ?
---taken from yuvi's notes
+--hashing function that combines password and extra salt
 create or replace function encrypt_password(username varchar, password varchar) return varchar
 is
 extra varchar(10) := '0L2di59Fw7';
@@ -85,10 +84,14 @@ end;
 /
 
 create or replace procedure get_user(input_username in varchar, input_password in varchar, 
-output_id out number, output_email out varchar, output_superuser out number, output_game out number, output_balance out number, output_total out number, output_wins out number)
+output_id out number, output_email out varchar, output_superuser out number, output_game out number,
+ output_balance out number, output_total out number, output_wins out number)
 as
 begin
-select user_id, balance, email, superuser, current_game, total_games, total_wins into output_id, output_balance, output_email, output_superuser, output_game, output_total, output_wins  from users where username=input_username and password=encrypt_password(input_username, input_password);
+select user_id, balance, email, superuser, current_game, total_games, total_wins 
+into output_id, output_balance, output_email, output_superuser, output_game, output_total, output_wins  
+from users 
+where username=input_username and password=encrypt_password(input_username, input_password);
 commit;-- saves changes
 end;
 /
