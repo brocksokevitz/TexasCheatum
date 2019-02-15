@@ -25,4 +25,8 @@ export class RegisterComponent implements OnInit {
         data => this.router.navigateByUrl("/TexasCheatum")
       );
   }
+
+  goBack() {
+    window.history.back();
+  }
 }
