@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
           console.log(data);
           this.router.navigateByUrl("/home");
         }
-        else if(data === ""){
-          console.log(data);
-          this.router.navigateByUrl("/TexasCheatum");
+        else {
           this.visible = !this.visible;
+          this.credentials.username = "";
+          this.credentials.password = "";
         }
       }
     );
