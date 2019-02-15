@@ -56,7 +56,7 @@ public class UserDaoImplementation implements UserDao{
 		conn = cu.getConnection();
 		
 		try {
-			CallableStatement cs = conn.prepareCall("{call get_user(?,?,?,?,?,?)}");	
+			CallableStatement cs = conn.prepareCall("{call get_user(?,?,?,?,?,?,?,?,?)}");	
 			cs.setString(1, username);
 			cs.setString(2, password);
 			cs.registerOutParameter(3, Types.INTEGER);
@@ -75,7 +75,6 @@ public class UserDaoImplementation implements UserDao{
 			double balance = cs.getDouble(7);
 			int totalGames = cs.getInt(8);
 			int totalWins = cs.getInt(9);
-			
 			return new User(userId, username, balance, email, password, superuser, currentGame, totalGames, totalWins);
 			
 		} catch (SQLException e) {

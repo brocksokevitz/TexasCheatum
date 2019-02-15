@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  credentials: any = {};
+  private credentials: any = {};
+  private visible: boolean = false;
 
   constructor(
     private credService: CredentialsService,
@@ -23,12 +24,13 @@ export class LoginComponent implements OnInit {
     this.credService.login(this.credentials.username, this.credentials.password).subscribe(
       data => {
         if(data !== null) {
-          console.log(data.username);
+          console.log(data);
           this.router.navigateByUrl("/home");
         }
-        else if(data === ""){
-          console.log(data);
-          this.router.navigateByUrl("/TexasCheatum")
+        else {
+          this.visible = !this.visible;
+          this.credentials.username = "";
+          this.credentials.password = "";
         }
       }
     );
