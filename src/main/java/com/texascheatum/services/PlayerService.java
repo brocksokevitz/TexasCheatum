@@ -27,8 +27,7 @@ public class PlayerService {
 					userJson.get("password").asText());
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("gameID", user.getUsername());
-		} else
-			response.sendError(403);;
+		}
 	}
 	
 	public static void login(HttpServletRequest request, HttpServletResponse response)
