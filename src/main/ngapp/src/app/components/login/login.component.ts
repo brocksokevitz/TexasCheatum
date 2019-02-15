@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   credentials: any = {};
-  private isVisible: boolean;
+  visible = false;
 
   constructor(
     private credService: CredentialsService,
@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
     this.credService.login(this.credentials.username, this.credentials.password).subscribe(
       data => {
         if(data !== null) {
-          console.log(data.username);
+          console.log(data);
           this.router.navigateByUrl("/home");
         }
         else if(data === ""){
           console.log(data);
           //this.router.navigateByUrl("/TexasCheatum")
-          this.isVisible = true;
+          this.visible = true;
         }
       }
     );

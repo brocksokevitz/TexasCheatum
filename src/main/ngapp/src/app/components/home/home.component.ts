@@ -21,9 +21,10 @@ export class HomeComponent implements OnInit {
     console.log("inside the logout method in home.component");
     this.credService.logout().subscribe(
       data => {
-        if(data.status === 200) {
-          this.router.navigateByUrl("/TexasCheatum");
-        }
+        console.log(data);
+        
+        this.router.navigateByUrl("/TexasCheatum");
+        
       }
     );
   }
