@@ -19,4 +19,16 @@ public class UserDaoTest {
 		Assert.assertEquals("fuksyr@gmail.com", testUser.getEmail());
 		Assert.assertEquals(25, testUser.getSuperuser());
 	}
+	
+	@Test
+	public void testFailInsertUser() {
+		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("super","fuksyr@gmail.com" ,"superpass");
+		Assert.assertFalse(insertStatus);
+	}
+	
+	@Test
+	public void testFailInvalidUser() {
+		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("","" ,"");
+		Assert.assertFalse(insertStatus);
+	}
 }
