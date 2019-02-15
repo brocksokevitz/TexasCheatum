@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  credentials: any = {};
-  public visible: boolean = false;
+  private credentials: any = {};
+  private visible: boolean = false;
 
   constructor(
     private credService: CredentialsService,
