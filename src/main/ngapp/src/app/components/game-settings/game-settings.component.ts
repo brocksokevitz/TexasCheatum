@@ -22,7 +22,7 @@ export class GameSettingsComponent implements OnInit {
     this.settingServ.newGame(this.game).subscribe(
       data => {
         if(data !== null) {
-          console.log(data);
+          console.log(data.text);
           this.router.navigateByUrl("/table");
         }
       }
