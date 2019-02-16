@@ -10,7 +10,7 @@ export class SettingsService {
 
   newGame(game: Object) {
     console.log("inside the newGame method of settings.service");
-    return this.http.post<any>("/TexasCheatum/servlet/start", {game});
+    return this.http.post<any>("/TexasCheatum/servlet/start", {game: game});
   }
 
   joinGame(gameID: string) {
