@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CredentialsService } from 'src/app/credentials.service';
+import { CredentialsService } from 'src/app/services/credentials.service';
 
 @Component({
   selector: 'app-register',
