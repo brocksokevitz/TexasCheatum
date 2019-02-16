@@ -58,7 +58,7 @@ public class DeckService {
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
 
-		response.setHeader("Content-Type", "text/plain");
+		response.setHeader("Content-Type", "application/json");
 		JsonNode piles = apiResp.get("piles");
 		if (piles.has(((User) request.getSession().getAttribute("user")).getUsername()))
 			response.getWriter().write(
