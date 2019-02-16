@@ -31,7 +31,7 @@ export class GameSettingsComponent implements OnInit {
 
   joinGame() {
     console.log("inside joinGame method in game-settings.component");
-    this.settingServ.joinGame(this.game.id).subscribe(
+    this.settingServ.joinGame(this.game.sesh).subscribe(
       data => {
         console.log(data);
         this.router.navigateByUrl("/table");
