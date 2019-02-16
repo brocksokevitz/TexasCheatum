@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
+import { CredentialsService } from '../../services/credentials.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-container',
@@ -8,7 +10,11 @@ import { GameService } from '../../services/game.service';
 })
 export class TableContainerComponent implements OnInit {
 
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private credService: CredentialsService,
+    private router: Router
+    ) {}
 
   ngOnInit() {}
 
@@ -53,6 +59,16 @@ export class TableContainerComponent implements OnInit {
     this.gameService.cheat().subscribe(
       data => {
         console.log(data);
+      }
+    );
+  }
+
+  logout() {
+    console.log("inside the logout method in home.component");
+    this.credService.logout().subscribe(
+      data => {
+        console.log(data);
+        this.router.navigateByUrl("/TexasCheatum");
       }
     );
   }

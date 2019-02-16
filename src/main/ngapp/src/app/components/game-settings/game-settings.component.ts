@@ -19,7 +19,7 @@ export class GameSettingsComponent implements OnInit {
 
   newGame() {
     console.log("inside the newGame method in game-settings.component");
-    this.settingServ.newGame(this.game).subscribe(
+    this.settingServ.newGame().subscribe(
       data => {
           console.log(data);
           this.router.navigateByUrl("/table");
