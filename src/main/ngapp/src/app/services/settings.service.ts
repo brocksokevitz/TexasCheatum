@@ -8,9 +8,9 @@ export class SettingsService {
 
   constructor(private http: HttpClient) {}
 
-  newGame(game: Object) {
+  newGame() {
     console.log("inside the newGame method of settings.service");
-    return this.http.post<any>("/TexasCheatum/servlet/start", {game});
+    return this.http.post<string>("/TexasCheatum/servlet/start", "");
   }
 
   joinGame(gameID: string) {

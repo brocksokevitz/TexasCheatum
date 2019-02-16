@@ -62,7 +62,7 @@ public class UserDaoImplementation implements UserDao{
 			cs.registerOutParameter(3, Types.INTEGER);
 			cs.registerOutParameter(4, Types.VARCHAR);
 			cs.registerOutParameter(5, Types.INTEGER);
-			cs.registerOutParameter(6, Types.INTEGER);
+			cs.registerOutParameter(6, Types.VARCHAR);
 			cs.registerOutParameter(7, Types.DOUBLE);
 			cs.registerOutParameter(8, Types.INTEGER);
 			cs.registerOutParameter(9, Types.INTEGER);
@@ -71,7 +71,7 @@ public class UserDaoImplementation implements UserDao{
 			int userId = cs.getInt(3);
 			String email = cs.getString(4);
 			int superuser = cs.getInt(5);
-			int currentGame = cs.getInt(6);
+			String currentGame = cs.getString(6);
 			double balance = cs.getDouble(7);
 			int totalGames = cs.getInt(8);
 			int totalWins = cs.getInt(9);
