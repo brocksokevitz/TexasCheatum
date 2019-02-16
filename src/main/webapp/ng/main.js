@@ -812,19 +812,19 @@ var GameService = /** @class */ (function () {
     }
     GameService.prototype.getHand = function () {
         console.log("inside the getHand method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getHand");
+        return this.http.get("/TexasCheatum/servlet/getHand", { responseType: "text" });
     };
     GameService.prototype.getFlop = function () {
         console.log("inside the getFlop method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getFlop");
+        return this.http.get("/TexasCheatum/servlet/getFlop", { responseType: "text" });
     };
     GameService.prototype.getTurn = function () {
         console.log("inside the getTurn method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getTurn");
+        return this.http.get("/TexasCheatum/servlet/getTurn", { responseType: "text" });
     };
     GameService.prototype.getRiver = function () {
         console.log("inside the getRiver method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getRiver");
+        return this.http.get("/TexasCheatum/servlet/getRiver", { responseType: "text" });
     };
     GameService.prototype.cheat = function () {
         console.log("inside the cheat method of game.service");

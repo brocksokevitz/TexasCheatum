@@ -42,20 +42,21 @@ public class DeckService {
 	
 	public static void getGame(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		response.getWriter().write("{");
+		response.getWriter().write("\"hand\" : ");
 		getHand(request, response);
+		response.getWriter().write(",");
+		response.getWriter().write("\"table\" : ");
 		getTable(request, response);
+		response.getWriter().write("}");
 	}
 
 	public static void getHand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.info(request.getSession().getAttribute("gameID")
-				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
-				+ "/list");
 		JsonNode apiResp = makeHttpRequest(
 				request.getSession().getAttribute("gameID")
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
-		log.info(apiResp);
 
 		response.setHeader("Content-Type", "text/plain");
 		JsonNode piles = apiResp.get("piles");
@@ -80,10 +81,12 @@ public class DeckService {
 				request.getSession().getAttribute("gameID")
 				+ "/pile/table/list");
 
-		response.setHeader("Content-Type", "text/plain");
+		response.setHeader("Content-Type", "application/json");
 		JsonNode piles = apiResp.get("piles");
 		if (piles.has("table"))
 			response.getWriter().write(getCardString(piles.get("table")));
+		else
+			response.getWriter().write("[]");
 	}
 	
 	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -102,13 +105,16 @@ public class DeckService {
 		addCardsToPile(request, "table", getCardString(apiResp));
 		getTable(request, response);
 	}
-	
 	private static void addCardsToPile(HttpServletRequest request, String pile, String cards) throws IOException {
+		JsonNode cardJson = mapper.readTree(cards);
+		String cardString = String.join(",", cardJson.findValuesAsText("value"));
+		log.info(cardString);
 		makeHttpRequest(
 				request.getSession().getAttribute("gameID")
 				+ "/pile/" + pile
-				+ "/add/?cards=" + cards);
+				+ "/add/?cards=" + cardString);
 	}
+	
 	private static JsonNode makeHttpRequest(String uri) throws IOException {
 		String url = "https://deckofcardsapi.com/api/deck/" + uri;
 		URL obj = new URL(url);
@@ -120,7 +126,6 @@ public class DeckService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
-		log.info(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -128,11 +133,16 @@ public class DeckService {
 			return null;
 	}
 	private static String getCardString(JsonNode cardsNode) {
-		StringBuilder cards = new StringBuilder("");
-		log.info(cardsNode);
-		for (JsonNode card : cardsNode.get("cards"))
-			cards.append(card.get("code").asText() + ",");
+		StringBuilder cards = new StringBuilder("[");
+		for (JsonNode card : cardsNode.get("cards")) {
+			cards.append("{");
+			cards.append("\"value\" : \"" + card.get("code").asText() + "\"");
+			cards.append(",");
+			cards.append("\"image\" : \"" + card.get("image").asText() + "\"");
+			cards.append("},");
+		}
 		cards.deleteCharAt(cards.length() - 1);
+		cards.append("]");
 		return cards.toString();
 	}
 }
