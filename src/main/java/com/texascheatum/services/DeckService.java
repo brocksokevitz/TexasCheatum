@@ -26,6 +26,8 @@ public class DeckService {
 			GameDaoImplementation.getGameDao().createGame(gameID,
 					((User) request.getSession().getAttribute("user")).getUsername());
 			request.getSession().setAttribute("gameID", gameID);
+			
+			response.setHeader("Content-Type", "text/plain");
 			response.getWriter().write(gameID);
 		}
 	}

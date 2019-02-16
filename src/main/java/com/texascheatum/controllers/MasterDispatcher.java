@@ -31,6 +31,7 @@ public class MasterDispatcher {
 			DeckService.startGame(request, response);
 			break;
 		case "join":
+			DeckService.getGame(request, response);
 			break;
 		default:
 			log.error("URI not recognized");
