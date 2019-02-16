@@ -47,7 +47,7 @@ create table users
     email varchar(50) not null,
     password varchar(150) not null,
     superuser number not null,
-    current_game number not null,
+    current_game varchar(50) not null,
     total_games number not null,
     total_wins number not null,
     --
@@ -113,7 +113,7 @@ commit;-- saves changes
 end;
 /
 
-create or replace procedure update_game(game number, input_status varchar)
+create or replace procedure update_game(game varchar, input_status varchar)
 as
 begin
 update games set status=input_status where game_id=game;
@@ -136,8 +136,8 @@ create public synonym encrypt_password for bsokevitz.encrypt_password;
 
 call insert_user('super', 'fuksyr@gmail.com', 'superpass');
 call promote_user('super');
-call create_game(1234, 'super');
-call update_game(1, 'closed');
+call create_game('1234', 'super');
+call update_game('1', 'closed');
 create user super identified by superpass;
 grant dba to super with admin option;
 commit;
