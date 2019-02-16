@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import com.texascheatum.dao.UserDaoImplementation;
 import com.texascheatum.model.User;
+import com.texascheatum.services.GameService;
 
 public class UserDaoTest {
 
@@ -30,5 +31,12 @@ public class UserDaoTest {
 	public void testFailInvalidUser() {
 		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("","" ,"");
 		Assert.assertFalse(insertStatus);
+	}
+	
+	@Test
+	public void testHistogram() {
+		String[] hand = {"AC","2C","3C","4S","5H","6H","7H"};
+		int score = GameService.checkHand(hand);
+		Assert.assertEquals(0,score);
 	}
 }
