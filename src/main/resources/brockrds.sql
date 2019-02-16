@@ -84,7 +84,7 @@ end;
 /
 
 create or replace procedure get_user(input_username in varchar, input_password in varchar, 
-output_id out number, output_email out varchar, output_superuser out number, output_game out number,
+output_id out number, output_email out varchar, output_superuser out number, output_game out varchar,
  output_balance out number, output_total out number, output_wins out number)
 as
 begin
