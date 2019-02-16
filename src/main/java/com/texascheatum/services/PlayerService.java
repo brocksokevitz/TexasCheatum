@@ -33,7 +33,7 @@ public class PlayerService {
 		
 		if (user.getUsername() != null && !user.getUsername().equals("")) {
 			request.getSession().setAttribute("user", user);
-			request.getSession().setAttribute("gameID", user.getUsername());
+			request.getSession().setAttribute("gameID", user.getCurrentGame());
 			
 			String json = mapper.writeValueAsString(user);
 			response.setHeader("Content-Type", "application/json");

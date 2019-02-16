@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.texascheatum.dao.GameDaoImplementation;
@@ -15,6 +17,7 @@ import com.texascheatum.model.User;
 
 public class DeckService {
 	private DeckService() { }
+	private static final Logger log = Logger.getLogger(DeckService.class);
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final String USER_AGENT =
 			"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
@@ -26,6 +29,7 @@ public class DeckService {
 			GameDaoImplementation.getGameDao().createGame(gameID,
 					((User) request.getSession().getAttribute("user")).getUsername());
 			request.getSession().setAttribute("gameID", gameID);
+			drawHand(request);
 			
 			response.setHeader("Content-Type", "text/plain");
 			response.getWriter().write(gameID);
@@ -44,10 +48,14 @@ public class DeckService {
 
 	public static void getHand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		log.info(request.getSession().getAttribute("gameID")
+				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
+				+ "/list");
 		JsonNode apiResp = makeHttpRequest(
 				request.getSession().getAttribute("gameID")
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
+		log.info(apiResp);
 
 		response.setHeader("Content-Type", "text/plain");
 		JsonNode piles = apiResp.get("piles");
@@ -105,12 +113,14 @@ public class DeckService {
 		String url = "https://deckofcardsapi.com/api/deck/" + uri;
 		URL obj = new URL(url);
 		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		log.info(url);
 
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
+		log.info(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -118,9 +128,10 @@ public class DeckService {
 			return null;
 	}
 	private static String getCardString(JsonNode cardsNode) {
-		StringBuilder cards = new StringBuilder();
+		StringBuilder cards = new StringBuilder("");
+		log.info(cardsNode);
 		for (JsonNode card : cardsNode.get("cards"))
-			cards.append(card.get("Code").asText() + ",");
+			cards.append(card.get("code").asText() + ",");
 		cards.deleteCharAt(cards.length() - 1);
 		return cards.toString();
 	}
