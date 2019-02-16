@@ -2,7 +2,7 @@
   <button (click)="newGame()">New Game</button>
   <form class="form-group" (ngSubmit)="joinGame()" method="POST">
     <Label>Enter an existing game session id: </Label>
-    <input type="text" name="gameId" [(ngModel)]="Game.id" #gameId="ngModel">
+    <input type="text" name="gameId" [(ngModel)]="game.id" #gameId="ngModel">
     <button class="btn btn-outline-info">Join Game</button>
   </form>
 <button click="goBack()">Back</button>
