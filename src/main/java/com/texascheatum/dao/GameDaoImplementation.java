@@ -36,10 +36,10 @@ public class GameDaoImplementation implements GameDao{
 			cs.setString(1, gameId);
 			cs.setString(2, username);
 
-			boolean output = cs.execute();
+			cs.execute();
 			
 
-			return output;
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -58,10 +58,10 @@ public class GameDaoImplementation implements GameDao{
 			cs.setString(1, gameId);
 			cs.setString(2, status);
 
-			boolean output = cs.execute();
+			cs.execute();
 			
 
-			return output;
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

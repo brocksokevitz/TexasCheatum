@@ -1,7 +1,7 @@
 -- DDL --
 drop public synonym users;
 drop public synonym games;
-drop public synonym new_game_id;
+--drop public synonym new_game_id;
 drop public synonym delete_user;
 drop public synonym insert_user;
 drop public synonym get_user;
@@ -12,7 +12,7 @@ drop public synonym encrypt_password;
 drop table users;
 drop table games;
 drop sequence new_user_id;
-drop sequence new_game_id;
+--drop sequence new_game_id;
 drop user super;
 drop user brock;
 
@@ -30,7 +30,7 @@ nocache;
 
 create table games
 (
-    game_id number not null,
+    game_id varchar(50) not null,
     status varchar(15) default('pending') not null,
     --
     constraint game_id_pk primary key(game_id)
@@ -57,8 +57,7 @@ create table users
     constraint game_id_fk foreign key (current_game) references games(game_id)
 ); -- for tables, you put ;
 
---hashing function that combines password and extra word get_customer_hash(?) ?
---taken from yuvi's notes
+--hashing function that combines password and extra salt
 create or replace function encrypt_password(username varchar, password varchar) return varchar
 is
 extra varchar(10) := '0L2di59Fw7';
@@ -85,10 +84,14 @@ end;
 /
 
 create or replace procedure get_user(input_username in varchar, input_password in varchar, 
-output_id out number, output_email out varchar, output_superuser out number, output_game out number, output_balance out number, output_total out number, output_wins out number)
+output_id out number, output_email out varchar, output_superuser out number, output_game out number,
+ output_balance out number, output_total out number, output_wins out number)
 as
 begin
-select user_id, balance, email, superuser, current_game, total_games, total_wins into output_id, output_balance, output_email, output_superuser, output_game, output_total, output_wins  from users where username=input_username and password=encrypt_password(input_username, input_password);
+select user_id, balance, email, superuser, current_game, total_games, total_wins 
+into output_id, output_balance, output_email, output_superuser, output_game, output_total, output_wins  
+from users 
+where username=input_username and password=encrypt_password(input_username, input_password);
 commit;-- saves changes
 end;
 /
@@ -101,7 +104,7 @@ commit;-- saves changes
 end;
 /
 
-create or replace procedure create_game(game_id number, host_username varchar)
+create or replace procedure create_game(game_id varchar, host_username varchar)
 as
 begin
 insert into games values(game_id, 'ongoing');
@@ -121,7 +124,7 @@ end;
 ---- TCL --
 create public synonym users for bsokevitz.users;
 create public synonym games for bsokevitz.games;
-create public synonym new_game_id for bsokevitz.new_game_id;
+--create public synonym new_game_id for bsokevitz.new_game_id;
 --create public synonym new_transaction_id for bsokevitz.new_transaction_id;
 create public synonym delete_user for bsokevitz.delete_user;
 create public synonym insert_user for bsokevitz.insert_user;

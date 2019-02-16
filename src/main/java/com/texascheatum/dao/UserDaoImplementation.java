@@ -38,10 +38,10 @@ public class UserDaoImplementation implements UserDao{
 			cs.setString(1, username);
 			cs.setString(2, email);
 			cs.setString(3, password);
-			boolean output = cs.execute();
+			cs.execute();
 			
 
-			return output;
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

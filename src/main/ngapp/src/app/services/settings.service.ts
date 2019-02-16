@@ -8,13 +8,13 @@ export class SettingsService {
 
   constructor(private http: HttpClient) {}
 
-  newGame() {
+  newGame(game: Object) {
     console.log("inside the newGame method of settings.service");
-    return this.http.get<any>("/TexasCheatum/servlet/start");
+    return this.http.post<any>("/TexasCheatum/servlet/start", {game});
   }
 
-  joinGame() {
+  joinGame(gameID: string) {
     console.log("inside the joinGame method of settings.service");
-    return this.http.get<any>("/TexasCheatum/servlet/join");
+    return this.http.post<any>("/TexasCheatum/servlet/join", {gameID: gameID});
   }
 }
