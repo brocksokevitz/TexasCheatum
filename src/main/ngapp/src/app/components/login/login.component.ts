@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl("/home");
         }
         else {
-          this.visible = !this.visible;
+          this.visible = true;
           this.credentials.username = "";
           this.credentials.password = "";
         }

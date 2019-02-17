@@ -12,6 +12,9 @@ import { HomeComponent } from './components/home/home.component';
 import { RulesComponent } from './components/rules/rules.component';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TableCardsComponent } from './components/table-cards/table-cards.component';
+import { PlayerHandComponent } from './components/player-hand/player-hand.component';
+import { PauseMenuComponent } from './components/pause-menu/pause-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { RegisterComponent } from './components/register/register.component';
     HomeComponent,
     RulesComponent,
     OptionsMenuComponent,
-    RegisterComponent
+    RegisterComponent,
+    TableCardsComponent,
+    PlayerHandComponent,
+    PauseMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
+  private tableCards: string[];
+  private handCards: string[];
+  private i: number;
 
   constructor(
     private gameService: GameService,
@@ -23,6 +26,9 @@ export class TableContainerComponent implements OnInit {
     this.gameService.getHand().subscribe(
       data => {
         console.log(data);
+        for(this.i = 0; this.i < data.length; this.i += 1) {
+          this.handCards += data[this.i].image; 
+        }
       }
     );
   }
@@ -32,6 +38,9 @@ export class TableContainerComponent implements OnInit {
     this.gameService.getFlop().subscribe(
       data => {
         console.log(data);
+        for(this.i = 0; this.i < data.length; this.i += 1) {
+          this.tableCards += data[this.i].image; 
+        }
       }
     );
   }
@@ -41,6 +50,9 @@ export class TableContainerComponent implements OnInit {
     this.gameService.getTurn().subscribe(
       data => {
         console.log(data);
+        for(this.i = 0; this.i < data.length; this.i += 1) {
+          this.tableCards += data[this.i].image; 
+        }
       }
     );
   }
@@ -50,6 +62,9 @@ export class TableContainerComponent implements OnInit {
     this.gameService.getRiver().subscribe(
       data => {
         console.log(data);
+        for(this.i = 0; this.i < data.length; this.i += 1) {
+          this.tableCards += data[this.i].image; 
+        }
       }
     );
   }

@@ -1,0 +1,24 @@
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+<button type="button" class="btn btn-info" (click)="open()">Pause</button>
+
+<div id="bootstrapModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header text-align-center">
+        <h4 class="modal-title">Pause Menu</h4>
+      </div>
+
+      <div class="modal-body text-align-center">
+        <button>Rules</button>
+        <button>Options</button>
+        <button>Quit Game</button>
+      </div>
+
+      <div class="modal-footer text-align-center">
+        <button type="button" class="btn btn-default" (click)="close()">Resume Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
