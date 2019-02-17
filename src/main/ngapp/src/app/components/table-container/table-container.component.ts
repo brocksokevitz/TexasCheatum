@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
-  private tableCards: string[];
-  private handCards: string[];
-  private i: number;
+  tableCards: string[];
+  handCards: string[];
+  i: number;
 
   constructor(
     private gameService: GameService,
