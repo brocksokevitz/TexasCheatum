@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.texascheatum.services.DeckService;
+import com.texascheatum.services.OddsService;
 import com.texascheatum.services.PlayerService;
 
 public class MasterDispatcher {
@@ -60,6 +61,7 @@ public class MasterDispatcher {
 			DeckService.turn_river(request, response);
 			break;
 		case "cheat":
+			OddsService.cheat(request, response);
 			break;
 		default:
 			log.error("URI not recognized");
