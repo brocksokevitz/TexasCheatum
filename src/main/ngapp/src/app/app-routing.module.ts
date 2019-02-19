@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GameSettingsComponent } from './components/game-settings/game-settings.component';
+//import { GameSettingsComponent } from './components/game-settings/game-settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { TableContainerComponent } from './components/table-container/table-container.component';

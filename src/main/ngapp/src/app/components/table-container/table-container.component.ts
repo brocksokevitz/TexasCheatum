@@ -128,5 +128,13 @@ export class TableContainerComponent implements OnInit {
 
   openPause() {
     const dialogRef = this.dialog.open(PauseMenuComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

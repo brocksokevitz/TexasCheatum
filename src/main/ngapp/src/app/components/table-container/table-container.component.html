@@ -11,12 +11,12 @@
 </div>
 
 <div *ngIf="gameView">
-  <div class="row" id="tableCard" *ngFor="let cards of tableCards">
-    <img src={{cards}}>
+  <div class="container justify-content-center" *ngFor="let cards of tableCards">
+    <img class="row" id="tableCard" src={{cards}}>
   </div>
 
-  <div class="row" id="handCard" *ngFor="let cards of handCards">
-    <img src={{cards}}>
+  <div class="container justify-content-center" *ngFor="let cards of handCards">
+    <img class="row" id="handCard" src={{cards}}>
   </div>
 
   <div>
