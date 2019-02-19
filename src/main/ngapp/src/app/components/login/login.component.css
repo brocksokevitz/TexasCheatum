@@ -1,3 +1,10 @@
 #invalid {
     color: red;
 }
+
+.container {
+    background-color: darkgreen;
+    color: whitesmoke;
+    padding: 50px;
+    justify-content: center;
+}

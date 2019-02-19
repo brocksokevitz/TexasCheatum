@@ -32,6 +32,10 @@
   </div>
 
   <br>
-  <button mat-button (click)="openPause()">Pause</button>
+  <button (click)="pause()">Pause</button>
+</div>
+
+<div *ngIf="pauseMenu">
+  <button (click)="resume()">Resume Game</button>
   <button (click)="logout()">Logout</button>
 </div>

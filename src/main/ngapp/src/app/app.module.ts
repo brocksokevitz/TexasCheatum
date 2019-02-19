@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +14,6 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
 import { RegisterComponent } from './components/register/register.component';
 import { TableCardsComponent } from './components/table-cards/table-cards.component';
 import { PlayerHandComponent } from './components/player-hand/player-hand.component';
-import { PauseMenuComponent } from './components/pause-menu/pause-menu.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +26,13 @@ import { PauseMenuComponent } from './components/pause-menu/pause-menu.component
     OptionsMenuComponent,
     RegisterComponent,
     TableCardsComponent,
-    PlayerHandComponent,
-    PauseMenuComponent
+    PlayerHandComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

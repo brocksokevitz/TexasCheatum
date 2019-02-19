@@ -3,8 +3,6 @@ import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
 import { SettingsService } from '../../services/settings.service';
-import { MatDialog } from '@angular/material';
-import { PauseMenuComponent } from '../pause-menu/pause-menu.component';
 
 @Component({
   selector: 'app-table-container',
@@ -18,13 +16,13 @@ export class TableContainerComponent implements OnInit {
   private i: number;
   private lobbyView: boolean = true;
   private gameView: boolean = false;
+  private pauseMenu: boolean = false;
 
   constructor(
     private gameService: GameService,
     private credService: CredentialsService,
     private router: Router,
     private settingServ: SettingsService,
-    public dialog: MatDialog
     ) {}
 
   ngOnInit() {}
@@ -126,12 +124,16 @@ export class TableContainerComponent implements OnInit {
     );
   }
 
-  openPause() {
-    const dialogRef = this.dialog.open(PauseMenuComponent);
+  pause() {
+    this.gameView = false;
+    this.lobbyView = false;
+    this.pauseMenu = true;
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  resume() {
+    this.gameView = true;
+    this.lobbyView = false;
+    this.pauseMenu = false;
   }
 
   goBack() {
