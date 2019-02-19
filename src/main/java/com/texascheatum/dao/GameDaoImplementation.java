@@ -69,5 +69,11 @@ public class GameDaoImplementation implements GameDao{
 		}
 	return false;
 	}
+
+	@Override
+	public boolean updatePot(String gameId, String status) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

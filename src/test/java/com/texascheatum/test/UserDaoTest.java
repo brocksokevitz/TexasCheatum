@@ -1,8 +1,12 @@
 package com.texascheatum.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.texascheatum.dao.GameDao;
+import com.texascheatum.dao.GameDaoImplementation;
 import com.texascheatum.dao.UserDaoImplementation;
 import com.texascheatum.model.User;
 import com.texascheatum.services.GameService;
@@ -31,6 +35,36 @@ public class UserDaoTest {
 	public void testFailInvalidUser() {
 		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("","" ,"");
 		Assert.assertFalse(insertStatus);
+	}
+	
+	@Test
+	public void testWinGame() {
+		boolean winStatus = UserDaoImplementation.getUserDao().wonGame("super");
+		Assert.assertTrue(winStatus);
+	}
+	
+	@Test
+	public void testGetUsersByGame() {
+		List<User> users = UserDaoImplementation.getUserDao().getUsers("1234");
+
+		Assert.assertEquals(1, users.size());
+		
+//		Assert.assertEquals("super", users.get(0).getUsername());
+//		Assert.assertEquals("1234", users.get(0).getCurrentGame());
+//		Assert.assertEquals(1, users.get(0).getUserId());
+	}
+	
+	@Test
+	public void testLoseGame() {
+		String[] array = {"super"};
+		boolean loseStatus = UserDaoImplementation.getUserDao().lostGame(array);
+		Assert.assertTrue(loseStatus);
+	}
+	
+	@Test
+	public void testUpdateGame() {
+		boolean gameStatus = GameDaoImplementation.getGameDao().updateGame("1234", "closed");
+		Assert.assertTrue(gameStatus);
 	}
 	
 	@Test

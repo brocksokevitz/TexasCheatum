@@ -2,8 +2,12 @@ package com.texascheatum.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -85,6 +89,32 @@ public class UserDaoImplementation implements UserDao{
 	}
 	
 	@Override
+	public List<User> getUsers(String gameId) {
+		Connection conn = null;
+		conn = cu.getConnection();
+
+		try {
+			String sql = "select * from users where current_game = ?";
+			PreparedStatement ps;
+			ps = conn.prepareStatement(sql);	
+			ps.setString(1, gameId);
+			ResultSet results = ps.executeQuery();
+			
+			List<User> allUsers = new ArrayList<>();
+			while(results.next()) {				
+				allUsers.add(new User(results.getInt("user_id"), results.getString("username"), results.getDouble("balance"), results.getString("email"), "n/a", 
+						results.getInt("superuser"), results.getString("current_game"),results.getInt("total_games"),results.getInt("total_wins")));
+			}
+			return allUsers;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}
+	return new ArrayList<>();
+	}
+	
+	@Override
 	public boolean promoteUser(String username) {
 		Connection conn = null;
 		conn = cu.getConnection();
@@ -95,7 +125,7 @@ public class UserDaoImplementation implements UserDao{
 			boolean output = cs.execute();
 			
 
-			return output;
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -116,6 +146,47 @@ public class UserDaoImplementation implements UserDao{
 			
 
 			return output;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}
+	return false;
+	}
+
+	@Override
+	public boolean wonGame(String username) {
+		Connection conn = null;
+		conn = cu.getConnection();
+		
+		try {
+			CallableStatement cs = conn.prepareCall("{call won_game(?)}");	
+			cs.setString(1, username);
+			cs.execute();
+			
+
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}
+	return false;
+	}
+
+	@Override
+	public boolean lostGame(String[] username) {
+		Connection conn = null;
+		conn = cu.getConnection();
+		
+		try {
+			for(int i = 0; i < username.length; i++) {
+			CallableStatement cs = conn.prepareCall("{call lost_game(?)}");	
+			cs.setString(1, username[i]);
+			cs.execute();
+			}
+
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
