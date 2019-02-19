@@ -20,7 +20,6 @@ public class TomcatConnectionPool {
 	            InitialContext initialContext = new InitialContext();
 	            Context environmentContext = (Context) initialContext.lookup("java:comp/env");
 				dataSource = (DataSource) environmentContext.lookup("jdbc/TexasCheatum");
-	            System.out.print(dataSource);
 	        } catch (NamingException e) {
 	            System.out.println(e);
 	        }

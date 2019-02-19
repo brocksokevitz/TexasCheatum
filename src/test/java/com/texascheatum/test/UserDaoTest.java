@@ -158,10 +158,10 @@ public class UserDaoTest {
 		Assert.assertEquals(9,score[0]);
 	}
 	
-	@Test
-	public void testTomcatConnectionPool() throws SQLException {
-		TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
-		Connection conn = pool.getConnection();
-		Assert.assertTrue(conn instanceof Connection);
-	}
+//	@Test
+//	public void testTomcatConnectionPool() throws SQLException {
+//		TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
+//		Connection conn = pool.getConnection();
+//		Assert.assertTrue(conn instanceof Connection);
+//	}
 }
