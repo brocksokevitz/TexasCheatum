@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
-//import { GameSettingsComponent } from '../game-settings/game-settings.component';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-table-container',
@@ -10,22 +10,50 @@ import { Router } from '@angular/router';
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
-  @Input() tableCards: any = [];
-  @Input() handCards: any = [];
-  i: number;
+  private tableCards: any = [];
+  private handCards: any = [];
+  private game: any = {};
+  private i: number;
+  private lobbyView: boolean = true;
+  private gameView: boolean = false;
 
   constructor(
     private gameService: GameService,
     private credService: CredentialsService,
     private router: Router,
-    //private gameSettings: GameSettingsComponent
+    private settingServ: SettingsService
     ) {}
 
-  ngOnInit() {
-    //this.tableCards = this.gameSettings.table;
-    console.log("game hand cards: " + this.tableCards);
-    //this.handCards = this.gameSettings.hand;
-    console.log("game table cards: " + this.handCards);
+  ngOnInit() {}
+
+  newGame() {
+    console.log("inside the newGame method in game-settings.component");
+    this.settingServ.newGame().subscribe(
+      data => {
+          console.log(data);
+          this.lobbyView = false;
+          this.gameView = true;
+      }
+    );
+  }
+
+  joinGame() {
+    console.log("inside joinGame method in game-settings.component");
+    this.settingServ.joinGame(this.game.sesh).subscribe(
+      data => {
+        console.log(data);
+        this.lobbyView = false;
+        this.gameView = true;
+
+        for(this.i = 0; this.i < data.hand.length; this.i++) {
+          this.handCards[this.i] = data.hand[this.i].image;
+        }
+
+        for(this.i = 0; this.i < data.table.length; this.i++) {
+          this.tableCards[this.i] = data.table[this.i].image;
+        }
+      }
+    );
   }
 
   getHand() {

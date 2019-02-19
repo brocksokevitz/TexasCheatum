@@ -39,14 +39,6 @@ export class GameSettingsComponent implements OnInit {
     this.settingServ.joinGame(this.game.sesh).subscribe(
       data => {
         console.log(data);
-        for(this.i = 0; this.i < data.hand.length; this.i += 1) {
-          this.hand[this.i] = data.hand[this.i].image;
-        }
-        for(this.i = 0; this.i < data.table.length; this.i += 1) {
-          this.table[this.i] = data.table[this.i].image;
-        }
-        console.log("hand: " + this.hand);
-        console.log("table: " + this.table);
         this.router.navigateByUrl("/table");
       }
     );

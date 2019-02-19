@@ -21,10 +21,10 @@ const routes: Routes = [
     path: "home",
     component: HomeComponent
   },
-  {
-    path: "game-settings",
-    component: GameSettingsComponent
-  },
+  // {
+  //   path: "game-settings",
+  //   component: GameSettingsComponent
+  // },
   {
     path: "table",
     component: TableContainerComponent

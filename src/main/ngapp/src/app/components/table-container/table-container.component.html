@@ -1,3 +1,16 @@
+<div *ngIf="lobbyView">
+  <button (click)="newGame()">New Game</button>
+
+  <form class="form-group" (ngSubmit)="joinGame()" method="POST">
+    <Label>Enter an existing game session id: </Label>
+    <input type="text" name="sesh" [(ngModel)]="game.sesh" #sesh="ngModel">
+    <button class="btn btn-outline-info">Join Game</button>
+  </form>
+  
+<button (click)="goBack()">Back</button>
+</div>
+
+<div *ngIf="gameView">
 <div class="container col-md-6 offset-md-3" *ngFor="let cards of tableCards">
   <img class="row" id="tableCard" src={{cards}}>
 </div>
@@ -16,3 +29,4 @@
 <br>
 <app-pause-menu></app-pause-menu>
 <button (click)="logout()">Logout</button>
+</div>
