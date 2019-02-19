@@ -11,12 +11,12 @@
 </div>
 
 <div *ngIf="gameView">
-  <div *ngFor="let cards of tableCards">
-    <img class="row" id="tableCard" src={{cards}}>
+  <div class="row" id="tableCard" *ngFor="let cards of tableCards">
+    <img src={{cards}}>
   </div>
 
-  <div *ngFor="let cards of handCards">
-    <img class="row" id="handCard" src={{cards}}>
+  <div class="row" id="handCard" *ngFor="let cards of handCards">
+    <img src={{cards}}>
   </div>
 
   <div>
@@ -27,6 +27,6 @@
     <button (click)="cheat()">Cheat</button>
   </div>
   <br>
-  <app-pause-menu></app-pause-menu>
+  <button mat-button (click)="openPause()">Pause</button>
   <button (click)="logout()">Logout</button>
 </div>

@@ -3,6 +3,8 @@ import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
 import { SettingsService } from '../../services/settings.service';
+import { MatDialog } from '@angular/material';
+import { PauseMenuComponent } from '../pause-menu/pause-menu.component';
 
 @Component({
   selector: 'app-table-container',
@@ -21,7 +23,8 @@ export class TableContainerComponent implements OnInit {
     private gameService: GameService,
     private credService: CredentialsService,
     private router: Router,
-    private settingServ: SettingsService
+    private settingServ: SettingsService,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit() {}
@@ -121,5 +124,9 @@ export class TableContainerComponent implements OnInit {
         this.router.navigateByUrl("/TexasCheatum");
       }
     );
+  }
+
+  openPause() {
+    const dialogRef = this.dialog.open(PauseMenuComponent);
   }
 }
