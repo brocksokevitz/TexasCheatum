@@ -160,7 +160,8 @@ public class UserDaoTest {
 	
 	@Test
 	public void testTomcatConnectionPool() throws SQLException {
-		Connection conn = TomcatConnectionPool.getConnection();
+		TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
+		Connection conn = pool.getConnection();
 		Assert.assertTrue(conn instanceof Connection);
 	}
 }

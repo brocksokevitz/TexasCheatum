@@ -12,33 +12,41 @@ import org.apache.log4j.Logger;
 
 public class TomcatConnectionPool {
 	
-	final static Logger log = Logger.getLogger(TomcatConnectionPool.class);
+	   private static TomcatConnectionPool pool = null;
+	    private static DataSource dataSource = null;
 
-	private DataSource dataSource;
-	
-	private static TomcatConnectionPool connectionpool;
+	    private TomcatConnectionPool() {
+	        try {
+	            InitialContext ic = new InitialContext();
+	            dataSource = (DataSource) ic.lookup("java:comp/env/jdbc/TexasCheatum");
+	            System.out.print(dataSource);
+	        } catch (NamingException e) {
+	            System.out.println(e);
+	        }
+	    }
 
-	private TomcatConnectionPool() {
+	    public static synchronized TomcatConnectionPool getInstance() {
+	        if (pool == null) {
+	            pool = new TomcatConnectionPool();
+	        }
+	        return pool;
+	    }
 
-		try {
-			Context initialContext = new InitialContext();
-			Context environmentContext = (Context) initialContext.lookup("java:comp/env");
-			dataSource = (DataSource) environmentContext.lookup("jdbc/TexasCheatum");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
-		}
-		
-	}
-	
-	public static void setupConnection() {
-		connectionpool = new TomcatConnectionPool();
-	}
-	
-	public static Connection getConnection() throws SQLException{
-		
-				return connectionpool.dataSource.getConnection();
+	    public Connection getConnection() {
+	        try {
+	            return dataSource.getConnection();
+	        } catch (SQLException e) {
+	            System.out.println(e);
+	            return null;
+	        }
+	    }
 
-	}
+	    public void freeConnection(Connection c) {
+	        try {
+	            c.close();
+	        } catch (SQLException e) {
+	            System.out.println(e);
+	        }
+	    }
 	
 }
