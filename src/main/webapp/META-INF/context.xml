@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<Resource name="jdbc/TexasCheatum"
+		  gloabal ="jdbc/TexasCheatum"
+          auth="Container"
+          type="javax.sql.DataSource"
+          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+          testWhileIdle="true"
+          validationQuery="SELECT 1"
+          validationInterval="30000"
+          maxActive="100"
+          minIdle="10"
+          initialSize="10"
+          username="Admin01"
+          password="s9d5j1q8"
+          driverClassName="oracle.jdbc.OracleDriver"
+          url="jdbc:oracle:thin:@revature-project1.cyitp3sizf7l.us-east-2.rds.amazonaws.com:1521:P01"/>
+</Context>

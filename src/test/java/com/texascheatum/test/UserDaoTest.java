@@ -1,5 +1,6 @@
 package com.texascheatum.test;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import com.texascheatum.dao.GameDaoImplementation;
 import com.texascheatum.dao.UserDaoImplementation;
 import com.texascheatum.model.User;
 import com.texascheatum.services.GameService;
+import com.texascheatum.utils.TomcatConnectionPool;
 
 public class UserDaoTest {
 
@@ -43,16 +45,15 @@ public class UserDaoTest {
 		Assert.assertTrue(winStatus);
 	}
 	
-	@Test
-	public void testGetUsersByGame() {
-		List<User> users = UserDaoImplementation.getUserDao().getUsers("1234");
-
-		Assert.assertEquals(1, users.size());
-		
+//	@Test
+//	public void testGetUsersByGame() {
+//		List<User> users = UserDaoImplementation.getUserDao().getUsers("1234");
+//
+//		Assert.assertEquals(1, users.size());
 //		Assert.assertEquals("super", users.get(0).getUsername());
 //		Assert.assertEquals("1234", users.get(0).getCurrentGame());
 //		Assert.assertEquals(1, users.get(0).getUserId());
-	}
+//	}
 	
 	@Test
 	public void testLoseGame() {
@@ -154,5 +155,11 @@ public class UserDaoTest {
 		String[] hand = {"0H","KH","JH","QH","AH","6S","7H"};
 		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(9,score[0]);
+	}
+	
+	@Test
+	public void testTomcatConnectionPool() {
+		Connection conn = TomcatConnectionPool.getConnection();
+		Assert.assertTrue(conn instanceof Connection);
 	}
 }
