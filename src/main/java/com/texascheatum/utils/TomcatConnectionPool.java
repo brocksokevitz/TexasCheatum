@@ -8,7 +8,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 public class TomcatConnectionPool {
+	
+	final static Logger log = Logger.getLogger(TomcatConnectionPool.class);
 
 	private static DataSource dataSource;
 
@@ -30,7 +34,7 @@ public class TomcatConnectionPool {
 				return dataSource.getConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
+				log.error(e.getMessage());
 			}
 			return null;
 	}
