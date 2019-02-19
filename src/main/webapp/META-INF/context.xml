@@ -11,4 +11,8 @@
           password="s9d5j1q8"
           driverClassName="oracle.jdbc.OracleDriver"
           url="jdbc:oracle:thin:@revature-project1.cyitp3sizf7l.us-east-2.rds.amazonaws.com:1521:P01"/>
+
+		 <ResourceLink name="jdbc/TexasCheatum"
+         global="jdbc/TexasCheatum"
+          type="javax.sql.DataSource" />
 </Context>
