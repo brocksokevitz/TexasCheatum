@@ -27,7 +27,7 @@ export class TableContainerComponent implements OnInit {
   ngOnInit() {}
 
   newGame() {
-    console.log("inside the newGame method in game-settings.component");
+    console.log("inside the newGame method in table-container.component");
     this.settingServ.newGame().subscribe(
       data => {
           console.log(data);
@@ -38,7 +38,7 @@ export class TableContainerComponent implements OnInit {
   }
 
   joinGame() {
-    console.log("inside joinGame method in game-settings.component");
+    console.log("inside joinGame method in table-container.component");
     this.settingServ.joinGame(this.game.sesh).subscribe(
       data => {
         console.log(data);

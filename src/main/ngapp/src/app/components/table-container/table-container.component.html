@@ -7,26 +7,26 @@
     <button class="btn btn-outline-info">Join Game</button>
   </form>
   
-<button (click)="goBack()">Back</button>
+  <button (click)="goBack()">Back</button>
 </div>
 
 <div *ngIf="gameView">
-<div class="container col-md-6 offset-md-3" *ngFor="let cards of tableCards">
-  <img class="row" id="tableCard" src={{cards}}>
-</div>
+  <div *ngFor="let cards of tableCards">
+    <img class="row" id="tableCard" src={{cards}}>
+  </div>
 
-<div class="container col-md-4 offset-md-4" *ngFor="let cards of handCards">
-  <img class="row" id="handCard" src={{cards}}>
-</div>
+  <div *ngFor="let cards of handCards">
+    <img class="row" id="handCard" src={{cards}}>
+  </div>
 
-<div>
-  <button (click)="getHand()">getHand</button>
-  <button (click)="getFlop()">getFlop</button>
-  <button (click)="getTurn()">getTurn</button>
-  <button (click)="getRiver()">getRiver</button>
-  <button (click)="cheat()">Cheat</button>
-</div>
-<br>
-<app-pause-menu></app-pause-menu>
-<button (click)="logout()">Logout</button>
+  <div>
+    <button (click)="getHand()">getHand</button>
+    <button (click)="getFlop()">getFlop</button>
+    <button (click)="getTurn()">getTurn</button>
+    <button (click)="getRiver()">getRiver</button>
+    <button (click)="cheat()">Cheat</button>
+  </div>
+  <br>
+  <app-pause-menu></app-pause-menu>
+  <button (click)="logout()">Logout</button>
 </div>
