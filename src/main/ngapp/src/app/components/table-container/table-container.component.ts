@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
-import { GameSettingsComponent } from '../game-settings/game-settings.component';
+//import { GameSettingsComponent } from '../game-settings/game-settings.component';
 
 @Component({
   selector: 'app-table-container',
@@ -10,21 +10,21 @@ import { GameSettingsComponent } from '../game-settings/game-settings.component'
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
-  tableCards: any = [];
-  handCards: any = [];
+  @Input() tableCards: any = [];
+  @Input() handCards: any = [];
   i: number;
 
   constructor(
     private gameService: GameService,
     private credService: CredentialsService,
     private router: Router,
-    private gameSettings: GameSettingsComponent
+    //private gameSettings: GameSettingsComponent
     ) {}
 
   ngOnInit() {
-    this.tableCards = this.gameSettings.table;
-    console.log("game hand card: " + this.tableCards);
-    this.handCards = this.gameSettings.hand;
+    //this.tableCards = this.gameSettings.table;
+    console.log("game hand cards: " + this.tableCards);
+    //this.handCards = this.gameSettings.hand;
     console.log("game table cards: " + this.handCards);
   }
 
