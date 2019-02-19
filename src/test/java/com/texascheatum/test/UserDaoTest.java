@@ -1,6 +1,7 @@
 package com.texascheatum.test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Assert;
@@ -158,7 +159,7 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	public void testTomcatConnectionPool() {
+	public void testTomcatConnectionPool() throws SQLException {
 		Connection conn = TomcatConnectionPool.getConnection();
 		Assert.assertTrue(conn instanceof Connection);
 	}

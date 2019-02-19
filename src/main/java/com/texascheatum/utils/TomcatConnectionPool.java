@@ -14,9 +14,11 @@ public class TomcatConnectionPool {
 	
 	final static Logger log = Logger.getLogger(TomcatConnectionPool.class);
 
-	private static DataSource dataSource;
+	private DataSource dataSource;
+	
+	private static TomcatConnectionPool connectionpool;
 
-	static {
+	private TomcatConnectionPool() {
 
 		try {
 			Context initialContext = new InitialContext();
@@ -29,15 +31,14 @@ public class TomcatConnectionPool {
 		
 	}
 	
-	public static Connection getConnection(){
+	public static void setupConnection() {
+		connectionpool = new TomcatConnectionPool();
+	}
+	
+	public static Connection getConnection() throws SQLException{
 		
-			try {
-				return dataSource.getConnection();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				log.error(e.getMessage());
-			}
-			return null;
+				return connectionpool.dataSource.getConnection();
+
 	}
 	
 }
