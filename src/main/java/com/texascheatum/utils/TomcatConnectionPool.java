@@ -30,7 +30,7 @@ public class TomcatConnectionPool {
 				return dataSource.getConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			return null;
 	}
