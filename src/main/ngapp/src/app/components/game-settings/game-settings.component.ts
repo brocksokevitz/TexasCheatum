@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../services/settings.service';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-game-settings',
   templateUrl: './game-settings.component.html',
