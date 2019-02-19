@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
+import { GameSettingsComponent } from '../game-settings/game-settings.component';
 
 @Component({
   selector: 'app-table-container',
@@ -9,17 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
-  tableCards: string[];
-  handCards: string[];
+  tableCards: any = [];
+  handCards: any = [];
   i: number;
 
   constructor(
     private gameService: GameService,
     private credService: CredentialsService,
-    private router: Router
+    private router: Router,
+    private gameSettings: GameSettingsComponent
     ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tableCards = this.gameSettings.table;
+    this.handCards = this.gameSettings.hand;
+  }
 
   getHand() {
     console.log("inside getHand method in table-container.component");
@@ -27,7 +32,7 @@ export class TableContainerComponent implements OnInit {
       data => {
         console.log(data);
         for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.handCards += data[this.i].image; 
+          this.handCards[this.i] = data[this.i].image; 
         }
       }
     );
@@ -39,7 +44,7 @@ export class TableContainerComponent implements OnInit {
       data => {
         console.log(data);
         for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards += data[this.i].image; 
+          this.tableCards[this.i] = data[this.i].image; 
         }
       }
     );
@@ -51,7 +56,7 @@ export class TableContainerComponent implements OnInit {
       data => {
         console.log(data);
         for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards += data[this.i].image; 
+          this.tableCards[this.i] = data[this.i].image; 
         }
       }
     );
@@ -63,7 +68,7 @@ export class TableContainerComponent implements OnInit {
       data => {
         console.log(data);
         for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards += data[this.i].image; 
+          this.tableCards[this.i] = data[this.i].image; 
         }
       }
     );
