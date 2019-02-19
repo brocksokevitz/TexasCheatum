@@ -36,7 +36,7 @@ public class UserDaoTest {
 	@Test
 	public void testNothing() {
 		String[] hand = {"AC","2C","4C","9S","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(0,score[0]);
 		Assert.assertEquals(14,score[1]);
 	}
@@ -44,14 +44,14 @@ public class UserDaoTest {
 	@Test
 	public void testSinglePair() {
 		String[] hand = {"AC","2C","4C","4S","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(1,score[0]);
 	}
 	
 	@Test
 	public void testTwoPair() {
 		String[] hand = {"2S","2C","4C","4S","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(2,score[0]);
 		Assert.assertEquals(7,score[1]);
 		Assert.assertEquals(4,score[2]);
@@ -61,7 +61,7 @@ public class UserDaoTest {
 	@Test
 	public void testThreeOfAkind() {
 		String[] hand = {"AC","4H","4C","4S","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(3,score[0]);
 		Assert.assertEquals(14,score[1]);
 	}
@@ -69,7 +69,7 @@ public class UserDaoTest {
 	@Test
 	public void testStraight() {
 		String[] hand = {"AH","2C","3H","4H","5C","6S","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(4,score[0]);
 		Assert.assertEquals(7,score[1]);
 	}
@@ -77,7 +77,7 @@ public class UserDaoTest {
 	@Test
 	public void testFlush() {
 		String[] hand = {"AH","4H","5H","KH","9C","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(5,score[0]);
 		Assert.assertEquals(14,score[1]);
 	}
@@ -85,7 +85,7 @@ public class UserDaoTest {
 	@Test
 	public void testFullHouse() {
 		String[] hand = {"KC","4H","4C","4S","KH","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(6,score[0]);
 		Assert.assertEquals(4,score[1]);
 		Assert.assertEquals(13,score[2]);
@@ -94,7 +94,7 @@ public class UserDaoTest {
 	@Test
 	public void testFourOfAKind() {
 		String[] hand = {"4D","4H","4C","4S","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(7,score[0]);
 		Assert.assertEquals(7,score[1]);
 	}
@@ -102,7 +102,7 @@ public class UserDaoTest {
 	@Test
 	public void testStraightFlush() {
 		String[] hand = {"AH","2H","3H","4H","5H","6H","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(8,score[0]);
 		Assert.assertEquals(7,score[1]);
 	}
@@ -110,7 +110,7 @@ public class UserDaoTest {
 	@Test
 	public void testLowerStraightFlush() {
 		String[] hand = {"AH","2H","3H","4H","5H","6S","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(8,score[0]);
 		Assert.assertEquals(5,score[1]);
 	}
@@ -118,7 +118,7 @@ public class UserDaoTest {
 	@Test
 	public void testRoyalFlush() {
 		String[] hand = {"0H","KH","JH","QH","AH","6S","7H"};
-		int[] score = GameService.checkHand(hand);
+		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(9,score[0]);
 	}
 }

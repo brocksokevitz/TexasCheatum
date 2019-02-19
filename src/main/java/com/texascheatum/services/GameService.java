@@ -1,7 +1,6 @@
 package com.texascheatum.services;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,32 +28,32 @@ public class GameService {
 	/**
 	 * 
 	 * @param hand
-	 * highest hand type wins
-	 * highest card only comes into play for ties
-	 * highest pair is used for pair, two pair, and fullhouse(in case of highest card tie)
-	 * lowest pair is only used for two pair ties
+	 * get all possible combinations for 7 choose 5 and send them to check hand.
 	 * @return int[] highestScore = {handType, highestCard, highest pair, lowest pair}
 	 */
-	public static int[] checkHand(String[] hand) {
+	public static int[] getScore(String[] hand) {
 		
 		int[] highestScore = {0,0,0,0};
 		int[] currentScore = {0,0,0,0};
-		int[] handHistogram = new int[13];
-		int[] suitHistogram = new int[4];
-		boolean flush = false;
-		boolean straight = false;
+		String[] newHand = new String[5];
 		
-		if(hand.length >5) {
-			//remove random element and send it through check hand again until it meets hand size
-			for(int i = 0; i<hand.length; i++) {
+		//create all possible 5 card hands
+		
+		//i is the first card we're removing
+		for(int i = 0; i<hand.length-1; i++) {
+			
+			//j is the second card we're removing	
+			for(int j = i+1; j<hand.length; j++) {
 				
-				String[] newHand = new String[hand.length-1];
-				
-				for(int j = 0; j<hand.length-1; j++) {
+				//h is the position of the card we're taking from the old hand and g is the position the card will have in the new hand
+				for(int h = 0, g = 0; h<7; h++) {
 					
-					newHand[j] = hand[(i+j)%(hand.length)];
-				} //end of nested for loop
-				
+					if(h != i && h != j) {
+						newHand[g]= hand[h];
+						g++;
+					}
+				}
+				//at this point we have a 5 card hand and can pass it to check hand and check for one of the winning hands
 				currentScore = checkHand(newHand);
 				
 				if(currentScore[0]>=highestScore[0]) {
@@ -78,9 +77,28 @@ public class GameService {
 							}
 					
 				}
-			} //end of outer for loop
-			
-		}else {
+				
+			} //end of nested for loop
+		} //end of outer for loop
+		
+		return highestScore;		
+	}
+	
+	/**
+	 * 
+	 * @param hand
+	 * highest hand type wins
+	 * highest card only comes into play for ties
+	 * highest pair is used for pair, two pair, and fullhouse(in case of highest card tie)
+	 * lowest pair is only used for two pair ties
+	 * @return int[] highestScore = {handType, highestCard, highest pair, lowest pair}
+	 */
+	public static int[] checkHand(String[] hand) {
+		
+		int[] highestScore = {0,0,0,0};
+		int[] handHistogram = new int[13];
+		int[] suitHistogram = new int[4];
+		boolean flush = false;		
 			
 			for(int k = 0; k<hand.length; k++) {
 				
@@ -148,8 +166,7 @@ public class GameService {
 				}
 			}
 			//System.out.println(Arrays.toString(handHistogram));
-		}
-		
+	
 		if(ArrayUtils.contains(handHistogram, 4)) {
 			
 			highestScore[0]=7;			
@@ -228,6 +245,7 @@ public class GameService {
 			
 		}
 		
+		//System.out.println(ArrayUtils.toString(handHistogram));
 		return highestScore;		
 	}
 }
