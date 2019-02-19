@@ -23,7 +23,9 @@ export class TableContainerComponent implements OnInit {
 
   ngOnInit() {
     this.tableCards = this.gameSettings.table;
+    console.log("game hand card: " + this.tableCards);
     this.handCards = this.gameSettings.hand;
+    console.log("game table cards: " + this.handCards);
   }
 
   getHand() {

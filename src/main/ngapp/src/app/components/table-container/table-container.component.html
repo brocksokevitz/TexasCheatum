@@ -1,9 +1,9 @@
-<div class="container col-md-6 offset-md-3 row" *ngFor="let cards of tableCards">
-  <img src={{cards}}>
+<div class="container col-md-6 offset-md-3" *ngFor="let cards of tableCards">
+  <img class="row" id="tableCard" src={{cards}}>
 </div>
 
-<div class="container col-md-4 offset-md-4 row" *ngFor="let cards of handCards">
-  <img src={{cards}}>
+<div class="container col-md-4 offset-md-4" *ngFor="let cards of handCards">
+  <img class="row" id="handCard" src={{cards}}>
 </div>
 
 <div>
