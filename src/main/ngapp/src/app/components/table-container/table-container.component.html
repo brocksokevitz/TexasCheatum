@@ -1,7 +1,6 @@
 <div *ngIf="lobbyView">
   <div class="row">
-    <div class="col-lg-4 offset-lg-4">
-      <div class="container rounded">
+    <div class="container rounded col-lg-4 offset-lg-4">
 
         <button class="btn btn-outline-light" (click)="newGame()">New Game</button>
         <br>
@@ -13,7 +12,6 @@
         
         <button class="btn btn-outline-light" (click)="goBack()">Back</button>
 
-      </div>
     </div>
   </div>
 </div>
@@ -22,7 +20,7 @@
   <div class="container rounded">
 
     <div class="row">
-      <div class="col-lg-6 col-lg-offset-3 rounded" id="tableRegion">
+      <div class="col-lg-6 col-lg-offset-3" id="tableRegion">
         <div *ngFor="let card of tableCards">
           <span><img src={{card}} id="tableCard"></span>
         </div>
@@ -38,7 +36,7 @@
     </div>
     <br>
     <div class="row">
-      <div class="col-lg-4 col-lg-offset-4 rounded" id="handRegion">
+      <div class="col-lg-4 col-lg-offset-4" id="handRegion">
         <div *ngFor="let card of handCards">
             <span><img src={{card}} id="handCard"></span>
         </div>
@@ -52,11 +50,9 @@
 
 <div *ngIf="pauseMenu">
   <div class="row">
-    <div class="col-lg-4 offset-lg-4">
-      <div class="container rounded">
+    <div class="container rounded col-lg-4 offset-lg-4">
           <button class="btn btn-outline-light" (click)="resume()">Resume Game</button><br>
           <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-      </div>
     </div>
   </div>
 </div>
