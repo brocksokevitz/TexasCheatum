@@ -12,8 +12,6 @@
     background-color: darkgreen;
     color: whitesmoke;
     padding: 50px;
-    display: flex;
-    justify-content: center;
 }
 
 #tableRegion, #handRegion {

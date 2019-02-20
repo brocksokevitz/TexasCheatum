@@ -4,8 +4,10 @@
           <form class="form-group" (ngSubmit)="register()" method="POST">
             <label>Username:</label><br>
             <input type="text" name="username" [(ngModel)]="credentials.username" #username="ngModel" required><br>
+            <br>
             <label>Email:</label><br>
             <input type="email" name="email" [(ngModel)]="credentials.email" #email="ngModel" required><br>
+            <br>
             <label>Password:</label><br>
             <input type="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" required><br>
             <button class="btn btn-outline-light">Register</button>
