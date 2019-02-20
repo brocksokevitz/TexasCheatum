@@ -1,22 +1,22 @@
 #handCard {
-    width: 50%;
+    width: 40%;
     padding: 5px;
-    display: inline;
 }
 
 #tableCard {
     width: 20%;
     padding: 5px;
-    display: inline;
 }
 
 .container {
     background-color: darkgreen;
     color: whitesmoke;
     padding: 50px;
+    display: flex;
     justify-content: center;
 }
 
 #tableRegion, #handRegion {
     border: 3px solid whitesmoke;
 }
+

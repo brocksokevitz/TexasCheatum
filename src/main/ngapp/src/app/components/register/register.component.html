@@ -2,9 +2,12 @@
   <div class="container rounded col-lg-4 offset-lg-4">
       <div>
           <form class="form-group" (ngSubmit)="register()" method="POST">
-            <input type="text" name="username" [(ngModel)]="credentials.username" #username="ngModel" placeholder="username" required><br>
-            <input type="email" name="email" [(ngModel)]="credentials.email" #email="ngModel" placeholder="email" required><br>
-            <input type="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" placeholder="password" required><br>
+            <label>Username:</label><br>
+            <input type="text" name="username" [(ngModel)]="credentials.username" #username="ngModel" required><br>
+            <label>Email:</label><br>
+            <input type="email" name="email" [(ngModel)]="credentials.email" #email="ngModel" required><br>
+            <label>Password:</label><br>
+            <input type="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" required><br>
             <button class="btn btn-outline-light">Register</button>
           </form>
       </div>
