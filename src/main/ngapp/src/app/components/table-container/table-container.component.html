@@ -21,20 +21,18 @@
 <div *ngIf="gameView">
   <div class="container rounded">
 
-    <div class="row">
+    
       <h3>Table Cards</h3>
       <div class="col-lg-6 col-lg-offset-3 rounded" id="tableRegion">
         <table>
           <tr>
-            <td>
-              <div *ngFor="let card of tableCards">
-                <img src={{card}} id="tableCard">
-              </div>
+            <td *ngFor="let card of tableCards">
+              <img src={{card}} id="tableCard">
             </td>
           </tr>
         </table>
       </div>
-    </div>
+    
     <br>
     <div>
       <button class="btn btn-outline-light" (click)="getHand()">getHand</button>
@@ -44,20 +42,18 @@
       <button class="btn btn-outline-light" (click)="cheat()">Cheat</button>
     </div>
     <br>
-    <div class="row">
+  
       <h3>Player Hand</h3>
       <div class="col-lg-4 col-lg-offset-4 rounded" id="handRegion">
         <table>
           <tr>
-            <td>
-              <div *ngFor="let card of handCards">
-                <img src={{card}} id="handCard">
-              </div>
+            <td *ngFor="let card of handCards">
+              <img src={{card}} id="handCard">
             </td>
           </tr>
         </table>
       </div>
-    </div> 
+     
     <br>
     <button class="btn btn-outline-light" (click)="pause()">Pause</button>
 

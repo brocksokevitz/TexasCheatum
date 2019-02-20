@@ -12,10 +12,12 @@
     background-color: darkgreen;
     color: whitesmoke;
     padding: 50px;
-    text-align: center;
 }
 
 #tableRegion, #handRegion {
     border: 3px solid whitesmoke;
 }
 
+h3 {
+    text-align: center;
+}
