@@ -18,7 +18,6 @@ import com.texascheatum.utils.TomcatConnectionPool;
 public class UserDaoImplementation implements UserDao{
 
 	private static UserDaoImplementation userDao;
-	private static ConnectionUtil cu = ConnectionUtil.getInstance();
 	private static TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
 	final static Logger log = Logger.getLogger(UserDaoImplementation.class);
 
@@ -54,6 +53,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -88,6 +89,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return new User();
 	}
