@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.texascheatum.utils.ConnectionUtil;
+import com.texascheatum.utils.TomcatConnectionPool;
 
 public class GameDaoImplementation implements GameDao{
 
 	private static GameDaoImplementation gameDao;
-	private static ConnectionUtil cu = ConnectionUtil.getInstance();
+	private static TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
 	final static Logger log = Logger.getLogger(GameDaoImplementation.class);
 
 	private GameDaoImplementation() {
@@ -29,7 +30,7 @@ public class GameDaoImplementation implements GameDao{
 	@Override
 	public boolean createGame(String gameId, String username) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call create_game(?,?)}");	
@@ -44,6 +45,8 @@ public class GameDaoImplementation implements GameDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -51,7 +54,7 @@ public class GameDaoImplementation implements GameDao{
 	@Override
 	public boolean updateGame(String gameId, String status) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call update_game(?,?)}");	
@@ -66,6 +69,8 @@ public class GameDaoImplementation implements GameDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
