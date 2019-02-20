@@ -1,41 +1,55 @@
 <div *ngIf="lobbyView">
-  <button (click)="newGame()">New Game</button>
+  <div class="container rounded">
 
-  <form class="form-group" (ngSubmit)="joinGame()" method="POST">
-    <Label>Enter an existing game session id:</Label>
-    <input type="text" name="sesh" [(ngModel)]="game.sesh" #sesh="ngModel">
-    <button class="btn btn-outline-info">Join Game</button>
-  </form>
-  
-  <button (click)="goBack()">Back</button>
+    <button class="btn btn-outline-light" (click)="newGame()">New Game</button>
+
+    <form class="form-group" (ngSubmit)="joinGame()" method="POST">
+      <Label>Enter an existing game session id:</Label><br>
+      <input type="text" class="form-control" name="sesh" [(ngModel)]="game.sesh" #sesh="ngModel">
+      <button class="btn btn-outline-light">Join Game</button>
+    </form>
+    
+    <button class="btn btn-outline-light" (click)="goBack()">Back</button>
+
+  </div>
 </div>
 
 <div *ngIf="gameView">
-  <div class="container col-lg-6 col-lg-offset-3">
-    <div *ngFor="let card of tableCards" class="row">
-     <img id="tableCard" src={{card}}>
+  <div class="container rounded">
+
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 rounded" id="tableRegion">
+        <div class="column" *ngFor="let card of tableCards" id="tableCard">
+          <img src={{card}}>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <button (click)="getHand()">getHand</button>
-    <button (click)="getFlop()">getFlop</button>
-    <button (click)="getTurn()">getTurn</button>
-    <button (click)="getRiver()">getRiver</button>
-    <button (click)="cheat()">Cheat</button>
-  </div>
-
-  <div class="container col-lg-4 col-lg-offset-4">
-    <div *ngFor="let card of handCards" class="row">
-      <img id="handCard" src={{card}}>
+    <div>
+      <button class="btn btn-outline-light" (click)="getHand()">getHand</button>
+      <button class="btn btn-outline-light" (click)="getFlop()">getFlop</button>
+      <button class="btn btn-outline-light" (click)="getTurn()">getTurn</button>
+      <button class="btn btn-outline-light" (click)="getRiver()">getRiver</button>
+      <button class="btn btn-outline-light" (click)="cheat()">Cheat</button>
     </div>
-  </div>
 
-  <br>
-  <button (click)="pause()">Pause</button>
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4 rounded" id="handRegion">
+        <div *ngFor="let card of handCards" id="handCard">
+          <img src={{card}}>
+        </div>
+      </div>
+    </div> 
+
+    <br>
+    <button class="btn btn-outline-light" (click)="pause()">Pause</button>
+
+  </div>
 </div>
 
 <div *ngIf="pauseMenu">
-  <button (click)="resume()">Resume Game</button>
-  <button (click)="logout()">Logout</button>
+  <div class="container rounded">
+      <button class="btn btn-outline-light" (click)="resume()">Resume Game</button><br>
+      <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+  </div>
 </div>
