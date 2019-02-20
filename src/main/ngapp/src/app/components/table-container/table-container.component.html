@@ -22,10 +22,17 @@
   <div class="container rounded">
 
     <div class="row">
-      <div class="col-lg-6 col-lg-offset-3 center" id="tableRegion">
-        <div *ngFor="let card of tableCards">
-          <span><img src={{card}} id="tableCard"></span>
-        </div>
+      <h3>Table Cards</h3>
+      <div class="col-lg-6 col-lg-offset-3 rounded" id="tableRegion">
+        <table>
+          <tr>
+            <td>
+              <div *ngFor="let card of tableCards">
+                <img src={{card}} id="tableCard">
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <br>
@@ -38,10 +45,17 @@
     </div>
     <br>
     <div class="row">
-      <div class="col-lg-4 col-lg-offset-4 center" id="handRegion">
-        <div *ngFor="let card of handCards">
-            <span><img src={{card}} id="handCard"></span>
-        </div>
+      <h3>Player Hand</h3>
+      <div class="col-lg-4 col-lg-offset-4 rounded" id="handRegion">
+        <table>
+          <tr>
+            <td>
+              <div *ngFor="let card of handCards">
+                <img src={{card}} id="handCard">
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div> 
     <br>
