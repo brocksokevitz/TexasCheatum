@@ -63,11 +63,11 @@ public class UserDaoTest {
 //		Assert.assertTrue(loseStatus);
 //	}
 	
-	@Test
-	public void testUpdateGame() {
-		boolean gameStatus = GameDaoImplementation.getGameDao().updateGame("1234", "closed");
-		Assert.assertTrue(gameStatus);
-	}
+//	@Test
+//	public void testUpdateGame() {
+//		boolean gameStatus = GameDaoImplementation.getGameDao().updateGame("1234", "closed");
+//		Assert.assertTrue(gameStatus);
+//	}
 	
 	@Test
 	public void testNothing() {
