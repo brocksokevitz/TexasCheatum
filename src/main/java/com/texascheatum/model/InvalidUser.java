@@ -1,6 +1,6 @@
 package com.texascheatum.model;
 
-public class InvalidUser extends User{
+public class InvalidUser extends AbstractUser{
 
 	@Override
 	public boolean isValid() {

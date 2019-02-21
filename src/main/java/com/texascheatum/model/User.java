@@ -16,6 +16,7 @@ public class User extends AbstractUser{
 	private String currentGame;
 	private int totalGames;
 	private int totalWins;
+	
 	public User() {
 		super();
 	}

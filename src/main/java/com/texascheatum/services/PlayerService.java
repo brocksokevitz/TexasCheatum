@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.texascheatum.dao.UserDaoImplementation;
+import com.texascheatum.model.AbstractUser;
 import com.texascheatum.model.User;
 
 public class PlayerService {
@@ -27,11 +28,16 @@ public class PlayerService {
 	public static void login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode userJson = mapper.readTree(request.getReader());
-		User user = UserDaoImplementation.getUserDao().getUser(
+//		User user = UserDaoImplementation.getUserDao().getUser(
+//				userJson.get("username").asText(),
+//				userJson.get("password").asText());
+		
+		AbstractUser abstractUser = UserDaoImplementation.getUserDao().getUser(
 				userJson.get("username").asText(),
 				userJson.get("password").asText());
 		
-		if (user.getUsername() != null && !user.getUsername().equals("")) {
+		if (abstractUser.isValid()) {
+			User user = (User)abstractUser;
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("gameID", user.getCurrentGame());
 			
