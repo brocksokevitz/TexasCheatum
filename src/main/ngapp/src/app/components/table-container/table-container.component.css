@@ -1,11 +1,11 @@
 #handCard {
-    width: 40%;
-    padding: 5px;
+    width: 100%;
+    padding: 3px;
 }
 
 #tableCard {
-    width: 20%;
-    padding: 5px;
+    width: 100%;
+    padding: 3px;
 }
 
 .container {
