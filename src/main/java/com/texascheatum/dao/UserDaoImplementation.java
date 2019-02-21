@@ -13,11 +13,12 @@ import org.apache.log4j.Logger;
 
 import com.texascheatum.model.User;
 import com.texascheatum.utils.ConnectionUtil;
+import com.texascheatum.utils.TomcatConnectionPool;
 
 public class UserDaoImplementation implements UserDao{
 
 	private static UserDaoImplementation userDao;
-	private static ConnectionUtil cu = ConnectionUtil.getInstance();
+	private static TomcatConnectionPool pool = TomcatConnectionPool.getInstance();
 	final static Logger log = Logger.getLogger(UserDaoImplementation.class);
 
 	private UserDaoImplementation() {
@@ -31,12 +32,14 @@ public class UserDaoImplementation implements UserDao{
 		
 		return userDao;
 	}
+	
 
 	@Override
 	public boolean insertUser(String username, String email, String password) {
 		Connection conn = null;
-		conn = cu.getConnection();
-		
+		System.out.println(1);
+		conn = pool.getConnection();
+		System.out.println(2);
 		try {
 			CallableStatement cs = conn.prepareCall("{call insert_user(?,?,?)}");	
 			cs.setString(1, username);
@@ -50,6 +53,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -57,7 +62,7 @@ public class UserDaoImplementation implements UserDao{
 	@Override
 	public User getUser(String username, String password) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call get_user(?,?,?,?,?,?,?,?,?)}");	
@@ -84,6 +89,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return new User();
 	}
@@ -91,7 +98,7 @@ public class UserDaoImplementation implements UserDao{
 	@Override
 	public List<User> getUsers(String gameId) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 
 		try {
 			String sql = "select * from users where current_game = ?";
@@ -110,14 +117,17 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
+		
 	return new ArrayList<>();
 	}
 	
 	@Override
 	public boolean promoteUser(String username) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call promote_user(?)}");	
@@ -130,6 +140,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -137,7 +149,7 @@ public class UserDaoImplementation implements UserDao{
 	@Override
 	public boolean deleteUser(String username) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call delete_user(?)}");	
@@ -150,6 +162,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -157,7 +171,7 @@ public class UserDaoImplementation implements UserDao{
 	@Override
 	public boolean wonGame(String username) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			CallableStatement cs = conn.prepareCall("{call won_game(?)}");	
@@ -170,6 +184,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}
@@ -177,7 +193,7 @@ public class UserDaoImplementation implements UserDao{
 	@Override
 	public boolean lostGame(String[] username) {
 		Connection conn = null;
-		conn = cu.getConnection();
+		conn = pool.getConnection();
 		
 		try {
 			for(int i = 0; i < username.length; i++) {
@@ -191,6 +207,8 @@ public class UserDaoImplementation implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
 		}
 	return false;
 	}

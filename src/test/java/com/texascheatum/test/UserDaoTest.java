@@ -18,33 +18,33 @@ public class UserDaoTest {
 
 	
 	
-	@Test
-	public void testGetUser() {
-		User testUser = UserDaoImplementation.getUserDao().getUser("super", "superpass");
-		Assert.assertEquals(1, testUser.getUserId());
-		Assert.assertEquals("super", testUser.getUsername());
-		Assert.assertEquals(0, Double.compare(10000, testUser.getBalance()));
-		Assert.assertEquals("fuksyr@gmail.com", testUser.getEmail());
-		Assert.assertEquals(25, testUser.getSuperuser());
-	}
+//	@Test
+//	public void testGetUser() {
+//		User testUser = UserDaoImplementation.getUserDao().getUser("super", "superpass");
+//		Assert.assertEquals(1, testUser.getUserId());
+//		Assert.assertEquals("super", testUser.getUsername());
+//		Assert.assertEquals(0, Double.compare(10000, testUser.getBalance()));
+//		Assert.assertEquals("fuksyr@gmail.com", testUser.getEmail());
+//		Assert.assertEquals(25, testUser.getSuperuser());
+//	}
 	
-	@Test
-	public void testFailInsertUser() {
-		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("super","fuksyr@gmail.com" ,"superpass");
-		Assert.assertFalse(insertStatus);
-	}
+//	@Test
+//	public void testFailInsertUser() {
+//		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("super","fuksyr@gmail.com" ,"superpass");
+//		Assert.assertFalse(insertStatus);
+//	}
 	
-	@Test
-	public void testFailInvalidUser() {
-		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("","" ,"");
-		Assert.assertFalse(insertStatus);
-	}
+//	@Test
+//	public void testFailInvalidUser() {
+//		boolean insertStatus = UserDaoImplementation.getUserDao().insertUser("","" ,"");
+//		Assert.assertFalse(insertStatus);
+//	}
 	
-	@Test
-	public void testWinGame() {
-		boolean winStatus = UserDaoImplementation.getUserDao().wonGame("super");
-		Assert.assertTrue(winStatus);
-	}
+//	@Test
+//	public void testWinGame() {
+//		boolean winStatus = UserDaoImplementation.getUserDao().wonGame("super");
+//		Assert.assertTrue(winStatus);
+//	}
 	
 //	@Test
 //	public void testGetUsersByGame() {
@@ -56,18 +56,18 @@ public class UserDaoTest {
 //		Assert.assertEquals(1, users.get(0).getUserId());
 //	}
 	
-	@Test
-	public void testLoseGame() {
-		String[] array = {"super"};
-		boolean loseStatus = UserDaoImplementation.getUserDao().lostGame(array);
-		Assert.assertTrue(loseStatus);
-	}
+//	@Test
+//	public void testLoseGame() {
+//		String[] array = {"super"};
+//		boolean loseStatus = UserDaoImplementation.getUserDao().lostGame(array);
+//		Assert.assertTrue(loseStatus);
+//	}
 	
-	@Test
-	public void testUpdateGame() {
-		boolean gameStatus = GameDaoImplementation.getGameDao().updateGame("1234", "closed");
-		Assert.assertTrue(gameStatus);
-	}
+//	@Test
+//	public void testUpdateGame() {
+//		boolean gameStatus = GameDaoImplementation.getGameDao().updateGame("1234", "closed");
+//		Assert.assertTrue(gameStatus);
+//	}
 	
 	@Test
 	public void testNothing() {

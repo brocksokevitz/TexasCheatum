@@ -2,14 +2,18 @@
   <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <form class="form-group" (ngSubmit)="login()" method="POST">
-        <input type="text" class="form-control" name="username" [(ngModel)]="credentials.username" #username="ngModel" placeholder="username">
-        <input type="password" class="form-control" name="password" [(ngModel)]="credentials.password" #password="ngModel" placeholder="password">
+        <label>Username:</label><br>
+        <input type="text" class="form-control" name="username" [(ngModel)]="credentials.username" #username="ngModel" required><br>
+        <label>Password:</label><br>
+        <input type="password" class="form-control" name="password" [(ngModel)]="credentials.password" #password="ngModel" required>
         <button class="btn btn-outline-light">Login</button>
       </form>
     </div>
   </div>
   
   <button class="btn btn-outline-light" routerLink="/register">Register</button>
+  <br>
+  <br>
   <div id="invalid" *ngIf="visible">
       <p>Invalid credentials. Please try again.</p>
   </div>
