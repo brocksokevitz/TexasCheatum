@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.texascheatum.model.InvalidUser;
 import com.texascheatum.model.User;
-import com.texascheatum.utils.ConnectionUtil;
 import com.texascheatum.utils.TomcatConnectionPool;
 
 public class UserDaoImplementation implements UserDao{
@@ -92,7 +92,7 @@ public class UserDaoImplementation implements UserDao{
 		}finally {
 			pool.freeConnection(conn);
 		}
-	return new User();
+	return new InvalidUser();
 	}
 	
 	@Override

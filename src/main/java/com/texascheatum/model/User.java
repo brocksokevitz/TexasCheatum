@@ -2,7 +2,7 @@ package com.texascheatum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class User {
+public class User extends AbstractUser{
 
 	private int userId;
 	private String username;
@@ -98,4 +98,9 @@ public class User {
 		this.totalWins = totalWins;
 	}
 	
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
