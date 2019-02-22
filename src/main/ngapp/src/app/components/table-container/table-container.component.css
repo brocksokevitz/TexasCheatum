@@ -8,14 +8,6 @@
     padding: 3px;
 }
 
-#tableCell {
-    width: 20%;
-}
-
-#handCell {
-    width: 50%;
-}
-
 .container {
     background-color: darkgreen;
     color: whitesmoke;
