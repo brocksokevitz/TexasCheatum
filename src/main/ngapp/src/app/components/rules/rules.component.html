@@ -1,5 +1,36 @@
-<p>
-  rules works!
-</p>
-<!-- go back one step in history (look how they did it in ToH)-->
-<button routerLink="/home">Back</button>
+<div class="container rounded">
+  <h2>How to Play</h2>
+  <div>
+    <h4>Winning Hands (ranked by priority):</h4>
+    <ol>
+      <li><b>Royal Flush</b> - five cards of the same suit, ordered ace through ten.</li>
+      <li><b>Straight Flush</b> - five cards of the same suit, ordered consecutively.</li>
+      <li><b>Four of a Kind</b> - four cards of the same value.</li>
+      <li><b>Full House</b> - three cards of the same value and two cards of the same value.</li>
+      <li><b>Flush</b> - any five cards of the same suit.</li>
+      <li><b>Straight</b> - any five cards ordered consecutively.</li>
+      <li><b>Three of a Kind</b> - three cards of the same value.</li>
+      <li><b>Two Pair</b> - two cards of the same value and two more cards of the same value.</li>
+      <li><b>One Pair</b> - two cards of the same value.</li>
+      <li><b>High Card</b> - highest value card, if no other hand can be formed.</li>
+    </ol>
+  </div>
+
+  <div>
+    <h4>Rules of Play:</h4>
+    <dl>
+      <dt><b>Pre-flop</b></dt>
+        <dd>In this initial betting stage, players can either call to match the table minimum bet, raise the current bet, or fold. Play continues in a clockwise cycle until the last bet is called.</dd>
+      <dt><b>The Flop</b></dt>
+        <dd>Following the final call of the pre-flop stage, the first three table cards are drawn and placed face up. Play continues where the previous stage left off. In this stage, however, players have the option to place a bet, call, raise, or fold. Additionally, Players can now check, which simply passes play on to the next player, if no bet was placed by the previous player. This stage ends when either the last bet/raise is called, or if all player check in a given cycle.</dd>
+      <dt><b>The Turn</b></dt>
+        <dd>After the flop stage, a fourth card is added to the table face up. Betting for this stage follows the same rules as the flop stage.</dd>
+      <dt><b>The River</b></dt>
+        <dd>Following the turn stage, the fifth table card is laid down, and players go through one final round of betting following the same rules as the previous stages. Once all betting is complete, the remaining players reveal their hands to determine a winner.</dd>
+      <dt><b>Winning the Hand</b></dt>
+        <dd>The winning hand is determined once all five table cards have been laid down. Players construct their best possible five-card hand from the seven available cards (two hand cards and five table cards). The hand with the highest overall priority wins.</dd>
+    </dl>
+  </div>
+  <br>
+  <button class="btn btn-outline-light" (click)="goBack()">Back</button>
+</div>

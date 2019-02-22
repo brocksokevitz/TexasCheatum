@@ -12,4 +12,7 @@ export class RulesComponent implements OnInit {
   ngOnInit() {
   }
 
+  goBack() {
+    window.history.back();
+  }
 }
