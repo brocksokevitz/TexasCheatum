@@ -10,7 +10,6 @@ import { TableContainerComponent } from './components/table-container/table-cont
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RulesComponent } from './components/rules/rules.component';
-import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TableCardsComponent } from './components/table-cards/table-cards.component';
 import { PlayerHandComponent } from './components/player-hand/player-hand.component';
@@ -22,7 +21,6 @@ import { PlayerHandComponent } from './components/player-hand/player-hand.compon
     LoginComponent,
     HomeComponent,
     RulesComponent,
-    OptionsMenuComponent,
     RegisterComponent,
     TableCardsComponent,
     PlayerHandComponent
