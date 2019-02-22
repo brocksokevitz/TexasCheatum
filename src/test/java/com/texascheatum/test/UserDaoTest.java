@@ -2,7 +2,9 @@ package com.texascheatum.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -157,6 +159,113 @@ public class UserDaoTest {
 		int[] score = GameService.getScore(hand);
 		Assert.assertEquals(9,score[0]);
 	}
+	
+	@Test
+	public void testComparePair() {
+		String[] table = {"AC","2C","3C","4C","8S"};
+		String[] hand = {"6H","AH"};
+		String[] hand2 = {"0H","2H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testComparePairTieHighCardWins() {
+		String[] table = {"AC","2C","3C","4C","8S"};
+		String[] hand = {"6H","AH"};
+		String[] hand2 = {"0H","AS"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testComparePairTie() {
+		String[] table = {"AC","2C","3C","4C","8S"};
+		String[] hand = {"0S","AH"};
+		String[] hand2 = {"0H","AS"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+//	@Test
+//	public void testCompareTwoPair() {
+//		String[] hand = {"AC","2C","3C","3C","2S","6H","7H"};
+//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
+//		String[] names = {"1", "2"};
+//		Map<String, String[]> map = new HashMap<>();
+//		map.put("1", hand);
+//		map.put("2", hand2);
+//		
+//		String winner = GameService.compareHands(names, map);
+//		Assert.assertEquals("2", winner);
+//	}
+//	
+//	@Test
+//	public void testCompareTwoPairHighPairTie() {
+//		String[] hand = {"AC","2C","3C","AC","2S","6H","7H"};
+//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
+//		String[] names = {"1", "2"};
+//		Map<String, String[]> map = new HashMap<>();
+//		map.put("1", hand);
+//		map.put("2", hand2);
+//		
+//		String winner = GameService.compareHands(names, map);
+//		Assert.assertEquals("2", winner);
+//	}
+//	
+//	@Test
+//	public void testCompareTwoPairHighPairTieLowPairTie() {
+//		String[] hand = {"AC","2C","3C","AC","2S","6H","7H"};
+//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
+//		String[] names = {"1", "2"};
+//		Map<String, String[]> map = new HashMap<>();
+//		map.put("1", hand);
+//		map.put("2", hand2);
+//		
+//		String winner = GameService.compareHands(names, map);
+//		Assert.assertEquals("2", winner);
+//	}
+//	
+//	@Test
+//	public void testCompareStraights() {
+//		String[] hand = {"AC","2C","4C","4S","5H","6H","7H"};
+//		String[] hand2 = {"AC","2C","10C","JS","QH","KH","AH"};
+//		String[] names = {"1", "2"};
+//		Map<String, String[]> map = new HashMap<>();
+//		map.put("1", hand);
+//		map.put("2", hand2);
+//		
+//		String winner = GameService.compareHands(names, map);
+//		Assert.assertEquals("2", winner);
+//	}
+//	
+//	@Test
+//	public void testCompareStraightFlushVsRoyalFlush() {
+//		String[] hand = {"AC","2C","3C","4C","5C","6H","7H"};
+//		String[] hand2 = {"AC","2C","0H","JH","QH","KH","AH"};
+//		String[] names = {"1", "2"};
+//		Map<String, String[]> map = new HashMap<>();
+//		map.put("1", hand);
+//		map.put("2", hand2);
+//		
+//		String winner = GameService.compareHands(names, map);
+//		Assert.assertEquals("2", winner);
+//	}
 	
 //	@Test
 //	public void testTomcatConnectionPool() throws SQLException {

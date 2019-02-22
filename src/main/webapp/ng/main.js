@@ -36,14 +36,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _components_game_settings_game_settings_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/game-settings/game-settings.component */ "./src/app/components/game-settings/game-settings.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/table-container/table-container.component */ "./src/app/components/table-container/table-container.component.ts");
-/* harmony import */ var _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/rules/rules.component */ "./src/app/components/rules/rules.component.ts");
-/* harmony import */ var _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/options-menu/options-menu.component */ "./src/app/components/options-menu/options-menu.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/table-container/table-container.component */ "./src/app/components/table-container/table-container.component.ts");
+/* harmony import */ var _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rules/rules.component */ "./src/app/components/rules/rules.component.ts");
+/* harmony import */ var _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/options-menu/options-menu.component */ "./src/app/components/options-menu/options-menu.component.ts");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
 
 
 
@@ -56,31 +54,27 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     {
         path: "TexasCheatum",
-        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]
+        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"]
     },
     {
         path: "register",
-        component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"]
+        component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_8__["RegisterComponent"]
     },
     {
         path: "home",
-        component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
-    },
-    {
-        path: "game-settings",
-        component: _components_game_settings_game_settings_component__WEBPACK_IMPORTED_MODULE_3__["GameSettingsComponent"]
+        component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]
     },
     {
         path: "table",
-        component: _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_6__["TableContainerComponent"]
+        component: _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_5__["TableContainerComponent"]
     },
     {
         path: "rules",
-        component: _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_7__["RulesComponent"]
+        component: _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_6__["RulesComponent"]
     },
     {
         path: "options",
-        component: _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_8__["OptionsMenuComponent"]
+        component: _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_7__["OptionsMenuComponent"]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -106,7 +100,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "div {\r\n    text-align: center;\r\n    margin-top: 150px;\r\n}\r\n\r\nh1 {\r\n    color: whitesmoke;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksaUJBQWlCO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJkaXYge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luLXRvcDogMTUwcHg7XHJcbn1cclxuXHJcbmgxIHtcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -117,7 +111,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{ title }}!\r\n  </h1>\r\n<router-outlet></router-outlet>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{ title }}!\r\n  </h1>\r\n  <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -168,15 +162,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/table-container/table-container.component */ "./src/app/components/table-container/table-container.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_game_settings_game_settings_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/game-settings/game-settings.component */ "./src/app/components/game-settings/game-settings.component.ts");
+/* harmony import */ var angular_google_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular-google-charts */ "./node_modules/angular-google-charts/fesm5/angular-google-charts.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/table-container/table-container.component */ "./src/app/components/table-container/table-container.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
 /* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
 /* harmony import */ var _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/rules/rules.component */ "./src/app/components/rules/rules.component.ts");
 /* harmony import */ var _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/options-menu/options-menu.component */ "./src/app/components/options-menu/options-menu.component.ts");
 /* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_table_cards_table_cards_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/table-cards/table-cards.component */ "./src/app/components/table-cards/table-cards.component.ts");
+/* harmony import */ var _components_player_hand_player_hand_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/player-hand/player-hand.component */ "./src/app/components/player-hand/player-hand.component.ts");
+
+
 
 
 
@@ -197,108 +195,28 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
-                _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_7__["TableContainerComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_8__["LoginComponent"],
-                _components_game_settings_game_settings_component__WEBPACK_IMPORTED_MODULE_9__["GameSettingsComponent"],
+                _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
+                _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_8__["TableContainerComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
                 _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_11__["RulesComponent"],
                 _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_12__["OptionsMenuComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_13__["RegisterComponent"]
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_13__["RegisterComponent"],
+                _components_table_cards_table_cards_component__WEBPACK_IMPORTED_MODULE_14__["TableCardsComponent"],
+                _components_player_hand_player_hand_component__WEBPACK_IMPORTED_MODULE_15__["PlayerHandComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+                angular_google_charts__WEBPACK_IMPORTED_MODULE_5__["GoogleChartsModule"].forRoot()
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/components/game-settings/game-settings.component.css":
-/*!**********************************************************************!*\
-  !*** ./src/app/components/game-settings/game-settings.component.css ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZ2FtZS1zZXR0aW5ncy9nYW1lLXNldHRpbmdzLmNvbXBvbmVudC5jc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/components/game-settings/game-settings.component.html":
-/*!***********************************************************************!*\
-  !*** ./src/app/components/game-settings/game-settings.component.html ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div>\r\n  <button (click)=\"newGame()\">New Game</button>\r\n\r\n  <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n    <Label>Enter an existing game session id: </Label>\r\n    <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\">\r\n    <button class=\"btn btn-outline-info\">Join Game</button>\r\n  </form>\r\n  \r\n<button (click)=\"goBack()\">Back</button>\r\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/components/game-settings/game-settings.component.ts":
-/*!*********************************************************************!*\
-  !*** ./src/app/components/game-settings/game-settings.component.ts ***!
-  \*********************************************************************/
-/*! exports provided: GameSettingsComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameSettingsComponent", function() { return GameSettingsComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_settings_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/settings.service */ "./src/app/services/settings.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
-
-
-
-var GameSettingsComponent = /** @class */ (function () {
-    function GameSettingsComponent(settingServ, router) {
-        this.settingServ = settingServ;
-        this.router = router;
-        this.game = {};
-    }
-    GameSettingsComponent.prototype.ngOnInit = function () { };
-    GameSettingsComponent.prototype.newGame = function () {
-        var _this = this;
-        console.log("inside the newGame method in game-settings.component");
-        this.settingServ.newGame().subscribe(function (data) {
-            console.log(data);
-            _this.router.navigateByUrl("/table");
-        });
-    };
-    GameSettingsComponent.prototype.joinGame = function () {
-        var _this = this;
-        console.log("inside joinGame method in game-settings.component");
-        this.settingServ.joinGame(this.game.sesh).subscribe(function (data) {
-            console.log(data);
-            _this.router.navigateByUrl("/table");
-        });
-    };
-    GameSettingsComponent.prototype.goBack = function () {
-        window.history.back();
-    };
-    GameSettingsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-game-settings',
-            template: __webpack_require__(/*! ./game-settings.component.html */ "./src/app/components/game-settings/game-settings.component.html"),
-            styles: [__webpack_require__(/*! ./game-settings.component.css */ "./src/app/components/game-settings/game-settings.component.css")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_settings_service__WEBPACK_IMPORTED_MODULE_2__["SettingsService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
-    ], GameSettingsComponent);
-    return GameSettingsComponent;
 }());
 
 
@@ -312,7 +230,7 @@ var GameSettingsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n    justify-content: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJCQUEyQjtJQUMzQixpQkFBaUI7SUFDakIsYUFBYTtJQUNiLHVCQUF1QjtBQUMzQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtncmVlbjtcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gICAgcGFkZGluZzogNTBweDtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -323,7 +241,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <button routerLink=\"/rules\">Game Rules</button>\r\n  <button routerLink=\"/game-settings\">Play!</button>\r\n  <button routerLink=\"/options\">Options</button>\r\n  <button (click)=\"logout()\">Logout</button>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/table\">Play!</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/rules\">Game Rules</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/options\">Options</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -383,7 +301,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#invalid {\r\n    color: red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksVUFBVTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2ludmFsaWQge1xyXG4gICAgY29sb3I6IHJlZDtcclxufSJdfQ== */"
+module.exports = "#invalid {\r\n    color: red;\r\n}\r\n\r\n.container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n    justify-content: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksVUFBVTtBQUNkOztBQUVBO0lBQ0ksMkJBQTJCO0lBQzNCLGlCQUFpQjtJQUNqQixhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2ludmFsaWQge1xyXG4gICAgY29sb3I6IHJlZDtcclxufVxyXG5cclxuLmNvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrZ3JlZW47XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIHBhZGRpbmc6IDUwcHg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -394,7 +312,7 @@ module.exports = "#invalid {\r\n    color: red;\r\n}\r\n/*# sourceMappingURL=dat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form class=\"form-group\" (ngSubmit)=\"login()\" method=\"POST\">\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"credentials.username\" #username=\"ngModel\" placeholder=\"username\">\r\n    <input type=\"password\" name=\"password\" [(ngModel)]=\"credentials.password\" #password=\"ngModel\" placeholder=\"password\">\r\n    <button class=\"btn btn-outline-info\">Login</button>\r\n  </form>\r\n</div>\r\n<button routerLink=\"/register\">Register</button>\r\n<div id=\"invalid\" *ngIf=\"visible\">\r\n    <p>Invalid credentials. Please try again.</p>\r\n</div>"
+module.exports = "<div class=\"container rounded col-lg-6 offset-lg-3\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6 offset-lg-3\">\r\n      <form class=\"form-group\" (ngSubmit)=\"login()\" method=\"POST\">\r\n        <label>Username:</label><br>\r\n        <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"credentials.username\" #username=\"ngModel\" required><br>\r\n        <label>Password:</label><br>\r\n        <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"credentials.password\" #password=\"ngModel\" required>\r\n        <button class=\"btn btn-outline-light\">Login</button>\r\n      </form>\r\n    </div>\r\n  </div>\r\n  \r\n  <button class=\"btn btn-outline-light\" routerLink=\"/register\">Register</button>\r\n  <br>\r\n  <br>\r\n  <div id=\"invalid\" *ngIf=\"visible\">\r\n      <p>Invalid credentials. Please try again.</p>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -434,7 +352,7 @@ var LoginComponent = /** @class */ (function () {
                 _this.router.navigateByUrl("/home");
             }
             else {
-                _this.visible = !_this.visible;
+                _this.visible = true;
                 _this.credentials.username = "";
                 _this.credentials.password = "";
             }
@@ -512,6 +430,62 @@ var OptionsMenuComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/player-hand/player-hand.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/components/player-hand/player-hand.component.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGxheWVyLWhhbmQvcGxheWVyLWhhbmQuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/player-hand/player-hand.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/player-hand/player-hand.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  player-hand works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/player-hand/player-hand.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/player-hand/player-hand.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: PlayerHandComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayerHandComponent", function() { return PlayerHandComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var PlayerHandComponent = /** @class */ (function () {
+    function PlayerHandComponent() {
+    }
+    PlayerHandComponent.prototype.ngOnInit = function () {
+    };
+    PlayerHandComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-player-hand',
+            template: __webpack_require__(/*! ./player-hand.component.html */ "./src/app/components/player-hand/player-hand.component.html"),
+            styles: [__webpack_require__(/*! ./player-hand.component.css */ "./src/app/components/player-hand/player-hand.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], PlayerHandComponent);
+    return PlayerHandComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/register/register.component.css":
 /*!************************************************************!*\
   !*** ./src/app/components/register/register.component.css ***!
@@ -519,7 +493,7 @@ var OptionsMenuComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = ".container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n    justify-content: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMkJBQTJCO0lBQzNCLGlCQUFpQjtJQUNqQixhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrZ3JlZW47XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIHBhZGRpbmc6IDUwcHg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -530,7 +504,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <form class=\"form-group\" (ngSubmit)=\"register()\" method=\"POST\">\r\n      <input type=\"text\" name=\"username\" [(ngModel)]=\"credentials.username\" #username=\"ngModel\" placeholder=\"username\">\r\n      <input type=\"email\" name=\"email\" [(ngModel)]=\"credentials.email\" #email=\"ngModel\" placeholder=\"email\">\r\n      <input type=\"password\" name=\"password\" [(ngModel)]=\"credentials.password\" #password=\"ngModel\" placeholder=\"password\">\r\n      <button class=\"btn btn-outline-info\">Register</button>\r\n    </form>\r\n</div>\r\n<button (click)=\"goBack()\">Back</button>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n      <div>\r\n          <form class=\"form-group\" (ngSubmit)=\"register()\" method=\"POST\">\r\n            <label>Username:</label><br>\r\n            <input type=\"text\" name=\"username\" [(ngModel)]=\"credentials.username\" #username=\"ngModel\" required><br>\r\n            <br>\r\n            <label>Email:</label><br>\r\n            <input type=\"email\" name=\"email\" [(ngModel)]=\"credentials.email\" #email=\"ngModel\" required><br>\r\n            <br>\r\n            <label>Password:</label><br>\r\n            <input type=\"password\" name=\"password\" [(ngModel)]=\"credentials.password\" #password=\"ngModel\" required><br>\r\n            <button class=\"btn btn-outline-light\">Register</button>\r\n          </form>\r\n      </div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -641,6 +615,62 @@ var RulesComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/table-cards/table-cards.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/components/table-cards/table-cards.component.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGFibGUtY2FyZHMvdGFibGUtY2FyZHMuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/table-cards/table-cards.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/table-cards/table-cards.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  table-cards works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/table-cards/table-cards.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/table-cards/table-cards.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: TableCardsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableCardsComponent", function() { return TableCardsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var TableCardsComponent = /** @class */ (function () {
+    function TableCardsComponent() {
+    }
+    TableCardsComponent.prototype.ngOnInit = function () {
+    };
+    TableCardsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-table-cards',
+            template: __webpack_require__(/*! ./table-cards.component.html */ "./src/app/components/table-cards/table-cards.component.html"),
+            styles: [__webpack_require__(/*! ./table-cards.component.css */ "./src/app/components/table-cards/table-cards.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], TableCardsComponent);
+    return TableCardsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/table-container/table-container.component.css":
 /*!**************************************************************************!*\
   !*** ./src/app/components/table-container/table-container.component.css ***!
@@ -648,7 +678,7 @@ var RulesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGFibGUtY29udGFpbmVyL3RhYmxlLWNvbnRhaW5lci5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n#tableCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n.container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n}\r\n\r\n#tableRegion, #handRegion {\r\n    border: 3px solid whitesmoke;\r\n    margin: auto;\r\n}\r\n\r\nh3 {\r\n    text-align: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90YWJsZS1jb250YWluZXIvdGFibGUtY29udGFpbmVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksMkJBQTJCO0lBQzNCLGlCQUFpQjtJQUNqQixhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksNEJBQTRCO0lBQzVCLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxrQkFBa0I7QUFDdEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RhYmxlLWNvbnRhaW5lci90YWJsZS1jb250YWluZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiNoYW5kQ2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDNweDtcclxufVxyXG5cclxuI3RhYmxlQ2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDNweDtcclxufVxyXG5cclxuLmNvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrZ3JlZW47XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIHBhZGRpbmc6IDUwcHg7XHJcbn1cclxuXHJcbiN0YWJsZVJlZ2lvbiwgI2hhbmRSZWdpb24ge1xyXG4gICAgYm9yZGVyOiAzcHggc29saWQgd2hpdGVzbW9rZTtcclxuICAgIG1hcmdpbjogYXV0bztcclxufVxyXG5cclxuaDMge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -659,7 +689,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <button (click)=\"getHand()\">getHand</button>\r\n  <button (click)=\"getFlop()\">getFlop</button>\r\n  <button (click)=\"getTurn()\">getTurn</button>\r\n  <button (click)=\"getRiver()\">getRiver</button>\r\n  <button (click)=\"cheat()\">Cheat</button>\r\n</div>\r\n<br>\r\n<button>Pause</button>\r\n<button (click)=\"logout()\">Logout</button>\r\n"
+module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n    \r\n      <h3>Table Cards</h3>\r\n      <div class=\"col-lg-6 col-lg-offset-3 rounded\" id=\"tableRegion\">\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getHand()\">Get Hand</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n      <h3>Player Hand</h3>\r\n      <div class=\"col-lg-4 col-lg-offset-4 rounded\" id=\"handRegion\">\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of handCards\">\r\n              <img src={{card}} id=\"handCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"chart.data\">\r\n  <google-chart\r\n    [title]=\"chart.title\"\r\n    [type]=\"chart.type\"\r\n    [data]=\"chart.data\">\r\n</google-chart>\r\n</div>"
 
 /***/ }),
 
@@ -678,46 +708,102 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_game_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/game.service */ "./src/app/services/game.service.ts");
 /* harmony import */ var _services_credentials_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/credentials.service */ "./src/app/services/credentials.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_settings_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/settings.service */ "./src/app/services/settings.service.ts");
+
 
 
 
 
 
 var TableContainerComponent = /** @class */ (function () {
-    function TableContainerComponent(gameService, credService, router) {
+    function TableContainerComponent(gameService, credService, router, settingServ) {
         this.gameService = gameService;
         this.credService = credService;
         this.router = router;
+        this.settingServ = settingServ;
+        this.tableCards = [];
+        this.handCards = [];
+        this.game = {};
+        this.chart = {
+            title: "Odds to Get Hand",
+            type: "ColumnChart",
+            data: null
+        };
+        this.lobbyView = true;
+        this.gameView = false;
+        this.pauseMenu = false;
     }
     TableContainerComponent.prototype.ngOnInit = function () { };
+    TableContainerComponent.prototype.newGame = function () {
+        var _this = this;
+        console.log("inside the newGame method in table-container.component");
+        this.settingServ.newGame().subscribe(function (data) {
+            console.log(data);
+            _this.lobbyView = false;
+            _this.gameView = true;
+        });
+    };
+    TableContainerComponent.prototype.joinGame = function () {
+        var _this = this;
+        console.log("inside joinGame method in table-container.component");
+        this.settingServ.joinGame(this.game.sesh).subscribe(function (data) {
+            console.log(data);
+            _this.lobbyView = false;
+            _this.gameView = true;
+            for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
+                _this.handCards[_this.i] = data.hand[_this.i].image;
+            }
+            for (_this.i = 0; _this.i < data.table.length; _this.i++) {
+                _this.tableCards[_this.i] = data.table[_this.i].image;
+            }
+        });
+    };
     TableContainerComponent.prototype.getHand = function () {
+        var _this = this;
         console.log("inside getHand method in table-container.component");
         this.gameService.getHand().subscribe(function (data) {
             console.log(data);
+            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
+                _this.handCards[_this.i] = data[_this.i].image;
+            }
         });
     };
     TableContainerComponent.prototype.getFlop = function () {
+        var _this = this;
         console.log("inside getFlop method in table-container.component");
         this.gameService.getFlop().subscribe(function (data) {
             console.log(data);
+            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
+                _this.tableCards[_this.i] = data[_this.i].image;
+            }
         });
     };
     TableContainerComponent.prototype.getTurn = function () {
+        var _this = this;
         console.log("inside getTurn method in table-container.component");
         this.gameService.getTurn().subscribe(function (data) {
             console.log(data);
+            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
+                _this.tableCards[_this.i] = data[_this.i].image;
+            }
         });
     };
     TableContainerComponent.prototype.getRiver = function () {
+        var _this = this;
         console.log("inside getRiver method in table-container.component");
         this.gameService.getRiver().subscribe(function (data) {
             console.log(data);
+            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
+                _this.tableCards[_this.i] = data[_this.i].image;
+            }
         });
     };
     TableContainerComponent.prototype.cheat = function () {
+        var _this = this;
         console.log("inside cheat method in table-container.component");
         this.gameService.cheat().subscribe(function (data) {
             console.log(data);
+            _this.chart.data = data;
         });
     };
     TableContainerComponent.prototype.logout = function () {
@@ -728,6 +814,19 @@ var TableContainerComponent = /** @class */ (function () {
             _this.router.navigateByUrl("/TexasCheatum");
         });
     };
+    TableContainerComponent.prototype.pause = function () {
+        this.gameView = false;
+        this.lobbyView = false;
+        this.pauseMenu = true;
+    };
+    TableContainerComponent.prototype.resume = function () {
+        this.gameView = true;
+        this.lobbyView = false;
+        this.pauseMenu = false;
+    };
+    TableContainerComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     TableContainerComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-table-container',
@@ -736,7 +835,8 @@ var TableContainerComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_game_service__WEBPACK_IMPORTED_MODULE_2__["GameService"],
             _services_credentials_service__WEBPACK_IMPORTED_MODULE_3__["CredentialsService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _services_settings_service__WEBPACK_IMPORTED_MODULE_5__["SettingsService"]])
     ], TableContainerComponent);
     return TableContainerComponent;
 }());
@@ -812,19 +912,19 @@ var GameService = /** @class */ (function () {
     }
     GameService.prototype.getHand = function () {
         console.log("inside the getHand method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getHand", { responseType: "text" });
+        return this.http.get("/TexasCheatum/servlet/getHand");
     };
     GameService.prototype.getFlop = function () {
         console.log("inside the getFlop method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getFlop", { responseType: "text" });
+        return this.http.get("/TexasCheatum/servlet/getFlop");
     };
     GameService.prototype.getTurn = function () {
         console.log("inside the getTurn method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getTurn", { responseType: "text" });
+        return this.http.get("/TexasCheatum/servlet/getTurn");
     };
     GameService.prototype.getRiver = function () {
         console.log("inside the getRiver method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getRiver", { responseType: "text" });
+        return this.http.get("/TexasCheatum/servlet/getRiver");
     };
     GameService.prototype.cheat = function () {
         console.log("inside the cheat method of game.service");

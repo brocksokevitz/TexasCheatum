@@ -71,3 +71,10 @@
     </div>
   </div>
 </div>
+<div *ngIf="chart.data">
+  <google-chart
+    [title]="chart.title"
+    [type]="chart.type"
+    [data]="chart.data">
+</google-chart>
+</div>

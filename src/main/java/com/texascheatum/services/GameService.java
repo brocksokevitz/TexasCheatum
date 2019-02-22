@@ -1,6 +1,9 @@
 package com.texascheatum.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,119 @@ public class GameService {
 				gameJson.get("username").asText());
 	}
 	
+	
+	
+	public static String compareHands(Map<String,String[]> playerMap) {
+		String winner = "";
+		int[] highestScore = {0,0,0,0};
+		int[] currentScore = {0,0,0,0};
+		String[] tableCards = playerMap.remove("table");
+		
+		List<String> listOfNames = new ArrayList<String>(playerMap.keySet());
+		
+		for(int i = 0; i < listOfNames.size(); i++) {
+			currentScore = getScore(ArrayUtils.addAll(playerMap.get(listOfNames.get(i)), tableCards));
+			
+
+			//System.out.println(ArrayUtils.toString(currentScore));
+			
+			if(currentScore[0]==highestScore[0] && currentScore[1]==highestScore[1] 
+					&& currentScore[2]==highestScore[2] && currentScore[3]==highestScore[3]) { // this is a tie
+				winner = "tie";
+			}else if(currentScore[0]>highestScore[0]) { //check hand type
+				winner = listOfNames.get(i);
+				highestScore = currentScore;
+			} else if(currentScore[0]==highestScore[0]) { //there was a tie with hand type, but the hands aren't a tie
+				
+				switch(currentScore[0]) {
+				case 1: //pair
+					
+					if(currentScore[2]>highestScore[2]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}else if(currentScore[2] == highestScore[2] && currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					
+					break;
+				case 2: //two pair
+					
+					if(currentScore[2]>highestScore[2]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}else if(currentScore[2] == highestScore[2] && currentScore[3]>highestScore[3]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					} else  if(currentScore[2] == highestScore[2] && currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					
+					break;
+				case 3: //three of a kind
+					
+					if(currentScore[2]>highestScore[2]) { //check the value of the three
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}else if(currentScore[2] == highestScore[2] && currentScore[1]>highestScore[1]) {//check for high card
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					
+					break;
+				case 4: //straight
+					
+					if(currentScore[1]>highestScore[1]) { //check the value of the three
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					
+					break;
+				case 5: //flush
+					if(currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					break;
+				case 6: //full house
+					if(currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}else if(currentScore[1] == highestScore[1] && currentScore[2]>highestScore[2]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					} 
+					break;
+				case 7: // 4 of a kind
+					if(currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					break;
+				case 8: //straight flush
+					if(currentScore[2]>highestScore[2]) { //check the value of the three
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					break;
+				case 9: //royal flush
+					winner = "tie";
+					highestScore = currentScore;
+					break;
+				default: //nothing
+					if(currentScore[1]>highestScore[1]) {
+						winner = listOfNames.get(i);
+						highestScore = currentScore;
+					}
+					break;
+				}
+				
+			}
+		}
+		
+		return winner;
+	}
 	
 	/**
 	 * 
@@ -59,7 +175,7 @@ public class GameService {
 				if(currentScore[0]>=highestScore[0]) {
 					
 					//change the highest card
-					if(currentScore[0]>highestScore[0] ||  currentScore[1]>highestScore[1]) {
+					if(currentScore[0]>highestScore[0] || currentScore[1]>highestScore[1]) {
 					highestScore[1]=currentScore[1];		
 					}
 					
@@ -180,6 +296,7 @@ public class GameService {
 		}else if(ArrayUtils.contains(handHistogram, 3) && ArrayUtils.contains(handHistogram, 1)) {
 			
 			highestScore[0]=3;
+			highestScore[2]=ArrayUtils.indexOf(handHistogram, 3)+1;
 			
 		}else if(ArrayUtils.contains(handHistogram, 2) && !ArrayUtils.contains(handHistogram, 3)) {
 			
