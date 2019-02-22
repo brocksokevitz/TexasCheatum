@@ -161,6 +161,34 @@ public class UserDaoTest {
 	}
 	
 	@Test
+	public void testCompareNothing() {
+		String[] table = {"0C","2C","3C","4C","8S"};
+		String[] hand = {"6H","KH"};
+		String[] hand2 = {"6S","7S"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareNothingTie() {
+		String[] table = {"0C","2C","3C","4C","8S"};
+		String[] hand = {"6H","7H"};
+		String[] hand2 = {"6S","7S"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
 	public void testComparePair() {
 		String[] table = {"AC","2C","3C","4C","8S"};
 		String[] hand = {"6H","AH"};
@@ -202,57 +230,286 @@ public class UserDaoTest {
 		Assert.assertEquals("tie", winner);
 	}
 	
-//	@Test
-//	public void testCompareTwoPair() {
-//		String[] hand = {"AC","2C","3C","3C","2S","6H","7H"};
-//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
-//		String[] names = {"1", "2"};
-//		Map<String, String[]> map = new HashMap<>();
-//		map.put("1", hand);
-//		map.put("2", hand2);
-//		
-//		String winner = GameService.compareHands(names, map);
-//		Assert.assertEquals("2", winner);
-//	}
-//	
-//	@Test
-//	public void testCompareTwoPairHighPairTie() {
-//		String[] hand = {"AC","2C","3C","AC","2S","6H","7H"};
-//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
-//		String[] names = {"1", "2"};
-//		Map<String, String[]> map = new HashMap<>();
-//		map.put("1", hand);
-//		map.put("2", hand2);
-//		
-//		String winner = GameService.compareHands(names, map);
-//		Assert.assertEquals("2", winner);
-//	}
-//	
-//	@Test
-//	public void testCompareTwoPairHighPairTieLowPairTie() {
-//		String[] hand = {"AC","2C","3C","AC","2S","6H","7H"};
-//		String[] hand2 = {"AC","4C","0H","JH","4S","KH","AH"};
-//		String[] names = {"1", "2"};
-//		Map<String, String[]> map = new HashMap<>();
-//		map.put("1", hand);
-//		map.put("2", hand2);
-//		
-//		String winner = GameService.compareHands(names, map);
-//		Assert.assertEquals("2", winner);
-//	}
-//	
-//	@Test
-//	public void testCompareStraights() {
-//		String[] hand = {"AC","2C","4C","4S","5H","6H","7H"};
-//		String[] hand2 = {"AC","2C","10C","JS","QH","KH","AH"};
-//		String[] names = {"1", "2"};
-//		Map<String, String[]> map = new HashMap<>();
-//		map.put("1", hand);
-//		map.put("2", hand2);
-//		
-//		String winner = GameService.compareHands(names, map);
-//		Assert.assertEquals("2", winner);
-//	}
+	@Test
+	public void testCompareTwoPair() {
+		String[] table = {"AC","2C","3C","4C","8S"};
+		String[] hand = {"2S","3H"};
+		String[] hand2 = {"AH","4S"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareTwoPairTieLowPairWins() {
+		String[] table = {"AC","2C","3C","AS","8S"};
+		String[] hand = {"2S","3H"};
+		String[] hand2 = {"8H","4S"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareTwoPairTieHighCardWins() {
+		String[] table = {"AC","2C","3C","AS","8S"};
+		String[] hand = {"6S","8C"};
+		String[] hand2 = {"8H","2S"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareTwoPairTie() {
+		String[] table = {"AC","2C","3C","AS","8S"};
+		String[] hand = {"6S","8C"};
+		String[] hand2 = {"8H","6H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareThreesOfAKind() {
+		String[] hand = {"2S","6H"};
+		String[] hand2 = {"3S","4C"};		
+		String[] table = {"AC","2C","2C","3S","3H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareThreesOfAKindTieHighCardWins() {
+		String[] hand = {"3S","AH"};
+		String[] hand2 = {"3S","4C"};		
+		String[] table = {"6C","2C","7C","3S","3H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareThreesOfAKindTie() {
+		String[] hand = {"3S","0H"};
+		String[] hand2 = {"3S","0C"};		
+		String[] table = {"6C","2C","7C","3S","3H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareStraights() {
+		String[] hand = {"3S","6H"};
+		String[] hand2 = {"3S","2C"};		
+		String[] table = {"AC","2C","4C","4S","5H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareStraightsTie() {
+		String[] hand = {"3S","2H"};
+		String[] hand2 = {"3S","2S"};		
+		String[] table = {"AC","2C","4C","4S","5H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareFlushes() {
+		String[] hand = {"3S","6C"};
+		String[] hand2 = {"3S","2C"};		
+		String[] table = {"AC","2C","4C","4S","5C"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareFlushesTie() {
+		String[] hand = {"5C","6C"};
+		String[] hand2 = {"3C","2C"};		
+		String[] table = {"AC","2H","4C","KC","5H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareFullHouseHighTripleWins() {
+		String[] hand = {"AD","5C"};
+		String[] hand2 = {"7H","7S"};		
+		String[] table = {"AC","AH","4C","7C","5H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareFullHouseLowPairWins() {
+		String[] hand = {"AS","7S"};
+		String[] hand2 = {"AD","5C"};		
+		String[] table = {"AC","AH","4C","7C","5H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareFourOfAKind() {
+		String[] hand = {"AS","AD"};
+		String[] hand2 = {"7D","7S"};		
+		String[] table = {"AC","AH","4C","7C","7H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner);
+	}
+	
+	@Test
+	public void testCompareFourOfAKindTieHighCardWins() {
+		String[] hand = {"7D","7S"};
+		String[] hand2 = {"0S","0D"};		
+		String[] table = {"AC","AH","AC","AC","7H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareFourOfAKindTie() {
+		String[] hand = {"0D","7S"};
+		String[] hand2 = {"0S","7D"};		
+		String[] table = {"AC","AH","AC","AC","7H"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareStraightFlush() {
+		String[] hand = {"0D","7S"};
+		String[] hand2 = {"6C","7C"};		
+		String[] table = {"AC","2C","3C","4C","5C"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareStraightFlushTie() {
+		String[] hand = {"0D","7S"};
+		String[] hand2 = {"6H","7H"};		
+		String[] table = {"AC","2C","3C","4C","5C"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
+	@Test
+	public void testCompareRoyalFlush() {
+		String[] hand = {"0D","7S"};
+		String[] hand2 = {"AC","7H"};		
+		String[] table = {"0C","KC","QC","JC","9C"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner);
+	}
+	
+	@Test
+	public void testCompareRoyalFlushTie() {
+		String[] hand = {"0D","7S"};
+		String[] hand2 = {"AH","7H"};		
+		String[] table = {"AC","KC","QC","JC","0C"};
+		Map<String, String[]> map = new HashMap<>();
+		map.put("1", hand);
+		map.put("2", hand2);
+		map.put("table", table);
+		
+		String winner = GameService.compareHands(map);
+		Assert.assertEquals("tie", winner);
+	}
+	
 //	
 //	@Test
 //	public void testCompareStraightFlushVsRoyalFlush() {
