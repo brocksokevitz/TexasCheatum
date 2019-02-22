@@ -23,7 +23,7 @@
 
     
       <h3>Table Cards</h3>
-      <div class="col-lg-6 col-lg-offset-3 rounded" id="tableRegion">
+      <div class="col-lg-6 offset-lg-3 rounded" id="tableRegion">
         <table>
           <tr>
             <td *ngFor="let card of tableCards" id="tableCell">
@@ -43,8 +43,9 @@
     </div>
     <br>
   
+    <div class="row">
       <h3>Player Hand</h3>
-      <div class="col-lg-4 col-lg-offset-4 rounded" id="handRegion">
+      <div class="col-lg-4 rounded" id="handRegion">
         <table>
           <tr>
             <td *ngFor="let card of handCards" id="handCell">
@@ -53,6 +54,15 @@
           </tr>
         </table>
       </div>
+
+      <div *ngIf="chart.data">
+        <google-chart
+          [title]="chart.title"
+          [type]="chart.type"
+          [data]="chart.data">
+        </google-chart>
+      </div>
+    </div>
      
     <br>
     <button class="btn btn-outline-light" (click)="pause()">Pause</button>
@@ -71,10 +81,4 @@
     </div>
   </div>
 </div>
-<div *ngIf="chart.data">
-  <google-chart
-    [title]="chart.title"
-    [type]="chart.type"
-    [data]="chart.data">
-</google-chart>
-</div>
+
