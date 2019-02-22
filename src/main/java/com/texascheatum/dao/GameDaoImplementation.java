@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.texascheatum.utils.ConnectionUtil;
 import com.texascheatum.utils.TomcatConnectionPool;
 
 public class GameDaoImplementation implements GameDao{
@@ -76,8 +75,47 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean updatePot(String gameId, String status) {
-		// TODO Auto-generated method stub
+	public boolean updateTarget(String gameId, double newTarget) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try {
+			CallableStatement cs = conn.prepareCall("{call update_game_target(?,?)}");	
+			cs.setString(1, gameId);
+			cs.setDouble(2, newTarget);
+
+			cs.execute();
+
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updatePot(String gameId) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try {
+			CallableStatement cs = conn.prepareCall("{call update_game_pot(?)}");	
+			cs.setString(1, gameId);
+
+			cs.execute();
+
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
 		return false;
 	}
 	

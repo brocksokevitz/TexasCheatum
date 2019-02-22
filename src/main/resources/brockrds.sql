@@ -8,6 +8,8 @@ drop public synonym get_user;
 drop public synonym promote_user;
 drop public synonym create_game;
 drop public synonym update_game;
+drop public synonym update_game_target;
+drop public synonym update_game_pot;
 drop public synonym encrypt_password;
 drop table users;
 drop table games;
@@ -32,11 +34,13 @@ create table games
 (
     game_id varchar(50) not null,
     status varchar(15) default('pending') not null,
+    pot Decimal(15,2) default(0) not null,
+    current_target Decimal(15,2) default(100) not null,
     --
     constraint game_id_pk primary key(game_id)
 ); -- for tables, you put ;
 
-insert into games values( 0,'closed');
+insert into games values( 0,'closed',0,100);
 
 -- DDL --
 create table users
@@ -107,7 +111,7 @@ end;
 create or replace procedure create_game(game_id varchar, host_username varchar)
 as
 begin
-insert into games values(game_id, 'ongoing');
+insert into games values(game_id, 'ongoing', 0, 100);
 update users set current_game=game_id where username=host_username;
 commit;-- saves changes
 end;
@@ -117,6 +121,24 @@ create or replace procedure update_game(game varchar, input_status varchar)
 as
 begin
 update games set status=input_status where game_id=game;
+commit;-- saves changes
+end;
+/
+create or replace procedure update_game_target(game varchar, in_target Decimal)
+as
+begin
+update games set current_target=in_target where game_id=game;
+commit;-- saves changes
+end;
+/
+create or replace procedure update_game_pot(game varchar)
+as
+temp_num Number;
+begin
+select current_target into temp_num from games where game_id=game;
+update users set balance=balance-temp_num where current_game=game;
+select count(username) into temp_num from users where current_game=game;
+update games set pot=pot+(current_target*temp_num),current_target=100 where game_id=game;
 commit;-- saves changes
 end;
 /
@@ -132,6 +154,8 @@ create public synonym get_user for bsokevitz.get_user;
 create public synonym promote_user for bsokevitz.promote_user;
 create public synonym create_game for bsokevitz.create_game;
 create public synonym update_game for bsokevitz.update_game;
+create public synonym update_game_target for bsokevitz.update_game_target;
+create public synonym update_game_pot for bsokevitz.update_game_pot;
 create public synonym encrypt_password for bsokevitz.encrypt_password;
 
 call insert_user('super', 'fuksyr@gmail.com', 'superpass');
