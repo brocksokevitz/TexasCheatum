@@ -13,6 +13,11 @@ export class TableContainerComponent implements OnInit {
   private tableCards: any = [];
   private handCards: any = [];
   private game: any = {};
+  private chart: any = {
+    title: "Odds to Get Hand",
+    type: "ColumnChart",
+    data: null
+  };
   private i: number;
   private lobbyView: boolean = true;
   private gameView: boolean = false;
@@ -110,6 +115,7 @@ export class TableContainerComponent implements OnInit {
     this.gameService.cheat().subscribe(
       data => {
         console.log(data);
+        this.chart.data = data;
       }
     );
   }

@@ -36,8 +36,8 @@ public class OddsService {
 		String oddsString = "";
 		if (apiResp_Deck_Table.get("piles").has("table")) {
 			String table = getCardString(apiResp_Deck_Table.get("piles")
-					.get("table"), true);
-			switch(apiResp_Deck_Table.get("piles").get("table").size()) {
+					.get("table"), false);
+			switch(apiResp_Deck_Table.get("piles").get("table").get("remaining").asInt()) {
 			case 3:
 				apiResp_Odds = makeHttpRequest_Odds("flop" + hand + table);
 				break;
@@ -80,6 +80,7 @@ public class OddsService {
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+		con.setRequestProperty("X-RapidAPI-Key", "1d95a66c75msh21130080aae1bc5p16ce1cjsnc37a36087fbf");
 		
 		int responseCode = con.getResponseCode();
 		
@@ -95,13 +96,23 @@ public class OddsService {
 		else
 			cards.append("&board=");
 		for (JsonNode card : cardsNode.get("cards")) {
-			cards.append(card.get("\"code\"").asText());
+			cards.append(card.get("code").asText());
 			cards.append("%2C");
 		}
 		cards.delete(cards.length() - 3, cards.length());
 		return cards.toString();
 	}
 	private static String getOddsString(JsonNode oddsNode, boolean isPreflop) throws JsonProcessingException {
-		return mapper.writeValueAsString(oddsNode.get("data").get("me").get("hit_at_least"));
+		StringBuilder oddsString = new StringBuilder("[");
+		if (isPreflop)
+			oddsNode.get("data").get("hit_at_least").fields().forEachRemaining(
+					pair -> oddsString.append("[" + pair.getKey() + "," + pair.getValue().asDouble() + "],"));
+		else
+			oddsNode.get("data").get("me").get("hit_at_least").fields().forEachRemaining(
+					pair -> oddsString.append("[\"" + pair.getKey() + "\"," + pair.getValue().asDouble() + "],"));
+		oddsString.deleteCharAt(oddsString.length() - 1);
+		oddsString.append("]");
+		System.out.println(oddsString);
+		return oddsString.toString();
 	}
 }
