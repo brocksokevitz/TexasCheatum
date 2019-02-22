@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TableContainerComponent } from '../table-container/table-container.component';
 
 @Component({
   selector: 'app-rules',
@@ -8,15 +7,12 @@ import { TableContainerComponent } from '../table-container/table-container.comp
 })
 export class RulesComponent implements OnInit {
 
-  constructor(
-    private table: TableContainerComponent
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   goBack() {
     window.history.back();
-    this.table.resume();
   }
 }

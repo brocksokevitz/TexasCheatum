@@ -3,11 +3,7 @@ import { GameService } from '../../services/game.service';
 import { CredentialsService } from '../../services/credentials.service'
 import { Router } from '@angular/router';
 import { SettingsService } from '../../services/settings.service';
-import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
 @Component({
   selector: 'app-table-container',
   templateUrl: './table-container.component.html',
