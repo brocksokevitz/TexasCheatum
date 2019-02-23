@@ -39,16 +39,19 @@ public class OddsService {
 					.get("table"), false);
 			switch(apiResp_Deck_Table.get("piles").get("table").get("remaining").asInt()) {
 			case 3:
+				System.out.println("flop" + hand + table);
 				apiResp_Odds = makeHttpRequest_Odds("flop" + hand + table);
 				break;
 			case 4:
+				System.out.println("turn" + hand + table);
 				apiResp_Odds = makeHttpRequest_Odds("turn" + hand + table);
 				break;
 			}
 			oddsString = getOddsString(apiResp_Odds, false);
 		}
 		else {
-			apiResp_Odds = makeHttpRequest_Odds("preflop" + hand);
+			System.out.println("pre-flop" + hand);
+			apiResp_Odds = makeHttpRequest_Odds("pre-flop" + hand);
 			oddsString = getOddsString(apiResp_Odds, true);
 		}
 		
@@ -66,6 +69,7 @@ public class OddsService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
+		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -83,6 +87,7 @@ public class OddsService {
 		con.setRequestProperty("X-RapidAPI-Key", "1d95a66c75msh21130080aae1bc5p16ce1cjsnc37a36087fbf");
 		
 		int responseCode = con.getResponseCode();
+		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -106,13 +111,13 @@ public class OddsService {
 		StringBuilder oddsString = new StringBuilder("[");
 		if (isPreflop)
 			oddsNode.get("data").get("hit_at_least").fields().forEachRemaining(
-					pair -> oddsString.append("[" + pair.getKey() + "," + pair.getValue().asDouble() + "],"));
+					pair -> oddsString.append("[\"" + pair.getKey() + "\"," + pair.getValue().asDouble() + "],"));
 		else
 			oddsNode.get("data").get("me").get("hit_at_least").fields().forEachRemaining(
 					pair -> oddsString.append("[\"" + pair.getKey() + "\"," + pair.getValue().asDouble() + "],"));
 		oddsString.deleteCharAt(oddsString.length() - 1);
 		oddsString.append("]");
-		System.out.println(oddsString);
+		
 		return oddsString.toString();
 	}
 }

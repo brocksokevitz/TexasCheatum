@@ -57,7 +57,7 @@ create table users
     superuser number not null,
     current_game varchar(50) not null,
     round_bet Decimal(15,2) not null,
-    turn_number Decimal(1) not null,
+    turn_number number(1) not null,
     total_games number not null,
     total_wins number not null,
     --
@@ -133,9 +133,9 @@ as
 number_players number;
 temp_varchar varchar(50);
 begin
-select count(*) into number_players from users where current_game=game;
+select count(*) into number_players from users where current_game=game and username=in_user;
 if number_players=0 then
-    update (select current_game, game_id from games, users where game_id=game and status='pending' and username=in_user) set current_game=game_id;
+    update users set current_game=game where username=in_user and exists(select game_id from games where game_id=game);
     success := SQL%ROWCOUNT;
     select count(*) into number_players from users where current_game=game;
     if number_players=4 then
@@ -203,16 +203,22 @@ begin
 select status into current_status from games where game_id=game;
 update users set round_bet=0 where current_game=game;
 if current_status='pending' then
-update games set status='pre-flop' where game_id=game;
+    update games set status='pre-flop' where game_id=game;
+    current_status := 'pre-flop';
 elsif current_status='pre-flop' then
-update games set status='flop' where game_id=game;
+    update games set status='flop' where game_id=game;
+    current_status := 'flop';
 elsif current_status='flop' then
-update games set status='turn' where game_id=game;
+    update games set status='turn' where game_id=game;
+    current_status := 'turn';
 elsif current_status='turn' then
-update games set status='river' where game_id=game;
+    update games set status='river' where game_id=game;
+    current_status := 'river';
 elsif current_status='river' then
-update games set status='closed' where game_id=game;
+    update games set status='closed' where game_id=game;
+    current_status := 'closed';
 end if;
+return current_status;
 commit;-- saves changes
 end;
 /
@@ -242,3 +248,5 @@ call update_game('1', 'closed');
 create user super identified by superpass;
 grant dba to super with admin option;
 commit;
+
+select username from users,games where game_id='yory4geq0ufs' and current_game='yory4geq0ufs' and current_turn=turn_number;

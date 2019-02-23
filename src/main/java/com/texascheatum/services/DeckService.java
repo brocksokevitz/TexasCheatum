@@ -92,7 +92,7 @@ public class DeckService {
 	public static void getHand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				request.getSession().getAttribute("gameID").toString()
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
 
@@ -201,6 +201,7 @@ public class DeckService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
+		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
