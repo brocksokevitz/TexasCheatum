@@ -6,5 +6,5 @@ public interface GameDao {
 	public boolean createGame(String gameId, String username);
 	public Game readGame(String gameId);
 	public boolean joinGame(String gameId, String userId);
-	public boolean makeBet(String gameId, String userId, double amount);
+	public double makeBet(String gameId, String userId, double amount);
 }

@@ -106,19 +106,20 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean makeBet(String gameId, String userId, double amount) {
+	public double makeBet(String gameId, String userId, double amount) {
 		Connection conn = null;
 		conn = pool.getConnection();
 		
 		try {
-			CallableStatement cs = conn.prepareCall("{call make_bet(?,?,?)}");	
+			CallableStatement cs = conn.prepareCall("{call make_bet(?,?,?,?)}");	
 			cs.setString(1, gameId);
 			cs.setString(2, userId);
 			cs.setDouble(3, amount);
+			cs.registerOutParameter(4, Types.DECIMAL);
 
 			cs.execute();
 
-			return true;
+			return cs.getDouble(4);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -126,7 +127,7 @@ public class GameDaoImplementation implements GameDao{
 		}finally {
 			pool.freeConnection(conn);
 		}
-		return false;
+		return 0.0;
 	}
 	
 }

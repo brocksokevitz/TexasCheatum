@@ -117,7 +117,7 @@ end;
 create or replace procedure create_game(game_id varchar, host_username varchar)
 as
 begin
-insert into games values(game_id, 'ongoing', 0, 100, 0);
+insert into games values(game_id, 'pending', 0, 100, 0);
 update users set current_game=game_id where username=host_username;
 commit;-- saves changes
 end;
@@ -147,7 +147,7 @@ end if;
 commit;-- saves changes
 end;
 /
-create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal)
+create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal, out_difference out Decimal)
 as
 difference Decimal(15,2);
 number_players number(1);
@@ -158,9 +158,10 @@ if in_target=0 then
     select current_target-round_bet into difference from users,games where username=in_user and game_id=game;
 else
     select in_target-round_bet into difference from users where username=in_user;
+    update games set current_target=in_target where game_id=game;
 end if;
-select in_target-round_bet into difference from users where username=in_user;
-update games set current_target=in_target, pot=pot+difference where game_id=game;
+out_difference := difference;
+update games set pot=pot+difference where game_id=game;
 update users set round_bet=round_bet+difference,balance=balance-difference where username=in_user;
 
 select count(*) into number_players from users where current_game=game;
@@ -200,6 +201,7 @@ as
 current_status varchar(50);
 begin
 select status into current_status from games where game_id=game;
+update users set round_bet=0 where current_game=game;
 if current_status='pending' then
 update games set status='pre-flop' where game_id=game;
 elsif current_status='pre-flop' then

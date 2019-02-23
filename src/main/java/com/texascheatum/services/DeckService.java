@@ -131,28 +131,36 @@ public class DeckService {
 		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
 		switch (actionJson.get("action").asText()) {
 		case "bet":
-			GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					actionJson.get("amount").asDouble());
+			((User) request.getSession().getAttribute("user")).setBalance(
+					((User) request.getSession().getAttribute("user")).getBalance()
+					- GameDaoImplementation.getGameDao().makeBet(
+							((User) request.getSession().getAttribute("user")).getCurrentGame(),
+							((User) request.getSession().getAttribute("user")).getUsername(),
+							actionJson.get("amount").asDouble()));
 			break;
 		case "call":
-			GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					0);
+			((User) request.getSession().getAttribute("user")).setBalance(
+					((User) request.getSession().getAttribute("user")).getBalance()
+					- GameDaoImplementation.getGameDao().makeBet(
+							((User) request.getSession().getAttribute("user")).getCurrentGame(),
+							((User) request.getSession().getAttribute("user")).getUsername(),
+							0.0));
 			break;
 		case "check":
-			GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					0);
+			((User) request.getSession().getAttribute("user")).setBalance(
+					((User) request.getSession().getAttribute("user")).getBalance()
+					- GameDaoImplementation.getGameDao().makeBet(
+							((User) request.getSession().getAttribute("user")).getCurrentGame(),
+							((User) request.getSession().getAttribute("user")).getUsername(),
+							0.0));
 			break;
 		case "raise":
-			GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					actionJson.get("amount").asDouble());
+			((User) request.getSession().getAttribute("user")).setBalance(
+					((User) request.getSession().getAttribute("user")).getBalance()
+					- GameDaoImplementation.getGameDao().makeBet(
+							((User) request.getSession().getAttribute("user")).getCurrentGame(),
+							((User) request.getSession().getAttribute("user")).getUsername(),
+							actionJson.get("amount").asDouble()));
 			break;
 		case "fold":
 			break;
