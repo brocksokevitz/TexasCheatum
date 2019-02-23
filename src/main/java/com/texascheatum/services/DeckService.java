@@ -129,52 +129,33 @@ public class DeckService {
 	
 	public static void action(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
+		double change = 0.0;
 		switch (actionJson.get("action").asText()) {
 		case "bet":
-			((User) request.getSession().getAttribute("user")).setBalance(
-					((User) request.getSession().getAttribute("user")).getBalance()
-					- GameDaoImplementation.getGameDao().makeBet(
-							((User) request.getSession().getAttribute("user")).getCurrentGame(),
-							((User) request.getSession().getAttribute("user")).getUsername(),
-							actionJson.get("amount").asDouble()));
+		case "raise":
+			change = GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					actionJson.get("amount").asDouble());
 			break;
 		case "call":
-			double change = GameDaoImplementation.getGameDao().makeBet(
-				((User) request.getSession().getAttribute("user")).getCurrentGame(),
-				((User) request.getSession().getAttribute("user")).getUsername(),
-				0.0);
-			((User) request.getSession().getAttribute("user")).setBalance(
-					((User) request.getSession().getAttribute("user")).getBalance()
-					- Math.abs(change));
-			if (change < 0) {
-				if (getTableCardNum(request) == 0)
-					flop(request, response);
-				else
-					turn_river(request, response);
-			}
-			break;
 		case "check":
 			change = GameDaoImplementation.getGameDao().makeBet(
 					((User) request.getSession().getAttribute("user")).getCurrentGame(),
 					((User) request.getSession().getAttribute("user")).getUsername(),
 					0.0);
-			if (change < 0) {
-				if (getTableCardNum(request) == 0)
-					flop(request, response);
-				else
-					turn_river(request, response);
-			}
-			break;
-		case "raise":
-			((User) request.getSession().getAttribute("user")).setBalance(
-					((User) request.getSession().getAttribute("user")).getBalance()
-					- GameDaoImplementation.getGameDao().makeBet(
-							((User) request.getSession().getAttribute("user")).getCurrentGame(),
-							((User) request.getSession().getAttribute("user")).getUsername(),
-							actionJson.get("amount").asDouble()));
 			break;
 		case "fold":
 			break;
+		}
+		((User) request.getSession().getAttribute("user")).setBalance(
+				((User) request.getSession().getAttribute("user")).getBalance()
+				- Math.abs(change));
+		if (change < 0) {
+			if (getTableCardNum(request) == 0)
+				flop(request, response);
+			else
+				turn_river(request, response);
 		}
 	}
 	public static int getTableCardNum(HttpServletRequest request) throws IOException {
