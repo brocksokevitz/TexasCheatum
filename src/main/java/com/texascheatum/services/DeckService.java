@@ -53,7 +53,7 @@ public class DeckService {
 		}
 		else {
 			response.setHeader("Content-Type", "application/json");
-			response.getWriter().write("{}");
+			response.getWriter().write("");
 		}
 	}
 	public static void getGame(HttpServletRequest request, HttpServletResponse response)
