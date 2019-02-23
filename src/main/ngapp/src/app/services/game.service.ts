@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GameService {
-  public round: number = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -16,24 +15,51 @@ export class GameService {
 
   getFlop() {
     console.log("inside the getFlop method of game.service");
-    this.round = 1;
     return this.http.get<any>("/TexasCheatum/servlet/getFlop");
   }
 
   getTurn() {
     console.log("inside the getTurn method of game.service");
-    this.round = 2;
     return this.http.get<any>("/TexasCheatum/servlet/getTurn");
   }
 
   getRiver() {
     console.log("inside the getRiver method of game.service");
-    this.round = 3;
     return this.http.get<any>("/TexasCheatum/servlet/getRiver");
   }
 
   cheat() {
     console.log("inside the cheat method of game.service");
     return this.http.get<any>("/TexasCheatum/servlet/cheat");
+  }
+
+  whosTurnIsItAnyways() {
+    console.log("inside whosTurnIsItAnyways method of game.service");
+    return this.http.get<any>("/TexasCheatum/servlet/status")
+  }
+
+  checking(action: string) {
+    console.log("inside checking method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {action: action})
+  }
+
+  betting(amount: number, action: string) {
+    console.log("inside betting method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  calling(amount: number, action: string) {
+    console.log("inside calling method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  raising(amount: number, action: string) {
+    console.log("inside raising method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  folding(action: string) {
+    console.log("inside folding method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {action: action})
   }
 }
