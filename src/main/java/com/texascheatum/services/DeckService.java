@@ -85,7 +85,6 @@ public class DeckService {
 		
 		response.getWriter().write("\"minimum\" : ");
 		response.getWriter().write("" + game.getCurrentTarget());
-		response.getWriter().write(",");
 		
 		response.getWriter().write("}");
 	}
