@@ -16,17 +16,17 @@ export class GameplayComponent implements OnInit {
   ngOnInit() {
   }
 
-  bet() {
+  betting() {
     this.totalAmount += this.betAmount;
     console.log(this.totalAmount);
   }
 
-  call() {
+  calling() {
     this.totalAmount += this.callAmount;
     console.log(this.totalAmount);
   }
 
-  raise() {
+  raising() {
     this.totalAmount += this.raiseAmount;
     console.log(this.totalAmount);
   }

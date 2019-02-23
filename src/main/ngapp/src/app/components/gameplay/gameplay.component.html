@@ -6,18 +6,18 @@
   </div>
 
   <div class="col-lg-1 offset-lg-1">
-    <input type="number" name="betAmount" [(ngModel)]="betAmount" #betAmount="ngModel" min="500" step="100" placeholder="Bet Amount"><br>
-    <button class="btn btn-outline-light" (click)="bet()">Bet</button>
+    <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="500" step="100" placeholder="Bet Amount"><br>
+    <button class="btn btn-outline-light" (click)="betting()">Bet</button>
   </div>
 
   <div class="col-lg-2 offset-lg-1">
-    <input type="number" name="callAmount" [(ngModel)]="callAmount" #callAmount="ngModel" min="500" step="100" placeholder="Call Amount"><br>
-    <button class="btn btn-outline-light" (click)="call()">Call</button>
+    <input type="number" name="call" [(ngModel)]="callAmount" #call="ngModel" min="500" step="100" placeholder="Call Amount"><br>
+    <button class="btn btn-outline-light" (click)="calling()">Call</button>
   </div>
 
   <div class="col-lg-2 offset-lg-1">
-    <input type="number" name="raiseAmount" [(ngModel)]="raiseAmount" #raiseAmount="ngModel" min="500" step="100" placeholder="Raise Amount"><br>
-    <button class="btn btn-outline-light" (click)="raise()">Raise</button>
+    <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="500" step="100" placeholder="Raise Amount"><br>
+    <button class="btn btn-outline-light" (click)="raising()">Raise</button>
   </div>
 
   <div class="col-lg-1 offset-lg-1">
