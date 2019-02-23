@@ -1,6 +1,6 @@
 <h4>Table Minimum: 500</h4>
 <br>
-<div class="row col-lg-10 offset-lg-1">
+<div class="row">
   <div>
     <div class="col-lg-2" id="check">
       <button class="btn btn-outline-light">Check</button>
@@ -8,18 +8,18 @@
 
     <div class="col-lg-2" id="bet">
       <input type="number" name="betAmount" [(ngModel)]="money.bet" #betAmount="ngModel" min="500" step="100" placeholder="Bet Amount">
-      <button class="btn btn-outline-light">Bet</button>
+      <button class="btn btn-outline-light" (click)="bet()">Bet</button>
     </div>
   </div>
 
-  <div class="col-lg-2" id="call">
+  <div class="col-lg-3" id="call">
     <input type="number" name="callAmount" [(ngModel)]="money.call" #callAmount="ngModel" min="500" step="100" placeholder="Call Amount">
-    <button class="btn btn-outline-light">Call</button>
+    <button class="btn btn-outline-light" (click)="call()">Call</button>
   </div>
 
-  <div class="col-lg-2" id="raise">
+  <div class="col-lg-3" id="raise">
     <input type="number" name="raiseAmount" [(ngModel)]="money.raise" #raiseAmount="ngModel" min="500" step="100" placeholder="Raise Amount">
-    <button class="btn btn-outline-light">Raise</button>
+    <button class="btn btn-outline-light" (click)="raise()">Raise</button>
   </div>
 
   <div class="col-lg-2" id="fold">
