@@ -10,7 +10,7 @@ export class GameplayComponent implements OnInit {
   private betAmount: number = null;
   private callAmount: number = null;
   private raiseAmount: number = null;
-  private totalAmount: number = null;
+  public totalAmount: number = 0;
   private round: number = 0;
   private postFlop: boolean = false;
 
@@ -26,6 +26,7 @@ export class GameplayComponent implements OnInit {
     console.log(this.totalAmount);
     this.betAmount = null;
     this.round = this.gameServ.round;
+    console.log(this.round);
     if(this.round > 0) {
       this.postFlop = true;
     }
@@ -36,6 +37,7 @@ export class GameplayComponent implements OnInit {
     console.log(this.totalAmount);
     this.callAmount = null;
     this.round = this.gameServ.round;
+    console.log(this.round);
     if(this.round > 0) {
       this.postFlop = true;
     }
@@ -46,6 +48,7 @@ export class GameplayComponent implements OnInit {
     console.log(this.totalAmount);
     this.raiseAmount = null;
     this.round = this.gameServ.round;
+    console.log(this.round);
     if(this.round > 0) {
       this.postFlop = true;
     }

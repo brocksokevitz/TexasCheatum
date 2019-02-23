@@ -42,14 +42,7 @@ export class TableContainerComponent implements OnInit {
       }
     );
 
-    this.gameService.getHand().subscribe(
-      data => {
-        console.log(data);
-        for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.handCards[this.i] = data[this.i].image; 
-        }
-      }
-    );
+    this.getHand();
   }
 
   joinGame() {
@@ -71,17 +64,17 @@ export class TableContainerComponent implements OnInit {
     );
   }
 
-  // getHand() {
-  //   console.log("inside getHand method in table-container.component");
-  //   this.gameService.getHand().subscribe(
-  //     data => {
-  //       console.log(data);
-  //       for(this.i = 0; this.i < data.length; this.i += 1) {
-  //         this.handCards[this.i] = data[this.i].image; 
-  //       }
-  //     }
-  //   );
-  // }
+  getHand() {
+    console.log("inside getHand method in table-container.component");
+    this.gameService.getHand().subscribe(
+      data => {
+        console.log(data);
+        for(this.i = 0; this.i < data.length; this.i += 1) {
+          this.handCards[this.i] = data[this.i].image; 
+        }
+      }
+    );
+  }
 
   getFlop() {
     console.log("inside getFlop method in table-container.component");
