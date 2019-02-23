@@ -95,6 +95,29 @@ public class UserDaoImplementation implements UserDao{
 		}
 	return new InvalidUser();
 	}
+	@Override
+	public String getUsernameForTurn(String gameID) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try {
+			PreparedStatement cs = conn.prepareStatement("select username from users,games where"
+					+ "current_game=? and game_id=? and current_turn=turn_number");	
+			cs.setString(1, gameID);
+			cs.setString(2, gameID);
+			ResultSet username = cs.executeQuery();
+			username.next();
+			
+			return username.getString(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
+	return null;
+	}
 	
 	@Override
 	public List<User> getUsers(String gameId) {

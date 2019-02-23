@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.texascheatum.dao.GameDaoImplementation;
+import com.texascheatum.dao.UserDaoImplementation;
+import com.texascheatum.model.Game;
 import com.texascheatum.model.User;
 
 public class DeckService {
@@ -40,14 +42,51 @@ public class DeckService {
 		return apiResp.get("deck_id").asText();
 	}
 	
+	public static void joinGame(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String gameID = mapper.readTree(request.getReader().readLine()).get("gameID").asText();
+		if (GameDaoImplementation.getGameDao().joinGame(
+				gameID,
+				((User) request.getSession().getAttribute("user")).getUsername())) {
+			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);
+			getGame(request, response);
+		}
+		else {
+			response.setHeader("Content-Type", "application/json");
+			response.getWriter().write("{}");
+		}
+	}
 	public static void getGame(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		Game game = GameDaoImplementation.getGameDao().readGame(
+				((User) request.getSession().getAttribute("user")).getCurrentGame());
+		
 		response.getWriter().write("{");
+		
 		response.getWriter().write("\"hand\" : ");
 		getHand(request, response);
 		response.getWriter().write(",");
+		
 		response.getWriter().write("\"table\" : ");
 		getTable(request, response);
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"turn\" : ");
+		response.getWriter().write("\"" + UserDaoImplementation.getUserDao().getUsernameForTurn(game.getGameID()) + "\"");
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"balance\" : ");
+		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getBalance());
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"pot\" : ");
+		response.getWriter().write("" + game.getPot());
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"minimum\" : ");
+		response.getWriter().write("" + game.getCurrentTarget());
+		response.getWriter().write(",");
+		
 		response.getWriter().write("}");
 	}
 
@@ -89,13 +128,43 @@ public class DeckService {
 			response.getWriter().write("[]");
 	}
 	
+	public static void action(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
+		switch (actionJson.get("action").asText()) {
+		case "bet":
+			GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					actionJson.get("amount").asDouble());
+			break;
+		case "call":
+			GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					0);
+			break;
+		case "check":
+			GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					0);
+			break;
+		case "raise":
+			GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					actionJson.get("amount").asDouble());
+			break;
+		case "fold":
+			break;
+		}
+	}
 	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
 				request.getSession().getAttribute("gameID")
 				+ "/draw/?count=3");
 		
 		addCardsToPile(request, "table", getCardString(apiResp));
-		getTable(request, response);
 	}
 	public static void turn_river(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
@@ -103,8 +172,8 @@ public class DeckService {
 				+ "/draw/?count=1");
 		
 		addCardsToPile(request, "table", getCardString(apiResp));
-		getTable(request, response);
 	}
+	
 	private static void addCardsToPile(HttpServletRequest request, String pile, String cards) throws IOException {
 		JsonNode cardJson = mapper.readTree(cards);
 		String cardString = String.join(",", cardJson.findValuesAsText("value"));
@@ -114,7 +183,6 @@ public class DeckService {
 				+ "/pile/" + pile
 				+ "/add/?cards=" + cardString);
 	}
-	
 	private static JsonNode makeHttpRequest(String uri) throws IOException {
 		String url = "https://deckofcardsapi.com/api/deck/" + uri;
 		URL obj = new URL(url);

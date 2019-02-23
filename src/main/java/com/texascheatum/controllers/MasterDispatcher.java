@@ -32,7 +32,10 @@ public class MasterDispatcher {
 			DeckService.startGame(request, response);
 			break;
 		case "join":
-			DeckService.getGame(request, response);
+			DeckService.joinGame(request, response);
+			break;
+		case "action":
+			DeckService.action(request, response);
 			break;
 		default:
 			log.error("URI not recognized");
@@ -51,17 +54,14 @@ public class MasterDispatcher {
 		case "getHand":
 			DeckService.getHand(request, response);
 			break;
-		case "getFlop":
-			DeckService.flop(request, response);
-			break;
-		case "getTurn":
-			DeckService.turn_river(request, response);
-			break;
-		case "getRiver":
-			DeckService.turn_river(request, response);
+		case "getTable":
+			DeckService.getTable(request, response);
 			break;
 		case "cheat":
 			OddsService.cheat(request, response);
+			break;
+		case "status":
+			DeckService.getGame(request, response);
 			break;
 		default:
 			log.error("URI not recognized");

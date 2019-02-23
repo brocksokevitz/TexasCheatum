@@ -1,8 +1,10 @@
 package com.texascheatum.dao;
 
+import com.texascheatum.model.Game;
+
 public interface GameDao {
 	public boolean createGame(String gameId, String username);
-	public boolean updateGame(String gameId, String status);
-	public boolean updateTarget(String gameId, double newTarget);
-	public boolean updatePot(String gameId);
+	public Game readGame(String gameId);
+	public boolean joinGame(String gameId, String userId);
+	public boolean makeBet(String gameId, String userId, double amount);
 }

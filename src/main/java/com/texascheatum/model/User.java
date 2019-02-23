@@ -14,6 +14,8 @@ public class User extends AbstractUser{
 	
 	private int superuser;
 	private String currentGame;
+	private double roundBet;
+	private int turnNumber;
 	private int totalGames;
 	private int totalWins;
 	
@@ -31,6 +33,7 @@ public class User extends AbstractUser{
 		this.email = email;
 		this.password = password;
 	}
+	
 	public User(int userId, String username, double balance, String email, String password, int superuser,
 			String currentGame, int totalGames, int totalWins) {
 		super();
@@ -85,6 +88,18 @@ public class User extends AbstractUser{
 	}
 	public void setCurrentGame(String currentGame) {
 		this.currentGame = currentGame;
+	}
+	public double getRoundBet() {
+		return roundBet;
+	}
+	public void setRoundBet(double roundBet) {
+		this.roundBet = roundBet;
+	}
+	public int getTurnNumber() {
+		return turnNumber;
+	}
+	public void setTurnNumber(int turnNumber) {
+		this.turnNumber = turnNumber;
 	}
 	public int getTotalGames() {
 		return totalGames;
