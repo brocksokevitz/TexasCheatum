@@ -51,7 +51,7 @@ export class TableContainerComponent implements OnInit {
     this.settingServ.joinGame(this.game.sesh).subscribe(
       data => {
         console.log(data);
-        if (data !== null) {
+        if(data !== {}) {
           this.lobbyView = false;
           this.gameView = true;
 
@@ -65,6 +65,8 @@ export class TableContainerComponent implements OnInit {
         }
         else {
           this.visible = true;
+          this.lobbyView = true;
+          this.gameView = false;
           this.game.sesh = "";
         }
       }
