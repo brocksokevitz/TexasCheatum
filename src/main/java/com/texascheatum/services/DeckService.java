@@ -139,20 +139,31 @@ public class DeckService {
 							actionJson.get("amount").asDouble()));
 			break;
 		case "call":
+			double change = GameDaoImplementation.getGameDao().makeBet(
+				((User) request.getSession().getAttribute("user")).getCurrentGame(),
+				((User) request.getSession().getAttribute("user")).getUsername(),
+				0.0);
 			((User) request.getSession().getAttribute("user")).setBalance(
 					((User) request.getSession().getAttribute("user")).getBalance()
-					- GameDaoImplementation.getGameDao().makeBet(
-							((User) request.getSession().getAttribute("user")).getCurrentGame(),
-							((User) request.getSession().getAttribute("user")).getUsername(),
-							0.0));
+					- Math.abs(change));
+			if (change < 0) {
+				if (getTableCardNum(request) == 0)
+					flop(request, response);
+				else
+					turn_river(request, response);
+			}
 			break;
 		case "check":
-			((User) request.getSession().getAttribute("user")).setBalance(
-					((User) request.getSession().getAttribute("user")).getBalance()
-					- GameDaoImplementation.getGameDao().makeBet(
-							((User) request.getSession().getAttribute("user")).getCurrentGame(),
-							((User) request.getSession().getAttribute("user")).getUsername(),
-							0.0));
+			change = GameDaoImplementation.getGameDao().makeBet(
+					((User) request.getSession().getAttribute("user")).getCurrentGame(),
+					((User) request.getSession().getAttribute("user")).getUsername(),
+					0.0);
+			if (change < 0) {
+				if (getTableCardNum(request) == 0)
+					flop(request, response);
+				else
+					turn_river(request, response);
+			}
 			break;
 		case "raise":
 			((User) request.getSession().getAttribute("user")).setBalance(
@@ -165,6 +176,17 @@ public class DeckService {
 		case "fold":
 			break;
 		}
+	}
+	public static int getTableCardNum(HttpServletRequest request) throws IOException {
+		JsonNode apiResp = makeHttpRequest(
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
+				+ "/pile/table/list");
+
+		JsonNode piles = apiResp.get("piles");
+		if (piles.has("table"))
+			return piles.get("table").get("cards").size();
+		else
+			return 0;
 	}
 	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(

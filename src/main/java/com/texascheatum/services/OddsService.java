@@ -27,6 +27,7 @@ public class OddsService {
 				+ "/list");
 		String hand = getCardString(apiResp_Deck_Hand.get("piles")
 				.get(((User) request.getSession().getAttribute("user")).getUsername()), true);
+		hand = hand.replace("0", "T");
 		
 		JsonNode apiResp_Deck_Table = makeHttpRequest_Deck(
 				request.getSession().getAttribute("gameID")
@@ -37,6 +38,7 @@ public class OddsService {
 		if (apiResp_Deck_Table.get("piles").has("table")) {
 			String table = getCardString(apiResp_Deck_Table.get("piles")
 					.get("table"), false);
+			table = table.replace("0", "T");
 			switch(apiResp_Deck_Table.get("piles").get("table").get("remaining").asInt()) {
 			case 3:
 				System.out.println("flop" + hand + table);

@@ -160,7 +160,6 @@ else
     select in_target-round_bet into difference from users where username=in_user;
     update games set current_target=in_target where game_id=game;
 end if;
-out_difference := difference;
 update games set pot=pot+difference where game_id=game;
 update users set round_bet=round_bet+difference,balance=balance-difference where username=in_user;
 
@@ -170,8 +169,13 @@ select count(*) into players_at_min from users where current_game=game and round
 if number_players=players_at_min then
     update games set current_turn=0 where game_id=game;
     temp_varchar := change_status(game);
+    if out_difference=0 then
+        out_difference := 1;
+    end if;
+    out_difference := out_difference*-1;
 else
     update games set current_turn=change_turn(game) where game_id=game;
+    out_difference := difference;
 end if;
 commit;-- saves changes
 end;
