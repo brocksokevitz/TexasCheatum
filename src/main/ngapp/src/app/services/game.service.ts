@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GameService {
+  public round: number = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -15,16 +16,19 @@ export class GameService {
 
   getFlop() {
     console.log("inside the getFlop method of game.service");
+    this.round = 1;
     return this.http.get<any>("/TexasCheatum/servlet/getFlop");
   }
 
   getTurn() {
     console.log("inside the getTurn method of game.service");
+    this.round = 2;
     return this.http.get<any>("/TexasCheatum/servlet/getTurn");
   }
 
   getRiver() {
     console.log("inside the getRiver method of game.service");
+    this.round = 3;
     return this.http.get<any>("/TexasCheatum/servlet/getRiver");
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-gameplay',
@@ -10,33 +11,43 @@ export class GameplayComponent implements OnInit {
   private callAmount: number = null;
   private raiseAmount: number = null;
   private totalAmount: number = null;
+  private round: number = 0;
+  private postFlop: boolean = false;
 
-  constructor() {}
+  constructor(
+    private gameServ: GameService
+  ) {}
 
   ngOnInit() {
   }
 
   betting() {
-    console.log(this.totalAmount);
-    console.log(this.betAmount);
     this.totalAmount += this.betAmount;
     console.log(this.totalAmount);
     this.betAmount = null;
+    this.round = this.gameServ.round;
+    if(this.round > 0) {
+      this.postFlop = true;
+    }
   }
 
   calling() {
-    console.log(this.totalAmount);
-    console.log(this.callAmount);
     this.totalAmount += this.callAmount;
     console.log(this.totalAmount);
     this.callAmount = null;
+    this.round = this.gameServ.round;
+    if(this.round > 0) {
+      this.postFlop = true;
+    }
   }
 
   raising() {
-    console.log(this.totalAmount);
-    console.log(this.raiseAmount);
     this.totalAmount += this.raiseAmount;
     console.log(this.totalAmount);
     this.raiseAmount = null;
+    this.round = this.gameServ.round;
+    if(this.round > 0) {
+      this.postFlop = true;
+    }
   }
 }
