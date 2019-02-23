@@ -34,7 +34,6 @@
     
     <br>
     <div>
-      <!-- <button class="btn btn-outline-light" (click)="getHand()">Get Hand</button> -->
       <button class="btn btn-outline-light" (click)="getFlop()">Get Flop</button>
       <button class="btn btn-outline-light" (click)="getTurn()">Get Turn</button>
       <button class="btn btn-outline-light" (click)="getRiver()">Get River</button>
@@ -47,7 +46,7 @@
     </div>
 
     <div class="col-lg-4 rounded" id="handRegion">
-      <h3>Player Hand</h3>
+      <h3>Player 1 Hand</h3>
       <table>
         <tr>
           <td *ngFor="let card of handCards" id="handCell">

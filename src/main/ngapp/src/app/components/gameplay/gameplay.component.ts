@@ -26,8 +26,10 @@ export class GameplayComponent implements OnInit {
         () => {
           this.gameServ.whosTurnIsItAnyways().subscribe(
             data => {
-              this.status = data;
               console.log(this.status);
+              this.status.pot = data.pot;
+              this.status.balance = data.balance;
+              this.status.minimum = data.minimum;
             }
           );
         }
@@ -41,54 +43,32 @@ export class GameplayComponent implements OnInit {
   checking() {
     console.log("inside the checking method of gameplay.component");
     this.action = "check";
-    this.gameServ.checking(this.action).subscribe(
-      data => {
-        console.log("checking: " + data);
-      }
-    );
+    this.gameServ.checking(this.action).subscribe();
   }
 
   betting() {
     console.log("inside the betting method of gameplay.component");
     this.action = "bet";
-    this.gameServ.betting(this.betAmount, this.action).subscribe(
-      data => {
-        console.log("betting: " + data);
-      }
-    );
+    this.gameServ.betting(this.betAmount, this.action).subscribe();
+    this.betAmount = null;
   }
 
   calling() {
     console.log("inside the calling method of gameplay.component");
     this.action = "call";
-    console.log(this.action);
-    this.gameServ.calling(this.action).subscribe(
-      data => {
-        console.log("calling: " + data);
-      }
-    );
+    this.gameServ.calling(this.action).subscribe();
   }
 
   raising() {
     console.log("inside the raising method of gameplay.component");
     this.action = "raise";
-    console.log(this.action);
-    this.gameServ.raising(this.raiseAmount, this.action).subscribe(
-      data => {
-        console.log("raising: " + data);
-      }
-    );
+    this.gameServ.raising(this.raiseAmount, this.action).subscribe();
+    this.raiseAmount = null;
   }
 
   folding() {
     console.log("inside the folding method of gameplay.component");
     this.action = "fold";
-    this.gameServ.folding(this.action).subscribe(
-      data => {
-        console.log("folding: " + data);
-      }
-    );
+    this.gameServ.folding(this.action).subscribe();
   }
-
-  
 }
