@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gameplay.component.css']
 })
 export class GameplayComponent implements OnInit {
-  private money: any = {};
-  private totalBets: number;
+  private betAmount: number;
+  private callAmount: number;
+  private raiseAmount: number;
+  private totalAmount: number;
 
   constructor() {}
 
@@ -15,17 +17,17 @@ export class GameplayComponent implements OnInit {
   }
 
   bet() {
-    this.totalBets += this.money.bet;
-    console.log(this.totalBets);
+    this.totalAmount += this.betAmount;
+    console.log(this.totalAmount);
   }
 
   call() {
-    this.totalBets += this.money.call;
-    console.log(this.totalBets);
+    this.totalAmount += this.callAmount;
+    console.log(this.totalAmount);
   }
 
   raise() {
-    this.totalBets += this.money.raise;
-    console.log(this.totalBets);
+    this.totalAmount += this.raiseAmount;
+    console.log(this.totalAmount);
   }
 }
