@@ -51,6 +51,7 @@ public class PlayerService {
 	public static void logout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getSession().invalidate();
+//		request.logout();
 		response.setHeader("status", "200");
 	}
 }
