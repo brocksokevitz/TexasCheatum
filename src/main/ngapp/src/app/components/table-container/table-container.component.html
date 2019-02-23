@@ -21,8 +21,8 @@
 <div *ngIf="gameView">
   <div class="container rounded">
 
-      <h3>Table Cards</h3>
       <div class="col-lg-6 offset-lg-3 rounded" id="tableRegion">
+        <h3>Table Cards</h3>
         <table>
           <tr>
             <td *ngFor="let card of tableCards" id="tableCell">
@@ -46,8 +46,8 @@
       <app-gameplay></app-gameplay>
     </div>
 
-    <h3>Player Hand</h3>
     <div class="col-lg-4 rounded" id="handRegion">
+      <h3>Player Hand</h3>
       <table>
         <tr>
           <td *ngFor="let card of handCards" id="handCell">
