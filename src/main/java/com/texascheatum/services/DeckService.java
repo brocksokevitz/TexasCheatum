@@ -30,7 +30,7 @@ public class DeckService {
 		if (gameID != null) {
 			GameDaoImplementation.getGameDao().createGame(gameID,
 					((User) request.getSession().getAttribute("user")).getUsername());
-			request.getSession().setAttribute("gameID", gameID);
+			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);
 			drawHand(request);
 			
 			response.setHeader("Content-Type", "text/plain");
@@ -92,7 +92,7 @@ public class DeckService {
 	public static void getHand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID").toString()
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
 
@@ -106,7 +106,7 @@ public class DeckService {
 	}
 	private static String drawHand(HttpServletRequest request) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/draw/?count=2");
 		
 		String cards = getCardString(apiResp);
@@ -116,7 +116,7 @@ public class DeckService {
 	
 	public static void getTable(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/table/list");
 
 		response.setHeader("Content-Type", "application/json");
@@ -168,14 +168,14 @@ public class DeckService {
 	}
 	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/draw/?count=3");
 		
 		addCardsToPile(request, "table", getCardString(apiResp));
 	}
 	public static void turn_river(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/draw/?count=1");
 		
 		addCardsToPile(request, "table", getCardString(apiResp));
@@ -186,7 +186,7 @@ public class DeckService {
 		String cardString = String.join(",", cardJson.findValuesAsText("value"));
 		log.info(cardString);
 		makeHttpRequest(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/" + pile
 				+ "/add/?cards=" + cardString);
 	}

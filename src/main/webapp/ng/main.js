@@ -229,7 +229,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container justify-content-center\">\r\n  <div class=\"row\">\r\n    <div *ngIf=\"postFlop\" class=\"col-lg-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"checking()\" method=\"POST\">\r\n            <button class=\"btn btn-outline-light\">Check</button>\r\n          </form>\r\n        </div>\r\n\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"betting()\" method=\"POST\">\r\n            <input type=\"number\" name=\"bet\" [(ngModel)]=\"betAmount\" #bet=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Bet Amount\" required><br>\r\n            <button class=\"btn btn-outline-light\">Bet</button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"calling()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Call</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"raising()\" method=\"POST\">\r\n          <input type=\"number\" name=\"raise\" [(ngModel)]=\"raiseAmount\" #raise=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Raise Amount\" required><br>\r\n          <button class=\"btn btn-outline-light\">Raise</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-2\">\r\n        <form class=\"form-group\" (ngSubmit)=\"folding()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Fold</button>\r\n        </form>\r\n      </div>\r\n    \r\n  </div>\r\n</div>\r\n<br>"
+module.exports = "<h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>\r\n<div class=\"container justify-content-center\">\r\n  <div class=\"row\">\r\n    <div *ngIf=\"postFlop\" class=\"col-lg-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"checking()\" method=\"POST\">\r\n            <button class=\"btn btn-outline-light\">Check</button>\r\n          </form>\r\n        </div>\r\n\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"betting()\" method=\"POST\">\r\n            <input type=\"number\" name=\"bet\" [(ngModel)]=\"betAmount\" #bet=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Bet Amount\" required><br>\r\n            <button class=\"btn btn-outline-light\">Bet</button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"calling()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Call</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"raising()\" method=\"POST\">\r\n          <input type=\"number\" name=\"raise\" [(ngModel)]=\"raiseAmount\" #raise=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Raise Amount\" required><br>\r\n          <button class=\"btn btn-outline-light\">Raise</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-2\">\r\n        <form class=\"form-group\" (ngSubmit)=\"folding()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Fold</button>\r\n        </form>\r\n      </div>\r\n    \r\n  </div>\r\n</div>\r\n<br>\r\n<h4>Player 1 Balance: {{status.balance}}</h4>"
 
 /***/ }),
 
@@ -263,8 +263,10 @@ var GameplayComponent = /** @class */ (function () {
         var _this = this;
         rxjs_observable_IntervalObservable__WEBPACK_IMPORTED_MODULE_3__["IntervalObservable"].create(2500).takeWhile(function () { return _this.alive; }).subscribe(function () {
             _this.gameServ.whosTurnIsItAnyways().subscribe(function (data) {
-                _this.status = data;
                 console.log(_this.status);
+                _this.status.pot = data.pot;
+                _this.status.balance = data.balance;
+                _this.status.minimum = data.minimum;
             });
         });
     };
@@ -274,39 +276,29 @@ var GameplayComponent = /** @class */ (function () {
     GameplayComponent.prototype.checking = function () {
         console.log("inside the checking method of gameplay.component");
         this.action = "check";
-        this.gameServ.checking(this.action).subscribe(function (data) {
-            console.log("checking: " + data);
-        });
+        this.gameServ.checking(this.action).subscribe();
     };
     GameplayComponent.prototype.betting = function () {
         console.log("inside the betting method of gameplay.component");
         this.action = "bet";
-        this.gameServ.betting(this.betAmount, this.action).subscribe(function (data) {
-            console.log("betting: " + data);
-        });
+        this.gameServ.betting(this.betAmount, this.action).subscribe();
+        this.betAmount = null;
     };
     GameplayComponent.prototype.calling = function () {
         console.log("inside the calling method of gameplay.component");
         this.action = "call";
-        console.log(this.action);
-        this.gameServ.calling(this.action).subscribe(function (data) {
-            console.log("calling: " + data);
-        });
+        this.gameServ.calling(this.action).subscribe();
     };
     GameplayComponent.prototype.raising = function () {
         console.log("inside the raising method of gameplay.component");
         this.action = "raise";
-        console.log(this.action);
-        this.gameServ.raising(this.raiseAmount, this.action).subscribe(function (data) {
-            console.log("raising: " + data);
-        });
+        this.gameServ.raising(this.raiseAmount, this.action).subscribe();
+        this.raiseAmount = null;
     };
     GameplayComponent.prototype.folding = function () {
         console.log("inside the folding method of gameplay.component");
         this.action = "fold";
-        this.gameServ.folding(this.action).subscribe(function (data) {
-            console.log("folding: " + data);
-        });
+        this.gameServ.folding(this.action).subscribe();
     };
     GameplayComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -624,7 +616,7 @@ module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <!-- <button class=\"btn btn-outline-light\" (click)=\"getHand()\">Get Hand</button> -->\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n    </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player 1 Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n    </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -676,21 +668,23 @@ var TableContainerComponent = /** @class */ (function () {
             console.log(data);
             _this.lobbyView = false;
             _this.gameView = true;
+            _this.getHand();
         });
-        this.getHand();
     };
     TableContainerComponent.prototype.joinGame = function () {
         var _this = this;
         console.log("inside joinGame method in table-container.component");
         this.settingServ.joinGame(this.game.sesh).subscribe(function (data) {
             console.log(data);
-            _this.lobbyView = false;
-            _this.gameView = true;
-            for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
-                _this.handCards[_this.i] = data.hand[_this.i].image;
-            }
-            for (_this.i = 0; _this.i < data.table.length; _this.i++) {
-                _this.tableCards[_this.i] = data.table[_this.i].image;
+            if (data !== {}) {
+                _this.lobbyView = false;
+                _this.gameView = true;
+                for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
+                    _this.handCards[_this.i] = data.hand[_this.i].image;
+                }
+                for (_this.i = 0; _this.i < data.table.length; _this.i++) {
+                    _this.tableCards[_this.i] = data.table[_this.i].image;
+                }
             }
         });
     };

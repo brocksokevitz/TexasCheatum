@@ -39,10 +39,10 @@ export class TableContainerComponent implements OnInit {
           console.log(data);
           this.lobbyView = false;
           this.gameView = true;
+          this.getHand();
       }
     );
 
-    this.getHand();
   }
 
   joinGame() {
@@ -50,15 +50,17 @@ export class TableContainerComponent implements OnInit {
     this.settingServ.joinGame(this.game.sesh).subscribe(
       data => {
         console.log(data);
-        this.lobbyView = false;
-        this.gameView = true;
-
-        for(this.i = 0; this.i < data.hand.length; this.i++) {
-          this.handCards[this.i] = data.hand[this.i].image;
-        }
-
-        for(this.i = 0; this.i < data.table.length; this.i++) {
-          this.tableCards[this.i] = data.table[this.i].image;
+        if (data !== {}) {
+	        this.lobbyView = false;
+	        this.gameView = true;
+	
+	        for(this.i = 0; this.i < data.hand.length; this.i++) {
+	          this.handCards[this.i] = data.hand[this.i].image;
+	        }
+	
+	        for(this.i = 0; this.i < data.table.length; this.i++) {
+	          this.tableCards[this.i] = data.table[this.i].image;
+	        }
         }
       }
     );

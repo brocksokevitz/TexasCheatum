@@ -4,7 +4,6 @@ drop public synonym games;
 --drop public synonym new_game_id;
 drop public synonym delete_user;
 drop public synonym insert_user;
-drop public synonym update_user_bet;
 drop public synonym get_user;
 drop public synonym promote_user;
 drop public synonym create_game;
@@ -126,6 +125,7 @@ create or replace procedure start_game(game in varchar, current_status out varch
 as
 begin
 current_status := change_status(game);
+commit;-- saves changes
 end;
 /
 create or replace procedure join_game(game in varchar, in_user in varchar, success out Integer)
@@ -183,7 +183,7 @@ max_turn number;
 have_next number;
 begin
 select max(turn_number) into max_turn from users where current_game=game;
-select next_turn into next_turn from games where game_id=game;
+select current_turn into next_turn from games where game_id=game;
 while have_next=0
 loop
     next_turn := next_turn+1;
@@ -192,7 +192,7 @@ loop
     end if;
     select count(*) into have_next from users where current_game=game and turn_number=next_turn;
 end loop;
-update games set current_turn=next_turn where game_id=game;
+commit;-- saves changes
 return next_turn;
 end;
 /
@@ -230,7 +230,6 @@ create public synonym games for admin01.games;
 --create public synonym new_transaction_id for bsokevitz.new_transaction_id;
 create public synonym delete_user for admin01.delete_user;
 create public synonym insert_user for admin01.insert_user;
-create public synonym update_user_bet for admin01.update_user_bet;
 create public synonym get_user for admin01.get_user;
 create public synonym promote_user for admin01.promote_user;
 create public synonym create_game for admin01.create_game;
@@ -243,10 +242,6 @@ create public synonym encrypt_password for admin01.encrypt_password;
 
 call insert_user('super', 'fuksyr@gmail.com', 'superpass');
 call promote_user('super');
-call create_game('1234', 'super');
-call update_game('1', 'closed');
 create user super identified by superpass;
 grant dba to super with admin option;
 commit;
-
-select username from users,games where game_id='yory4geq0ufs' and current_game='yory4geq0ufs' and current_turn=turn_number;
