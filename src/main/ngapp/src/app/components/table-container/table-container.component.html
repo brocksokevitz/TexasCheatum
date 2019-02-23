@@ -11,6 +11,10 @@
           <br>
           <button class="btn btn-outline-light">Join Game</button>
         </form>
+        <br>
+        <div id="invalidGame" *ngIf="visible">
+          <p>Invalid Game Id. Try again, or start a new game.</p>
+        </div>
         
         <button class="btn btn-outline-light" (click)="goBack()">Back</button>
 
