@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container justify-content-center">
   <div class="row">
     <div *ngIf="postFlop" class="col-lg-4">
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-6">
           <form class="form-group" (ngSubmit)="checking()" method="POST">
             <button class="btn btn-outline-light">Check</button>
           </form>
         </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-6">
           <form class="form-group" (ngSubmit)="betting()" method="POST">
             <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="500" step="25" placeholder="Bet Amount" required><br>
             <button class="btn btn-outline-light">Bet</button>
@@ -19,7 +19,6 @@
 
       <div class="col-lg-3">
         <form class="form-group" (ngSubmit)="calling()" method="POST">
-          <input type="number" name="call" [(ngModel)]="callAmount" #call="ngModel" min="500" step="25" placeholder="Call Amount" required><br>
           <button class="btn btn-outline-light">Call</button>
         </form>
       </div>

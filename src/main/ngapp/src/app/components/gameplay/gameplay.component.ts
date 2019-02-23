@@ -9,10 +9,9 @@ import 'rxjs/add/operator/takeWhile';
   styleUrls: ['./gameplay.component.css']
 })
 export class GameplayComponent implements OnInit {
-  private betAmount: number = null;
-  private callAmount: number = null;
-  private raiseAmount: number = null;
-  private postFlop: boolean = false;
+  private betAmount: number;
+  private raiseAmount: number;
+  private postFlop: boolean;
   private alive: boolean;
   private status: any = {};
   private action: string;
@@ -22,13 +21,13 @@ export class GameplayComponent implements OnInit {
   ) {this.alive = true;}
 
   ngOnInit() {
-    IntervalObservable.create(1000).takeWhile(
+    IntervalObservable.create(2500).takeWhile(
       () => this.alive).subscribe(
         () => {
           this.gameServ.whosTurnIsItAnyways().subscribe(
             data => {
               this.status = data;
-              console.log("Game status: " + this.status);
+              console.log(this.status);
             }
           );
         }
@@ -62,7 +61,8 @@ export class GameplayComponent implements OnInit {
   calling() {
     console.log("inside the calling method of gameplay.component");
     this.action = "call";
-    this.gameServ.calling(this.callAmount, this.action).subscribe(
+    console.log(this.action);
+    this.gameServ.calling(this.action).subscribe(
       data => {
         console.log("calling: " + data);
       }
@@ -72,6 +72,7 @@ export class GameplayComponent implements OnInit {
   raising() {
     console.log("inside the raising method of gameplay.component");
     this.action = "raise";
+    console.log(this.action);
     this.gameServ.raising(this.raiseAmount, this.action).subscribe(
       data => {
         console.log("raising: " + data);
