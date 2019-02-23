@@ -1,27 +1,27 @@
-<h4>Table Minimum: 200</h4>
+<h4>Table Minimum: 500</h4>
 <br>
 <div class="row">
-  <div class="col-lg-4 offset-lg-1">
-    <div class="col-lg-2">
+  <div class="row col-lg-4 offset-lg-1">
+    <div class="col-lg-2" id="check">
       <button class="btn btn-outline-light">Check</button>
     </div>
-    <div class="col-lg-2">
-      <input type="number" name="betAmount" [(ngModel)]="money" #betAmount="ngModel">
+    <div class="col-lg-2" id="bet">
+      <input type="number" name="betAmount" [(ngModel)]="money" #betAmount="ngModel" min="500" step="100" placeholder="Bet Amount">
       <button class="btn btn-outline-light">Bet</button>
     </div>
   </div>
 
-  <div class="col-lg-2">
-    <input type="number" name="callAmount" [(ngModel)]="money" #callAmount="ngModel">
+  <div class="col-lg-2" id="call">
+    <input type="number" name="callAmount" [(ngModel)]="money" #callAmount="ngModel" min="500" step="100" placeholder="Call Amount">
     <button class="btn btn-outline-light">Call</button>
   </div>
 
-  <div class="col-lg-2">
-    <input type="number" name="raiseAmount" [(ngModel)]="money" #raiseAmount="ngModel">
+  <div class="col-lg-2" id="raise">
+    <input type="number" name="raiseAmount" [(ngModel)]="money" #raiseAmount="ngModel" min="500" step="100" placeholder="Raise Amount">
     <button class="btn btn-outline-light">Raise</button>
   </div>
 
-  <div class="col-lg-2">
+  <div class="col-lg-2" id="fold">
     <button class="btn btn-outline-light">Fold</button>
   </div>
 </div>

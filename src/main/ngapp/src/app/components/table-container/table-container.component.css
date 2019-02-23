@@ -16,6 +16,10 @@
     width: 50%;
 }
 
+#chart {
+    padding: 10px;
+}
+
 .container {
     background-color: darkgreen;
     color: whitesmoke;
