@@ -4,7 +4,6 @@ drop public synonym games;
 --drop public synonym new_game_id;
 drop public synonym delete_user;
 drop public synonym insert_user;
-drop public synonym update_user_bet;
 drop public synonym get_user;
 drop public synonym promote_user;
 drop public synonym create_game;
@@ -57,7 +56,7 @@ create table users
     superuser number not null,
     current_game varchar(50) not null,
     round_bet Decimal(15,2) not null,
-    turn_number Decimal(1) not null,
+    turn_number number(1) not null,
     total_games number not null,
     total_wins number not null,
     --
@@ -126,6 +125,7 @@ create or replace procedure start_game(game in varchar, current_status out varch
 as
 begin
 current_status := change_status(game);
+commit;-- saves changes
 end;
 /
 create or replace procedure join_game(game in varchar, in_user in varchar, success out Integer)
@@ -133,9 +133,9 @@ as
 number_players number;
 temp_varchar varchar(50);
 begin
-select count(*) into number_players from users where current_game=game;
+select count(*) into number_players from users where current_game=game and username=in_user;
 if number_players=0 then
-    update (select current_game, game_id from games, users where game_id=game and status='pending' and username=in_user) set current_game=game_id;
+    update users set current_game=game where username=in_user and exists(select game_id from games where game_id=game);
     success := SQL%ROWCOUNT;
     select count(*) into number_players from users where current_game=game;
     if number_players=4 then
@@ -183,7 +183,7 @@ max_turn number;
 have_next number;
 begin
 select max(turn_number) into max_turn from users where current_game=game;
-select next_turn into next_turn from games where game_id=game;
+select current_turn into next_turn from games where game_id=game;
 while have_next=0
 loop
     next_turn := next_turn+1;
@@ -192,7 +192,7 @@ loop
     end if;
     select count(*) into have_next from users where current_game=game and turn_number=next_turn;
 end loop;
-update games set current_turn=next_turn where game_id=game;
+commit;-- saves changes
 return next_turn;
 end;
 /
@@ -203,16 +203,22 @@ begin
 select status into current_status from games where game_id=game;
 update users set round_bet=0 where current_game=game;
 if current_status='pending' then
-update games set status='pre-flop' where game_id=game;
+    update games set status='pre-flop' where game_id=game;
+    current_status := 'pre-flop';
 elsif current_status='pre-flop' then
-update games set status='flop' where game_id=game;
+    update games set status='flop' where game_id=game;
+    current_status := 'flop';
 elsif current_status='flop' then
-update games set status='turn' where game_id=game;
+    update games set status='turn' where game_id=game;
+    current_status := 'turn';
 elsif current_status='turn' then
-update games set status='river' where game_id=game;
+    update games set status='river' where game_id=game;
+    current_status := 'river';
 elsif current_status='river' then
-update games set status='closed' where game_id=game;
+    update games set status='closed' where game_id=game;
+    current_status := 'closed';
 end if;
+return current_status;
 commit;-- saves changes
 end;
 /
@@ -224,7 +230,6 @@ create public synonym games for admin01.games;
 --create public synonym new_transaction_id for bsokevitz.new_transaction_id;
 create public synonym delete_user for admin01.delete_user;
 create public synonym insert_user for admin01.insert_user;
-create public synonym update_user_bet for admin01.update_user_bet;
 create public synonym get_user for admin01.get_user;
 create public synonym promote_user for admin01.promote_user;
 create public synonym create_game for admin01.create_game;
@@ -237,8 +242,6 @@ create public synonym encrypt_password for admin01.encrypt_password;
 
 call insert_user('super', 'fuksyr@gmail.com', 'superpass');
 call promote_user('super');
-call create_game('1234', 'super');
-call update_game('1', 'closed');
 create user super identified by superpass;
 grant dba to super with admin option;
 commit;

@@ -40,9 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
 /* harmony import */ var _components_table_container_table_container_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/table-container/table-container.component */ "./src/app/components/table-container/table-container.component.ts");
 /* harmony import */ var _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rules/rules.component */ "./src/app/components/rules/rules.component.ts");
-/* harmony import */ var _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/options-menu/options-menu.component */ "./src/app/components/options-menu/options-menu.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
 
 
 
@@ -58,7 +56,7 @@ var routes = [
     },
     {
         path: "register",
-        component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_8__["RegisterComponent"]
+        component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"]
     },
     {
         path: "home",
@@ -71,10 +69,6 @@ var routes = [
     {
         path: "rules",
         component: _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_6__["RulesComponent"]
-    },
-    {
-        path: "options",
-        component: _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_7__["OptionsMenuComponent"]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -169,12 +163,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
 /* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
 /* harmony import */ var _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/rules/rules.component */ "./src/app/components/rules/rules.component.ts");
-/* harmony import */ var _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/options-menu/options-menu.component */ "./src/app/components/options-menu/options-menu.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-/* harmony import */ var _components_table_cards_table_cards_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/table-cards/table-cards.component */ "./src/app/components/table-cards/table-cards.component.ts");
-/* harmony import */ var _components_player_hand_player_hand_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/player-hand/player-hand.component */ "./src/app/components/player-hand/player-hand.component.ts");
-
-
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_gameplay_gameplay_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/gameplay/gameplay.component */ "./src/app/components/gameplay/gameplay.component.ts");
 
 
 
@@ -200,10 +190,8 @@ var AppModule = /** @class */ (function () {
                 _components_login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
                 _components_rules_rules_component__WEBPACK_IMPORTED_MODULE_11__["RulesComponent"],
-                _components_options_menu_options_menu_component__WEBPACK_IMPORTED_MODULE_12__["OptionsMenuComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_13__["RegisterComponent"],
-                _components_table_cards_table_cards_component__WEBPACK_IMPORTED_MODULE_14__["TableCardsComponent"],
-                _components_player_hand_player_hand_component__WEBPACK_IMPORTED_MODULE_15__["PlayerHandComponent"]
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__["RegisterComponent"],
+                _components_gameplay_gameplay_component__WEBPACK_IMPORTED_MODULE_13__["GameplayComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -217,6 +205,110 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/gameplay/gameplay.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/components/gameplay/gameplay.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZ2FtZXBsYXkvZ2FtZXBsYXkuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/gameplay/gameplay.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/components/gameplay/gameplay.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>\r\n<div class=\"container justify-content-center\">\r\n  <div class=\"row\">\r\n    <div *ngIf=\"postFlop\" class=\"col-lg-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"checking()\" method=\"POST\">\r\n            <button class=\"btn btn-outline-light\">Check</button>\r\n          </form>\r\n        </div>\r\n\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"betting()\" method=\"POST\">\r\n            <input type=\"number\" name=\"bet\" [(ngModel)]=\"betAmount\" #bet=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Bet Amount\" required><br>\r\n            <button class=\"btn btn-outline-light\">Bet</button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"calling()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Call</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"raising()\" method=\"POST\">\r\n          <input type=\"number\" name=\"raise\" [(ngModel)]=\"raiseAmount\" #raise=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Raise Amount\" required><br>\r\n          <button class=\"btn btn-outline-light\">Raise</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-2\">\r\n        <form class=\"form-group\" (ngSubmit)=\"folding()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Fold</button>\r\n        </form>\r\n      </div>\r\n    \r\n  </div>\r\n</div>\r\n<br>\r\n<h4>Player 1 Balance: {{status.balance}}</h4>"
+
+/***/ }),
+
+/***/ "./src/app/components/gameplay/gameplay.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/gameplay/gameplay.component.ts ***!
+  \***********************************************************/
+/*! exports provided: GameplayComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameplayComponent", function() { return GameplayComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_game_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/game.service */ "./src/app/services/game.service.ts");
+/* harmony import */ var rxjs_observable_IntervalObservable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/observable/IntervalObservable */ "./node_modules/rxjs-compat/_esm5/observable/IntervalObservable.js");
+/* harmony import */ var rxjs_add_operator_takeWhile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/add/operator/takeWhile */ "./node_modules/rxjs-compat/_esm5/add/operator/takeWhile.js");
+
+
+
+
+
+var GameplayComponent = /** @class */ (function () {
+    function GameplayComponent(gameServ) {
+        this.gameServ = gameServ;
+        this.status = {};
+        this.alive = true;
+    }
+    GameplayComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        rxjs_observable_IntervalObservable__WEBPACK_IMPORTED_MODULE_3__["IntervalObservable"].create(2500).takeWhile(function () { return _this.alive; }).subscribe(function () {
+            _this.gameServ.whosTurnIsItAnyways().subscribe(function (data) {
+                console.log(_this.status);
+                _this.status.pot = data.pot;
+                _this.status.balance = data.balance;
+                _this.status.minimum = data.minimum;
+            });
+        });
+    };
+    GameplayComponent.prototype.ngOnDestroy = function () {
+        this.alive = false;
+    };
+    GameplayComponent.prototype.checking = function () {
+        console.log("inside the checking method of gameplay.component");
+        this.action = "check";
+        this.gameServ.checking(this.action).subscribe();
+    };
+    GameplayComponent.prototype.betting = function () {
+        console.log("inside the betting method of gameplay.component");
+        this.action = "bet";
+        this.gameServ.betting(this.betAmount, this.action).subscribe();
+        this.betAmount = null;
+    };
+    GameplayComponent.prototype.calling = function () {
+        console.log("inside the calling method of gameplay.component");
+        this.action = "call";
+        this.gameServ.calling(this.action).subscribe();
+    };
+    GameplayComponent.prototype.raising = function () {
+        console.log("inside the raising method of gameplay.component");
+        this.action = "raise";
+        this.gameServ.raising(this.raiseAmount, this.action).subscribe();
+        this.raiseAmount = null;
+    };
+    GameplayComponent.prototype.folding = function () {
+        console.log("inside the folding method of gameplay.component");
+        this.action = "fold";
+        this.gameServ.folding(this.action).subscribe();
+    };
+    GameplayComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-gameplay',
+            template: __webpack_require__(/*! ./gameplay.component.html */ "./src/app/components/gameplay/gameplay.component.html"),
+            styles: [__webpack_require__(/*! ./gameplay.component.css */ "./src/app/components/gameplay/gameplay.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_game_service__WEBPACK_IMPORTED_MODULE_2__["GameService"]])
+    ], GameplayComponent);
+    return GameplayComponent;
 }());
 
 
@@ -241,7 +333,7 @@ module.exports = ".container {\r\n    background-color: darkgreen;\r\n    color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/table\">Play!</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/rules\">Game Rules</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/options\">Options</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/table\">Play!</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" routerLink=\"/rules\">Game Rules</button><br>\r\n        <br>\r\n        <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -374,118 +466,6 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/options-menu/options-menu.component.css":
-/*!********************************************************************!*\
-  !*** ./src/app/components/options-menu/options-menu.component.css ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvb3B0aW9ucy1tZW51L29wdGlvbnMtbWVudS5jb21wb25lbnQuY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/components/options-menu/options-menu.component.html":
-/*!*********************************************************************!*\
-  !*** ./src/app/components/options-menu/options-menu.component.html ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  options-menu works!\r\n</p>\r\n<!-- go back one step in history (look how they did it in ToH)-->\r\n<button routerLink=\"/home\">Back</button>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/components/options-menu/options-menu.component.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/options-menu/options-menu.component.ts ***!
-  \*******************************************************************/
-/*! exports provided: OptionsMenuComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionsMenuComponent", function() { return OptionsMenuComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var OptionsMenuComponent = /** @class */ (function () {
-    function OptionsMenuComponent() {
-    }
-    OptionsMenuComponent.prototype.ngOnInit = function () {
-    };
-    OptionsMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-options-menu',
-            template: __webpack_require__(/*! ./options-menu.component.html */ "./src/app/components/options-menu/options-menu.component.html"),
-            styles: [__webpack_require__(/*! ./options-menu.component.css */ "./src/app/components/options-menu/options-menu.component.css")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], OptionsMenuComponent);
-    return OptionsMenuComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/components/player-hand/player-hand.component.css":
-/*!******************************************************************!*\
-  !*** ./src/app/components/player-hand/player-hand.component.css ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGxheWVyLWhhbmQvcGxheWVyLWhhbmQuY29tcG9uZW50LmNzcyJ9 */"
-
-/***/ }),
-
-/***/ "./src/app/components/player-hand/player-hand.component.html":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/player-hand/player-hand.component.html ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  player-hand works!\r\n</p>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/components/player-hand/player-hand.component.ts":
-/*!*****************************************************************!*\
-  !*** ./src/app/components/player-hand/player-hand.component.ts ***!
-  \*****************************************************************/
-/*! exports provided: PlayerHandComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayerHandComponent", function() { return PlayerHandComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var PlayerHandComponent = /** @class */ (function () {
-    function PlayerHandComponent() {
-    }
-    PlayerHandComponent.prototype.ngOnInit = function () {
-    };
-    PlayerHandComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-player-hand',
-            template: __webpack_require__(/*! ./player-hand.component.html */ "./src/app/components/player-hand/player-hand.component.html"),
-            styles: [__webpack_require__(/*! ./player-hand.component.css */ "./src/app/components/player-hand/player-hand.component.css")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], PlayerHandComponent);
-    return PlayerHandComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/components/register/register.component.css":
 /*!************************************************************!*\
   !*** ./src/app/components/register/register.component.css ***!
@@ -566,7 +546,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcnVsZXMvcnVsZXMuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = ".container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n    justify-content: center;\r\n}\r\n\r\nol {\r\n    text-align: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ydWxlcy9ydWxlcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMkJBQTJCO0lBQzNCLGlCQUFpQjtJQUNqQixhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksa0JBQWtCO0FBQ3RCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9ydWxlcy9ydWxlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrZ3JlZW47XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIHBhZGRpbmc6IDUwcHg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufVxyXG5cclxub2wge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -577,7 +557,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  rules works!\r\n</p>\r\n<!-- go back one step in history (look how they did it in ToH)-->\r\n<button routerLink=\"/home\">Back</button>"
+module.exports = "<div class=\"container rounded\">\r\n  <h2>How to Play</h2>\r\n  <div>\r\n    <h4>Winning Hands (ranked by priority):</h4>\r\n    <dl>\r\n      <dt><b>Royal Flush</b> - five cards of the same suit, ordered ace through ten.</dt>\r\n      <dt><b>Straight Flush</b> - five cards of the same suit, ordered consecutively.</dt>\r\n      <dt><b>Four of a Kind</b> - four cards of the same value.</dt>\r\n      <dt><b>Full House</b> - three cards of the same value and two cards of the same value.</dt>\r\n      <dt><b>Flush</b> - any five cards of the same suit.</dt>\r\n      <dt><b>Straight</b> - any five cards ordered consecutively.</dt>\r\n      <dt><b>Three of a Kind</b> - three cards of the same value.</dt>\r\n      <dt><b>Two Pair</b> - two cards of the same value and two more cards of the same value.</dt>\r\n      <dt><b>One Pair</b> - two cards of the same value.</dt>\r\n      <dt><b>High Card</b> - highest value card, if no other hand can be formed.</dt>\r\n    </dl>\r\n  </div>\r\n\r\n  <div>\r\n    <h4>Rules of Play:</h4>\r\n    <dl>\r\n      <dt><b>Pre-flop</b></dt>\r\n        <dd>In this initial betting stage, players can either call to match the table minimum bet, raise the current bet, or fold. Play continues in a clockwise cycle until the last bet is called.</dd>\r\n      <dt><b>The Flop</b></dt>\r\n        <dd>Following the final call of the pre-flop stage, the first three table cards are drawn and placed face up. Play continues where the previous stage left off. In this stage, however, players have the option to place a bet, call, raise, or fold. Additionally, Players can now check, which simply passes play on to the next player, if no bet was placed by the previous player. This stage ends when either the last bet/raise is called, or if all players check in a given cycle.</dd>\r\n      <dt><b>The Turn</b></dt>\r\n        <dd>After the flop stage, a fourth card is added to the table face up. Betting for this stage follows the same rules as the flop stage.</dd>\r\n      <dt><b>The River</b></dt>\r\n        <dd>Following the turn stage, the fifth table card is laid down, and players go through one final round of betting following the same rules as the previous stages. Once all betting is complete, the remaining players reveal their hands to determine a winner.</dd>\r\n      <dt><b>Winning the Hand</b></dt>\r\n        <dd>The winning hand is determined once all five table cards have been laid down. Players construct their best possible five-card hand from the seven available cards (two hand cards and five table cards). The hand with the highest overall priority wins.</dd>\r\n    </dl>\r\n  </div>\r\n  <br>\r\n  <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n</div>"
 
 /***/ }),
 
@@ -600,6 +580,9 @@ var RulesComponent = /** @class */ (function () {
     }
     RulesComponent.prototype.ngOnInit = function () {
     };
+    RulesComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     RulesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-rules',
@@ -615,62 +598,6 @@ var RulesComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/table-cards/table-cards.component.css":
-/*!******************************************************************!*\
-  !*** ./src/app/components/table-cards/table-cards.component.css ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGFibGUtY2FyZHMvdGFibGUtY2FyZHMuY29tcG9uZW50LmNzcyJ9 */"
-
-/***/ }),
-
-/***/ "./src/app/components/table-cards/table-cards.component.html":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/table-cards/table-cards.component.html ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  table-cards works!\r\n</p>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/components/table-cards/table-cards.component.ts":
-/*!*****************************************************************!*\
-  !*** ./src/app/components/table-cards/table-cards.component.ts ***!
-  \*****************************************************************/
-/*! exports provided: TableCardsComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableCardsComponent", function() { return TableCardsComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var TableCardsComponent = /** @class */ (function () {
-    function TableCardsComponent() {
-    }
-    TableCardsComponent.prototype.ngOnInit = function () {
-    };
-    TableCardsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-table-cards',
-            template: __webpack_require__(/*! ./table-cards.component.html */ "./src/app/components/table-cards/table-cards.component.html"),
-            styles: [__webpack_require__(/*! ./table-cards.component.css */ "./src/app/components/table-cards/table-cards.component.css")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], TableCardsComponent);
-    return TableCardsComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/components/table-container/table-container.component.css":
 /*!**************************************************************************!*\
   !*** ./src/app/components/table-container/table-container.component.css ***!
@@ -678,7 +605,7 @@ var TableCardsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n#tableCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n.container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n}\r\n\r\n#tableRegion, #handRegion {\r\n    border: 3px solid whitesmoke;\r\n    margin: auto;\r\n}\r\n\r\nh3 {\r\n    text-align: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90YWJsZS1jb250YWluZXIvdGFibGUtY29udGFpbmVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksMkJBQTJCO0lBQzNCLGlCQUFpQjtJQUNqQixhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksNEJBQTRCO0lBQzVCLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxrQkFBa0I7QUFDdEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RhYmxlLWNvbnRhaW5lci90YWJsZS1jb250YWluZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiNoYW5kQ2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDNweDtcclxufVxyXG5cclxuI3RhYmxlQ2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDNweDtcclxufVxyXG5cclxuLmNvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrZ3JlZW47XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIHBhZGRpbmc6IDUwcHg7XHJcbn1cclxuXHJcbiN0YWJsZVJlZ2lvbiwgI2hhbmRSZWdpb24ge1xyXG4gICAgYm9yZGVyOiAzcHggc29saWQgd2hpdGVzbW9rZTtcclxuICAgIG1hcmdpbjogYXV0bztcclxufVxyXG5cclxuaDMge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59Il19 */"
+module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n#tableCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n#tableCell {\r\n    width: 20%;\r\n}\r\n\r\n#handCell {\r\n    width: 50%;\r\n}\r\n\r\n#chart {\r\n    padding: 10px;\r\n}\r\n\r\n.container {\r\n    background-color: darkgreen;\r\n    color: whitesmoke;\r\n    padding: 50px;\r\n}\r\n\r\n#tableRegion, #handRegion {\r\n    border: 3px solid whitesmoke;\r\n    margin: auto;\r\n}\r\n\r\nh3 {\r\n    text-align: center;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90YWJsZS1jb250YWluZXIvdGFibGUtY29udGFpbmVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksVUFBVTtBQUNkOztBQUVBO0lBQ0ksVUFBVTtBQUNkOztBQUVBO0lBQ0ksYUFBYTtBQUNqQjs7QUFFQTtJQUNJLDJCQUEyQjtJQUMzQixpQkFBaUI7SUFDakIsYUFBYTtBQUNqQjs7QUFFQTtJQUNJLDRCQUE0QjtJQUM1QixZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksa0JBQWtCO0FBQ3RCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy90YWJsZS1jb250YWluZXIvdGFibGUtY29udGFpbmVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjaGFuZENhcmQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBwYWRkaW5nOiAzcHg7XHJcbn1cclxuXHJcbiN0YWJsZUNhcmQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBwYWRkaW5nOiAzcHg7XHJcbn1cclxuXHJcbiN0YWJsZUNlbGwge1xyXG4gICAgd2lkdGg6IDIwJTtcclxufVxyXG5cclxuI2hhbmRDZWxsIHtcclxuICAgIHdpZHRoOiA1MCU7XHJcbn1cclxuXHJcbiNjaGFydCB7XHJcbiAgICBwYWRkaW5nOiAxMHB4O1xyXG59XHJcblxyXG4uY29udGFpbmVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtncmVlbjtcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gICAgcGFkZGluZzogNTBweDtcclxufVxyXG5cclxuI3RhYmxlUmVnaW9uLCAjaGFuZFJlZ2lvbiB7XHJcbiAgICBib3JkZXI6IDNweCBzb2xpZCB3aGl0ZXNtb2tlO1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG59XHJcblxyXG5oMyB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -689,7 +616,7 @@ module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n    \r\n      <h3>Table Cards</h3>\r\n      <div class=\"col-lg-6 col-lg-offset-3 rounded\" id=\"tableRegion\">\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getHand()\">Get Hand</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n      <h3>Player Hand</h3>\r\n      <div class=\"col-lg-4 col-lg-offset-4 rounded\" id=\"handRegion\">\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of handCards\">\r\n              <img src={{card}} id=\"handCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"chart.data\">\r\n  <google-chart\r\n    [title]=\"chart.title\"\r\n    [type]=\"chart.type\"\r\n    [data]=\"chart.data\">\r\n</google-chart>\r\n</div>"
+module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player 1 Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n    </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -741,6 +668,7 @@ var TableContainerComponent = /** @class */ (function () {
             console.log(data);
             _this.lobbyView = false;
             _this.gameView = true;
+            _this.getHand();
         });
     };
     TableContainerComponent.prototype.joinGame = function () {
@@ -748,13 +676,15 @@ var TableContainerComponent = /** @class */ (function () {
         console.log("inside joinGame method in table-container.component");
         this.settingServ.joinGame(this.game.sesh).subscribe(function (data) {
             console.log(data);
-            _this.lobbyView = false;
-            _this.gameView = true;
-            for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
-                _this.handCards[_this.i] = data.hand[_this.i].image;
-            }
-            for (_this.i = 0; _this.i < data.table.length; _this.i++) {
-                _this.tableCards[_this.i] = data.table[_this.i].image;
+            if (data !== {}) {
+                _this.lobbyView = false;
+                _this.gameView = true;
+                for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
+                    _this.handCards[_this.i] = data.hand[_this.i].image;
+                }
+                for (_this.i = 0; _this.i < data.table.length; _this.i++) {
+                    _this.tableCards[_this.i] = data.table[_this.i].image;
+                }
             }
         });
     };
@@ -929,6 +859,30 @@ var GameService = /** @class */ (function () {
     GameService.prototype.cheat = function () {
         console.log("inside the cheat method of game.service");
         return this.http.get("/TexasCheatum/servlet/cheat");
+    };
+    GameService.prototype.whosTurnIsItAnyways = function () {
+        console.log("inside whosTurnIsItAnyways method of game.service");
+        return this.http.get("/TexasCheatum/servlet/status");
+    };
+    GameService.prototype.checking = function (action) {
+        console.log("inside checking method of game.service");
+        return this.http.post("/TexasCheatum/servlet/action", { action: action });
+    };
+    GameService.prototype.betting = function (amount, action) {
+        console.log("inside betting method of game.service");
+        return this.http.post("/TexasCheatum/servlet/action", { amount: amount, action: action });
+    };
+    GameService.prototype.calling = function (action) {
+        console.log("inside calling method of game.service");
+        return this.http.post("/TexasCheatum/servlet/action", { action: action });
+    };
+    GameService.prototype.raising = function (amount, action) {
+        console.log("inside raising method of game.service");
+        return this.http.post("/TexasCheatum/servlet/action", { amount: amount, action: action });
+    };
+    GameService.prototype.folding = function (action) {
+        console.log("inside folding method of game.service");
+        return this.http.post("/TexasCheatum/servlet/action", { action: action });
     };
     GameService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

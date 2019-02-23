@@ -101,10 +101,8 @@ public class UserDaoImplementation implements UserDao{
 		conn = pool.getConnection();
 		
 		try {
-			PreparedStatement cs = conn.prepareStatement("select username from users,games where"
-					+ "current_game=? and game_id=? and current_turn=turn_number");	
+			PreparedStatement cs = conn.prepareStatement("select username from users,games where current_game=? and game_id=current_game and current_turn=turn_number");	
 			cs.setString(1, gameID);
-			cs.setString(2, gameID);
 			ResultSet username = cs.executeQuery();
 			username.next();
 			
