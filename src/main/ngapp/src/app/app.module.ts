@@ -11,8 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RulesComponent } from './components/rules/rules.component';
 import { RegisterComponent } from './components/register/register.component';
-import { TableCardsComponent } from './components/table-cards/table-cards.component';
-import { PlayerHandComponent } from './components/player-hand/player-hand.component';
+import { GameplayComponent } from './components/gameplay/gameplay.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { PlayerHandComponent } from './components/player-hand/player-hand.compon
     HomeComponent,
     RulesComponent,
     RegisterComponent,
-    TableCardsComponent,
-    PlayerHandComponent
+    GameplayComponent
   ],
   imports: [
     BrowserModule,

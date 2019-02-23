@@ -25,7 +25,7 @@
       <div class="col-lg-6 offset-lg-3 rounded" id="tableRegion">
         <table>
           <tr>
-            <td *ngFor="let card of tableCards" class="col-lg-1">
+            <td *ngFor="let card of tableCards" id="tableCell">
               <img src={{card}} id="tableCard">
             </td>
           </tr>
@@ -43,12 +43,17 @@
     <br>
   
     <div>
+      <app-gameplay></app-gameplay>
+    </div>
+
+    <br>
+    <div class="row">
       <div>
         <h3>Player Hand</h3>
-        <div class="col-lg-4 offset-lg-4 rounded" id="handRegion">
+        <div class="col-lg-4 offset-lg-2 rounded" id="handRegion">
           <table>
             <tr>
-              <td *ngFor="let card of handCards" class="col-lg-1">
+              <td *ngFor="let card of handCards" id="handCell">
                 <img src={{card}} id="handCard">
               </td>
             </tr>
@@ -56,7 +61,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 offset-lg-4">
+      <div class="col-lg-4 offset-lg-2">
         <div *ngIf="chart.data">
           <google-chart
             [title]="chart.title"
@@ -84,4 +89,3 @@
     </div>
   </div>
 </div>
-

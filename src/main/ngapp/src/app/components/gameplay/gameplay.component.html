@@ -1,0 +1,27 @@
+<h4>Table Minimum: 200</h4>
+<br>
+<div class="row">
+  <div class="col-lg-4 offset-lg-1">
+    <div class="col-lg-2">
+      <button class="btn btn-outline-light">Check</button>
+    </div>
+    <div class="col-lg-2">
+      <input type="number" name="betAmount" [(ngModel)]="money" #betAmount="ngModel">
+      <button class="btn btn-outline-light">Bet</button>
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <input type="number" name="callAmount" [(ngModel)]="money" #callAmount="ngModel">
+    <button class="btn btn-outline-light">Call</button>
+  </div>
+
+  <div class="col-lg-2">
+    <input type="number" name="raiseAmount" [(ngModel)]="money" #raiseAmount="ngModel">
+    <button class="btn btn-outline-light">Raise</button>
+  </div>
+
+  <div class="col-lg-2">
+    <button class="btn btn-outline-light">Fold</button>
+  </div>
+</div>
