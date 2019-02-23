@@ -32,4 +32,34 @@ export class GameService {
     console.log("inside the cheat method of game.service");
     return this.http.get<any>("/TexasCheatum/servlet/cheat");
   }
+
+  whosTurnIsItAnyways() {
+    console.log("inside whosTurnIsItAnyways method of game.service");
+    return this.http.get<any>("/TexasCheatum/servlet/status")
+  }
+
+  checking(action: string) {
+    console.log("inside checking method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {action: action})
+  }
+
+  betting(amount: number, action: string) {
+    console.log("inside betting method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  calling(amount: number, action: string) {
+    console.log("inside calling method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  raising(amount: number, action: string) {
+    console.log("inside raising method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+  }
+
+  folding(action: string) {
+    console.log("inside folding method of game.service");
+    return this.http.post<any>("/TexasCheatum/servlet/action", {action: action})
+  }
 }

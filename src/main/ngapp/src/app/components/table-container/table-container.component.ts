@@ -41,6 +41,8 @@ export class TableContainerComponent implements OnInit {
           this.gameView = true;
       }
     );
+
+    this.getHand();
   }
 
   joinGame() {
