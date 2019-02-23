@@ -8,6 +8,11 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
+  startGame() {
+    console.log("inside startGame method of game.service");
+    return this.http.get<any>("/TexasCheatum/servlet/startGame");
+  }
+
   getHand() {
     console.log("inside the getHand method of game.service");
     return this.http.get<any>("/TexasCheatum/servlet/getHand");
