@@ -169,6 +169,29 @@ public class UserDaoImplementation implements UserDao{
 	}
 	
 	@Override
+	public boolean assignTurnOrder(int turnNumber, String username) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try {
+			PreparedStatement cs = conn.prepareStatement("update users set turn_number=? where username=?");	
+			cs.setInt(1, turnNumber);
+			cs.setString(2, username);
+			int output = cs.executeUpdate();
+			
+
+			return output > 1;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
+	return false;
+	}
+	
+	@Override
 	public boolean deleteUser(String username) {
 		Connection conn = null;
 		conn = pool.getConnection();

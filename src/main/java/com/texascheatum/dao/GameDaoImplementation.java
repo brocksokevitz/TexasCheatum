@@ -106,6 +106,29 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
+	public boolean startGame(String gameId) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try {
+			CallableStatement cs = conn.prepareCall("{call start_game(?,?)}");	
+			cs.setString(1, gameId);
+			cs.registerOutParameter(2, Types.VARCHAR);
+
+			cs.execute();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
+	return false;
+	}
+
+	@Override
 	public double makeBet(String gameId, String userId, double amount) {
 		Connection conn = null;
 		conn = pool.getConnection();

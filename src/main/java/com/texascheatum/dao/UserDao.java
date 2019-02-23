@@ -12,6 +12,7 @@ public interface UserDao {
 	public String getUsernameForTurn(String gameID);
 	public List<User> getUsers(String gameId);
 	public boolean promoteUser(String username);
+	public boolean assignTurnOrder(int turnNumber, String username);
 	public boolean deleteUser(String username);
 	public boolean wonGame(String username);
 	public boolean lostGame(String[] username);

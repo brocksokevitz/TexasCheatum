@@ -2,6 +2,9 @@ package com.texascheatum.services;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletException;
@@ -40,6 +43,25 @@ public class DeckService {
 	private static String getNewGameID() throws IOException {
 		JsonNode apiResp = makeHttpRequest("new/shuffle/?deck_count=1");
 		return apiResp.get("deck_id").asText();
+	}
+	
+	public static void beginGame(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		assignTurns(request, response);
+		GameDaoImplementation.getGameDao().startGame(((User) request.getSession().getAttribute("user")).getCurrentGame());
+	}
+	private static void assignTurns(HttpServletRequest request, HttpServletResponse response) {
+		List<User> users = UserDaoImplementation.getUserDao().getUsers(
+				((User) request.getSession().getAttribute("user")).getCurrentGame());
+		List<Integer> turnNumbers = new ArrayList<>();
+		for (int i = 0; i < users.size(); i++)
+			turnNumbers.add(i);
+		Random rando = new Random();
+		for (User user : users) {
+			int turnNumber = turnNumbers.get(rando.nextInt(turnNumbers.size()));
+			turnNumbers.remove(Integer.valueOf(turnNumber));
+			UserDaoImplementation.getUserDao().assignTurnOrder(turnNumber, user.getUsername());
+		}
 	}
 	
 	public static void joinGame(HttpServletRequest request, HttpServletResponse response)

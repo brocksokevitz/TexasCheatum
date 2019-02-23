@@ -36,6 +36,9 @@ public class MasterDispatcher {
 		case "start":
 			DeckService.startGame(request, response);
 			break;
+		case "startGame":
+			DeckService.beginGame(request, response);
+			break;
 		case "join":
 			DeckService.joinGame(request, response);
 			break;
