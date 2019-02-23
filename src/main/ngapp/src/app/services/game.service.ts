@@ -48,9 +48,9 @@ export class GameService {
     return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
   }
 
-  calling(amount: number, action: string) {
+  calling(action: string) {
     console.log("inside calling method of game.service");
-    return this.http.post<any>("/TexasCheatum/servlet/action", {amount: amount, action: action})
+    return this.http.post<any>("/TexasCheatum/servlet/action", {action: action})
   }
 
   raising(amount: number, action: string) {
