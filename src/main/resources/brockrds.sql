@@ -39,11 +39,12 @@ create table games
     pot Decimal(15,2) default(0) not null,
     current_target Decimal(15,2) default(100) not null,
     current_turn number(1) not null,
+    round_started number(1) not null,
     --
     constraint game_id_pk primary key(game_id)
 ); -- for tables, you put ;
 
-insert into games values( 0,'closed',0,0,0);
+insert into games values( 0,'closed',0,0,0,0);
 
 -- DDL --
 create table users
@@ -116,7 +117,7 @@ end;
 create or replace procedure create_game(game_id varchar, host_username varchar)
 as
 begin
-insert into games values(game_id, 'pending', 0, 100, 0);
+insert into games values(game_id, 'pending', 0, 100, 0, 0);
 update users set current_game=game_id where username=host_username;
 commit;-- saves changes
 end;
@@ -125,6 +126,7 @@ create or replace procedure start_game(game in varchar, current_status out varch
 as
 begin
 current_status := change_status(game);
+update games set round_started=1 where game_id=game;
 commit;-- saves changes
 end;
 /
@@ -147,20 +149,29 @@ end if;
 commit;-- saves changes
 end;
 /
-create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal, out_difference out Decimal)
+create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal, in_action varchar, out_difference out Decimal)
 as
 difference Decimal(15,2);
 number_players number(1);
 players_at_min number(1);
+round_begun number(1);
 temp_varchar varchar(15);
 begin
-select count(username) into difference from users,games where game_id=game and username=in_user and current_turn=turn_number;
-if difference>0 then
-    if in_target=0 then
+select count(username) into number_players from users,games where game_id=game and username=in_user and current_turn=turn_number;
+select status into temp_varchar from games where game_id=game;
+if number_players>0 and temp_varchar!='pending' then
+    select round_started into round_begun from games where game_id=game;
+    difference := 0;
+    if in_action='call' and round_begun=1 then
         select current_target-round_bet into difference from users,games where username=in_user and game_id=game;
-    else
+    elsif in_action='bet' and round_begun=0 then
+        select in_target-round_bet into difference from users where username=in_user;
+        update games set current_target=in_target,round_started=1 where game_id=game;
+    elsif in_action='raise' and round_begun=1 then
         select in_target-round_bet into difference from users where username=in_user;
         update games set current_target=in_target where game_id=game;
+    elsif in_action='fold' then
+        update users set current_game=0 where user_id=in_user;
     end if;
     update games set pot=pot+difference where game_id=game;
     update users set round_bet=round_bet+difference,balance=balance-difference where username=in_user;
@@ -169,12 +180,12 @@ if difference>0 then
     select count(username) into players_at_min from users,(select current_target from games where game_id=game) where current_game=game and round_bet=current_target;
     
     out_difference := difference;
-    if number_players=players_at_min then
-        update games set current_turn=0,current_target=100 where game_id=game;
+    if number_players=players_at_min and round_begun=1 then
+        update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
         update users set round_bet=0 where current_game=game;
         temp_varchar := change_status(game);
         if out_difference=0 then
-            out_difference := 1;
+            out_difference := 0.001;
         end if;
         out_difference := out_difference*-1;
     else

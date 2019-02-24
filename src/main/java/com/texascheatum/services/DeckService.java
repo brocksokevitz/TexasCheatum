@@ -98,7 +98,8 @@ public class DeckService {
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"turn\" : ");
-		response.getWriter().write("\"" + UserDaoImplementation.getUserDao().getUsernameForTurn(game.getGameID()) + "\"");
+		response.getWriter().write("\"" +  UserDaoImplementation.getUserDao().getUsernameForTurn(
+				((User) request.getSession().getAttribute("user")).getCurrentGame()) + "\"");
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"balance\" : ");
@@ -157,32 +158,15 @@ public class DeckService {
 		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
 		double change = 0.0;
 		log.info(actionJson.get("action").asText());
-		switch (actionJson.get("action").asText()) {
-		case "bet":
-		case "raise":
-			change = GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					actionJson.get("amount").asDouble());
-			((User) request.getSession().getAttribute("user")).setBalance(
-					((User) request.getSession().getAttribute("user")).getBalance()
-					- Math.abs(change));
-			break;
-		case "call":
-		case "check":
-			change = GameDaoImplementation.getGameDao().makeBet(
-					((User) request.getSession().getAttribute("user")).getCurrentGame(),
-					((User) request.getSession().getAttribute("user")).getUsername(),
-					0.0);
-			if (actionJson.get("action").asText().equals("call"))
-				((User) request.getSession().getAttribute("user")).setBalance(
-						((User) request.getSession().getAttribute("user")).getBalance()
-						- Math.abs(change));
-			break;
-		case "fold":
-			break;
-		}
+		change = GameDaoImplementation.getGameDao().makeBet(
+				((User) request.getSession().getAttribute("user")).getCurrentGame(),
+				((User) request.getSession().getAttribute("user")).getUsername(),
+				actionJson.has("amount") ? actionJson.get("amount").asDouble() : 0.0,
+						actionJson.get("action").asText());
 		log.info(change);
+		((User) request.getSession().getAttribute("user")).setBalance(
+				((User) request.getSession().getAttribute("user")).getBalance()
+				- (Math.abs(change) > 0.001 ? Math.abs(change) : 0));
 		if (change < 0) {
 			if (getTableCardNum(request) == 0)
 				flop(request, response);
