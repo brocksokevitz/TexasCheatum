@@ -159,6 +159,9 @@ public class DeckService {
 					((User) request.getSession().getAttribute("user")).getCurrentGame(),
 					((User) request.getSession().getAttribute("user")).getUsername(),
 					actionJson.get("amount").asDouble());
+			((User) request.getSession().getAttribute("user")).setBalance(
+					((User) request.getSession().getAttribute("user")).getBalance()
+					- Math.abs(change));
 			break;
 		case "call":
 		case "check":
@@ -166,13 +169,14 @@ public class DeckService {
 					((User) request.getSession().getAttribute("user")).getCurrentGame(),
 					((User) request.getSession().getAttribute("user")).getUsername(),
 					0.0);
+			if (actionJson.get("action").asText().equals("call"))
+				((User) request.getSession().getAttribute("user")).setBalance(
+						((User) request.getSession().getAttribute("user")).getBalance()
+						- Math.abs(change));
 			break;
 		case "fold":
 			break;
 		}
-		((User) request.getSession().getAttribute("user")).setBalance(
-				((User) request.getSession().getAttribute("user")).getBalance()
-				- Math.abs(change));
 		if (change < 0) {
 			if (getTableCardNum(request) == 0)
 				flop(request, response);
