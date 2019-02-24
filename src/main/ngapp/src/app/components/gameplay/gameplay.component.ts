@@ -15,6 +15,7 @@ export class GameplayComponent implements OnInit {
   private status: any = {};
   private action: string;
   private tableCards: any = [];
+  private notFolded: boolean = true;
 
   constructor(
     private gameServ: GameService
@@ -32,6 +33,7 @@ export class GameplayComponent implements OnInit {
               this.status.minimum = data.minimum;
               this.status.turn = data.turn;
               this.status.game = data.game;
+              this.status.playerBet = data.playerBet;
               this.status.hand = data.hand;
               this.status.table = data.table;
               this.tableCards = this.status.table;
@@ -75,5 +77,6 @@ export class GameplayComponent implements OnInit {
     console.log("inside the folding method of gameplay.component");
     this.action = "fold";
     this.gameServ.folding(this.action).subscribe();
+    this.notFolded = false;
   }
 }

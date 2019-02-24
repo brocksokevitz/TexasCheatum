@@ -16,12 +16,12 @@
   <h4>It's currently {{status.turn}}'s turn!</h4>
   <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
 
-  <div class="col-lg-10 offset-lg-1">
+  <div class="col-lg-10 offset-lg-1" *ngIf="notFolded">
     <div class="row">
       <div *ngIf="tableCards.length > 0" class="col-lg-5">
         <div class="row">
           <div class="col-lg-6">
-            <form class="form-group" (ngSubmit)="checking()" method="POST">
+            <form class="form-group" (ngSubmit)="checking()" method="POST" *ngIf="status.playerBet >= status.minimum">
               <button class="btn btn-outline-light">Check</button>
             </form>
           </div>
@@ -55,6 +55,13 @@
         </div>
     </div>
   </div>
+
+  <div *ngIf="!notFolded">
+    <br>
+    <h4 id="youFold">You folded! Stay and watch the rest of the game, or exit through the pause menu.</h4>
+  </div>
+  
+
 </div>
 <br>
 <h4>Player Balance: {{status.balance}}</h4>
