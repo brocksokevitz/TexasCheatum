@@ -149,7 +149,7 @@ end if;
 commit;-- saves changes
 end;
 /
-create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal, in_action varchar, out_difference out Decimal)
+create or replace procedure make_bet(game in varchar, in_user in varchar, in_target in Decimal, in_action varchar, out_difference out number)
 as
 difference Decimal(15,2);
 number_players number(1);
@@ -179,16 +179,23 @@ if number_players>0 and temp_varchar!='pending' and temp_varchar!='closed' then
     select count(username) into number_players from users where current_game=game;
     select count(username) into players_at_min from users,(select current_target from games where game_id=game) where current_game=game and round_bet=current_target;
     
+    dbms_output.put_line(number_players);
+    dbms_output.put_line(players_at_min);
     out_difference := difference;
     if number_players=players_at_min and round_begun=1 then
         update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
         update users set round_bet=0 where current_game=game;
         if change_status(game)='closed' then
+            dbms_output.put_line('closed');
             out_difference := out_difference+0.002;
+            dbms_output.put_line(out_difference);
         else
+            dbms_output.put_line('not closed');
             out_difference := out_difference+0.001;
+            dbms_output.put_line(out_difference);
         end if;
         out_difference := out_difference*-1;
+        dbms_output.put_line(out_difference);
     else
         number_players := change_turn(game);
         update games set current_turn=number_players where game_id=game;
@@ -213,7 +220,6 @@ loop
         next_turn := 0;
     end if;
     select count(username) into have_next from users where current_game=game and turn_number=next_turn;
-    dbms_output.put_line(next_turn);
 end loop;
 commit;-- saves changes
 return next_turn;
