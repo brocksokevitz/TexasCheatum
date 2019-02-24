@@ -6,7 +6,7 @@
         <br>
         <br>
         <form class="form-group" (ngSubmit)="joinGame()" method="POST">
-          <label>Enter an existing game session id:</label><br>
+          <label>Enter a GameID or Username of the game creator to join an existing game:</label><br>
           <input type="text" name="sesh" [(ngModel)]="game.sesh" #sesh="ngModel" required>
           <br>
           <button class="btn btn-outline-light">Join Game</button>
@@ -75,9 +75,9 @@
       </div>
     </div>
     <br>
-    <p>Click "Start Game" to begin once all players have joined the session:</p>
+    <!-- <p>Click "Start Game" to begin once all players have joined the session:</p>
     <button class="btn btn-outline-light" (click)="startGame()">Start Game</button>
-    <br>
+    <br> -->
     <button class="btn btn-outline-light" (click)="cheat()">Cheat</button>
     <br>
     <button class="btn btn-outline-light" (click)="pause()">Pause</button>

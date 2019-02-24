@@ -101,9 +101,9 @@ public class UserDaoImplementation implements UserDao{
 				+ " and game_id=current_game and current_turn=turn_number");) {
 			cs.setString(1, gameID);
 			ResultSet username = cs.executeQuery();
-			username.next();
-			
-			return username.getString(1);
+			if (username.next())
+				return username.getString(1);
+			return "";
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

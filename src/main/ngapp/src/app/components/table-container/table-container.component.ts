@@ -73,10 +73,10 @@ export class TableContainerComponent implements OnInit {
     );
   }
 
-  startGame() {
-    console.log("inside startGame method in thable-container.component");
-    this.gameService.startGame().subscribe();
-  }
+  // startGame() {
+  //   console.log("inside startGame method in thable-container.component");
+  //   this.gameService.startGame().subscribe();
+  // }
 
   getHand() {
     console.log("inside getHand method in table-container.component");
