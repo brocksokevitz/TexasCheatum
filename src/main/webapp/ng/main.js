@@ -218,7 +218,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZ2FtZXBsYXkvZ2FtZXBsYXkuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "#tableCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\r\n#tableCell {\r\n    width: 20%;\r\n}\r\n\r\n#tableRegion {\r\n    border: 3px solid whitesmoke;\r\n    margin: auto;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9nYW1lcGxheS9nYW1lcGxheS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxVQUFVO0FBQ2Q7O0FBRUE7SUFDSSw0QkFBNEI7SUFDNUIsWUFBWTtBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZ2FtZXBsYXkvZ2FtZXBsYXkuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0YWJsZUNhcmQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBwYWRkaW5nOiAzcHg7XHJcbn1cclxuXHJcbiN0YWJsZUNlbGwge1xyXG4gICAgd2lkdGg6IDIwJTtcclxufVxyXG5cclxuI3RhYmxlUmVnaW9uIHtcclxuICAgIGJvcmRlcjogM3B4IHNvbGlkIHdoaXRlc21va2U7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -229,7 +229,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>\r\n<div class=\"container justify-content-center\">\r\n  <div class=\"row\">\r\n    <div *ngIf=\"postFlop\" class=\"col-lg-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"checking()\" method=\"POST\">\r\n            <button class=\"btn btn-outline-light\">Check</button>\r\n          </form>\r\n        </div>\r\n\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"betting()\" method=\"POST\">\r\n            <input type=\"number\" name=\"bet\" [(ngModel)]=\"betAmount\" #bet=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Bet Amount\" required><br>\r\n            <button class=\"btn btn-outline-light\">Bet</button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"calling()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Call</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"raising()\" method=\"POST\">\r\n          <input type=\"number\" name=\"raise\" [(ngModel)]=\"raiseAmount\" #raise=\"ngModel\" min=\"500\" step=\"25\" placeholder=\"Raise Amount\" required><br>\r\n          <button class=\"btn btn-outline-light\">Raise</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-2\">\r\n        <form class=\"form-group\" (ngSubmit)=\"folding()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Fold</button>\r\n        </form>\r\n      </div>\r\n    \r\n  </div>\r\n</div>\r\n<br>\r\n<h4>Player Balance: {{status.balance}}</h4>"
+module.exports = "<div class=\"container\">\r\n  <h4>Current Game Session: {{status.game}}</h4>\r\n  <br>\r\n  <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n    <h3>Table Cards</h3>\r\n    <table>\r\n      <tr>\r\n        <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n          <img src={{card.image}} id=\"tableCard\">\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <br>\r\n\r\n  <h4>It's currently {{status.turn}}'s turn!</h4>\r\n  <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>\r\n\r\n  <div class=\"row\">\r\n    <div *ngIf=\"postFlop\" class=\"col-lg-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"checking()\" method=\"POST\">\r\n            <button class=\"btn btn-outline-light\">Check</button>\r\n          </form>\r\n        </div>\r\n\r\n        <div class=\"col-lg-6\">\r\n          <form class=\"form-group\" (ngSubmit)=\"betting()\" method=\"POST\">\r\n            <input type=\"number\" name=\"bet\" [(ngModel)]=\"betAmount\" #bet=\"ngModel\" min=\"100\" step=\"25\" placeholder=\"Bet Amount\" required><br>\r\n            <button class=\"btn btn-outline-light\">Bet</button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"calling()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Call</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-3\">\r\n        <form class=\"form-group\" (ngSubmit)=\"raising()\" method=\"POST\">\r\n          <input type=\"number\" name=\"raise\" [(ngModel)]=\"raiseAmount\" #raise=\"ngModel\" min=\"100\" step=\"25\" placeholder=\"Raise Amount\" required><br>\r\n          <button class=\"btn btn-outline-light\">Raise</button>\r\n        </form>\r\n      </div>\r\n\r\n      <div class=\"col-lg-2\">\r\n        <form class=\"form-group\" (ngSubmit)=\"folding()\" method=\"POST\">\r\n          <button class=\"btn btn-outline-light\">Fold</button>\r\n        </form>\r\n      </div>\r\n    \r\n  </div>\r\n</div>\r\n<br>\r\n<h4>Player Balance: {{status.balance}}</h4>"
 
 /***/ }),
 
@@ -257,6 +257,7 @@ var GameplayComponent = /** @class */ (function () {
     function GameplayComponent(gameServ) {
         this.gameServ = gameServ;
         this.status = {};
+        this.tableCards = [];
         this.alive = true;
     }
     GameplayComponent.prototype.ngOnInit = function () {
@@ -267,6 +268,11 @@ var GameplayComponent = /** @class */ (function () {
                 _this.status.pot = data.pot;
                 _this.status.balance = data.balance;
                 _this.status.minimum = data.minimum;
+                _this.status.turn = data.turn;
+                _this.status.game = data.game;
+                _this.status.hand = data.hand;
+                _this.status.table = data.table;
+                _this.tableCards = _this.status.table;
             });
         });
     };
@@ -557,7 +563,7 @@ module.exports = ".container {\r\n    background-color: darkgreen;\r\n    color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container rounded\">\r\n  <h2>How to Play</h2>\r\n  <div>\r\n    <h4>Winning Hands (ranked by priority):</h4>\r\n    <dl>\r\n      <dt><b>Royal Flush</b> - five cards of the same suit, ordered ace through ten.</dt>\r\n      <dt><b>Straight Flush</b> - five cards of the same suit, ordered consecutively.</dt>\r\n      <dt><b>Four of a Kind</b> - four cards of the same value.</dt>\r\n      <dt><b>Full House</b> - three cards of the same value and two cards of the same value.</dt>\r\n      <dt><b>Flush</b> - any five cards of the same suit.</dt>\r\n      <dt><b>Straight</b> - any five cards ordered consecutively.</dt>\r\n      <dt><b>Three of a Kind</b> - three cards of the same value.</dt>\r\n      <dt><b>Two Pair</b> - two cards of the same value and two more cards of the same value.</dt>\r\n      <dt><b>One Pair</b> - two cards of the same value.</dt>\r\n      <dt><b>High Card</b> - highest value card, if no other hand can be formed.</dt>\r\n    </dl>\r\n  </div>\r\n\r\n  <div>\r\n    <h4>Rules of Play:</h4>\r\n    <dl>\r\n      <dt><b>Pre-flop</b></dt>\r\n        <dd>In this initial betting stage, players can either call to match the table minimum bet, raise the current bet, or fold. Play continues in a clockwise cycle until the last bet is called.</dd>\r\n      <dt><b>The Flop</b></dt>\r\n        <dd>Following the final call of the pre-flop stage, the first three table cards are drawn and placed face up. Play continues where the previous stage left off. In this stage, however, players have the option to place a bet, call, raise, or fold. Additionally, Players can now check, which simply passes play on to the next player, if no bet was placed by the previous player. This stage ends when either the last bet/raise is called, or if all players check in a given cycle.</dd>\r\n      <dt><b>The Turn</b></dt>\r\n        <dd>After the flop stage, a fourth card is added to the table face up. Betting for this stage follows the same rules as the flop stage.</dd>\r\n      <dt><b>The River</b></dt>\r\n        <dd>Following the turn stage, the fifth table card is laid down, and players go through one final round of betting following the same rules as the previous stages. Once all betting is complete, the remaining players reveal their hands to determine a winner.</dd>\r\n      <dt><b>Winning the Hand</b></dt>\r\n        <dd>The winning hand is determined once all five table cards have been laid down. Players construct their best possible five-card hand from the seven available cards (two hand cards and five table cards). The hand with the highest overall priority wins.</dd>\r\n    </dl>\r\n  </div>\r\n  <br>\r\n  <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n</div>"
+module.exports = "<div class=\"container rounded\">\r\n  <h2>How to Play</h2>\r\n  <div>\r\n    <h4>Winning Hands (ranked by priority):</h4>\r\n    <dl>\r\n      <dt><b>Royal Flush</b> - five cards of the same suit, ordered ace through ten.</dt>\r\n      <dt><b>Straight Flush</b> - five cards of the same suit, ordered consecutively.</dt>\r\n      <dt><b>Four of a Kind</b> - four cards of the same value.</dt>\r\n      <dt><b>Full House</b> - three cards of the same value and two cards of the same value.</dt>\r\n      <dt><b>Flush</b> - any five cards of the same suit.</dt>\r\n      <dt><b>Straight</b> - any five cards ordered consecutively.</dt>\r\n      <dt><b>Three of a Kind</b> - three cards of the same value.</dt>\r\n      <dt><b>Two Pair</b> - two cards of the same value and two more cards of the same value.</dt>\r\n      <dt><b>One Pair</b> - two cards of the same value.</dt>\r\n      <dt><b>High Card</b> - highest value card, if no other hand can be formed.</dt>\r\n    </dl>\r\n  </div>\r\n\r\n  <div>\r\n    <h4>Rules of Play:</h4>\r\n    <dl>\r\n      <dt><b>Betting</b></dt>\r\n        <dd>The initial minimum bet for a game is 100, and bets can be placed in increments of 25.</dd>\r\n      <dt><b>Cheating</b></dt>\r\n        <dd>Each player gets one cheat per game, which allows you to view the probabilities of getting each hand type based on your current hand and the table cards in play. </dd>\r\n      <dt><b>Pre-flop</b></dt>\r\n        <dd>In this initial betting stage, players can either call to match the table minimum bet, raise the current bet, or fold. Play continues in a clockwise cycle until the last bet is called.</dd>\r\n      <dt><b>The Flop</b></dt>\r\n        <dd>Following the final call of the pre-flop stage, the first three table cards are drawn and placed face up. Play continues where the previous stage left off. In this stage, however, players have the option to place a bet, call, raise, or fold. Additionally, Players can now check, which simply passes play on to the next player, if no bet was placed by the previous player. This stage ends when either the last bet/raise is called, or if all players check in a given cycle.</dd>\r\n      <dt><b>The Turn</b></dt>\r\n        <dd>After the flop stage, a fourth card is added to the table face up. Betting for this stage follows the same rules as the flop stage.</dd>\r\n      <dt><b>The River</b></dt>\r\n        <dd>Following the turn stage, the fifth table card is laid down, and players go through one final round of betting following the same rules as the previous stages. Once all betting is complete, the remaining players reveal their hands to determine a winner.</dd>\r\n      <dt><b>Winning the Hand</b></dt>\r\n        <dd>The winning hand is determined once all five table cards have been laid down. Players construct their best possible five-card hand from the seven available cards (two hand cards and five table cards). The hand with the highest overall priority wins.</dd>\r\n    </dl>\r\n  </div>\r\n  <br>\r\n  <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n</div>"
 
 /***/ }),
 
@@ -616,7 +622,7 @@ module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n\r\n        <div id=\"invalidGame\" *ngIf=\"visible\">\r\n          <p>Invalid Game Session. Try again, or start a new game.</p>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <!-- <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button> -->\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n      <br>\r\n    </div>\r\n    <p>Click \"Start Game\" to manually begin play without four players</p>\r\n    <button class=\"btn btn-outline-light\" (click)=\"startGame()\">Start Game</button>\r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n\r\n        <div id=\"invalidGame\" *ngIf=\"visible\">\r\n          <p>Invalid Game Session. Try again, or start a new game.</p>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <!-- <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div> -->\r\n    \r\n    <!-- <br>\r\n    <div> -->\r\n      <!-- <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button> -->\r\n      \r\n    <!-- </div>\r\n    <br> -->\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n      <br>\r\n    </div>\r\n    <p>Click \"Start Game\" to manually begin play without four players</p>\r\n    <button class=\"btn btn-outline-light\" (click)=\"startGame()\">Start Game</button>\r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -709,36 +715,39 @@ var TableContainerComponent = /** @class */ (function () {
             }
         });
     };
-    TableContainerComponent.prototype.getFlop = function () {
-        var _this = this;
-        console.log("inside getFlop method in table-container.component");
-        this.gameService.getFlop().subscribe(function (data) {
-            console.log(data);
-            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
-                _this.tableCards[_this.i] = data[_this.i].image;
-            }
-        });
-    };
-    TableContainerComponent.prototype.getTurn = function () {
-        var _this = this;
-        console.log("inside getTurn method in table-container.component");
-        this.gameService.getTurn().subscribe(function (data) {
-            console.log(data);
-            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
-                _this.tableCards[_this.i] = data[_this.i].image;
-            }
-        });
-    };
-    TableContainerComponent.prototype.getRiver = function () {
-        var _this = this;
-        console.log("inside getRiver method in table-container.component");
-        this.gameService.getRiver().subscribe(function (data) {
-            console.log(data);
-            for (_this.i = 0; _this.i < data.length; _this.i += 1) {
-                _this.tableCards[_this.i] = data[_this.i].image;
-            }
-        });
-    };
+    // getFlop() {
+    //   console.log("inside getFlop method in table-container.component");
+    //   this.gameService.getFlop().subscribe(
+    //     data => {
+    //       console.log(data);
+    //       for(this.i = 0; this.i < data.length; this.i += 1) {
+    //         this.tableCards[this.i] = data[this.i].image; 
+    //       }
+    //     }
+    //   );
+    // }
+    // getTurn() {
+    //   console.log("inside getTurn method in table-container.component");
+    //   this.gameService.getTurn().subscribe(
+    //     data => {
+    //       console.log(data);
+    //       for(this.i = 0; this.i < data.length; this.i += 1) {
+    //         this.tableCards[this.i] = data[this.i].image; 
+    //       }
+    //     }
+    //   );
+    // }
+    // getRiver() {
+    //   console.log("inside getRiver method in table-container.component");
+    //   this.gameService.getRiver().subscribe(
+    //     data => {
+    //       console.log(data);
+    //       for(this.i = 0; this.i < data.length; this.i += 1) {
+    //         this.tableCards[this.i] = data[this.i].image; 
+    //       }
+    //     }
+    //   );
+    // }
     TableContainerComponent.prototype.cheat = function () {
         var _this = this;
         console.log("inside cheat method in table-container.component");
@@ -859,18 +868,18 @@ var GameService = /** @class */ (function () {
         console.log("inside the getHand method of game.service");
         return this.http.get("/TexasCheatum/servlet/getHand");
     };
-    GameService.prototype.getFlop = function () {
-        console.log("inside the getFlop method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getFlop");
-    };
-    GameService.prototype.getTurn = function () {
-        console.log("inside the getTurn method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getTurn");
-    };
-    GameService.prototype.getRiver = function () {
-        console.log("inside the getRiver method of game.service");
-        return this.http.get("/TexasCheatum/servlet/getRiver");
-    };
+    // getFlop() {
+    //   console.log("inside the getFlop method of game.service");
+    //   return this.http.get<any>("/TexasCheatum/servlet/getFlop");
+    // }
+    // getTurn() {
+    //   console.log("inside the getTurn method of game.service");
+    //   return this.http.get<any>("/TexasCheatum/servlet/getTurn");
+    // }
+    // getRiver() {
+    //   console.log("inside the getRiver method of game.service");
+    //   return this.http.get<any>("/TexasCheatum/servlet/getRiver");
+    // }
     GameService.prototype.cheat = function () {
         console.log("inside the cheat method of game.service");
         return this.http.get("/TexasCheatum/servlet/cheat");

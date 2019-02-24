@@ -22,7 +22,7 @@ public class OddsService {
 	public static void cheat(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode apiResp_Deck_Hand = makeHttpRequest_Deck(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
 		String hand = getCardString(apiResp_Deck_Hand.get("piles")
@@ -30,7 +30,7 @@ public class OddsService {
 		hand = hand.replace('0', 'T');
 		
 		JsonNode apiResp_Deck_Table = makeHttpRequest_Deck(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/table/list");
 
 		JsonNode apiResp_Odds = null;
@@ -71,7 +71,6 @@ public class OddsService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
-		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -89,7 +88,6 @@ public class OddsService {
 		con.setRequestProperty("X-RapidAPI-Key", "1d95a66c75msh21130080aae1bc5p16ce1cjsnc37a36087fbf");
 		
 		int responseCode = con.getResponseCode();
-		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
