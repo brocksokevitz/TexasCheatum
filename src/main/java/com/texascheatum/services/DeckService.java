@@ -3,7 +3,9 @@ package com.texascheatum.services;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -86,7 +88,22 @@ public class DeckService {
 		response.getWriter().write("{");
 		
 		response.getWriter().write("\"game\" : ");
+		if (game.getStatus().equals("closed")
+				&& !((User) request.getSession().getAttribute("user")).getCurrentGame().equals("")) {
+			((User) request.getSession().getAttribute("user")).setCurrentGame("");
+			String winner = UserDaoImplementation.getUserDao().getUsernameForTurn(
+					((User) request.getSession().getAttribute("user")).getCurrentGame());
+			if (winner.equals(((User) request.getSession().getAttribute("user")).getUsername())
+					|| winner.equals(""))
+				((User) request.getSession().getAttribute("user")).setBalance(
+						((User) request.getSession().getAttribute("user")).getBalance()
+						+ game.getPot());
+		}
 		response.getWriter().write("\"" + ((User) request.getSession().getAttribute("user")).getCurrentGame() + "\"");
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"status\" : ");
+		response.getWriter().write("\"" + game.getStatus() + "\"");
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"hand\" : ");
@@ -156,23 +173,37 @@ public class DeckService {
 	
 	public static void action(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
-		double change = 0.0;
+		double difference;
+		
 		log.info(actionJson.get("action").asText());
-		change = GameDaoImplementation.getGameDao().makeBet(
+		difference = GameDaoImplementation.getGameDao().makeBet(
 				((User) request.getSession().getAttribute("user")).getCurrentGame(),
 				((User) request.getSession().getAttribute("user")).getUsername(),
 				actionJson.has("amount") ? actionJson.get("amount").asDouble() : 0.0,
 						actionJson.get("action").asText());
-		log.info(change);
+		
+		log.info(difference);
+		if (difference < 0) {
+			String changeString = Double.toString(difference);
+			if (changeString.charAt(changeString.length() - 1) == '1') {
+				difference += 0.001;
+				if (getTableCardNum(request) == 0)
+					flop(request, response);
+				else
+					turn_river(request, response);
+			} else {
+				difference += 0.002;
+				endGame(request, response);
+			}
+			difference *= -1;
+		}
+
+		log.info(difference);
 		((User) request.getSession().getAttribute("user")).setBalance(
 				((User) request.getSession().getAttribute("user")).getBalance()
-				- (Math.abs(change) > 0.001 ? Math.abs(change) : 0));
-		if (change < 0) {
-			if (getTableCardNum(request) == 0)
-				flop(request, response);
-			else
-				turn_river(request, response);
-		}
+				- difference);
+		if (actionJson.get("action").asText().equals("fold"))
+			((User) request.getSession().getAttribute("user")).setCurrentGame("");
 	}
 	public static int getTableCardNum(HttpServletRequest request) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
@@ -200,6 +231,32 @@ public class DeckService {
 				+ "/draw/?count=1");
 		
 		addCardsToPile(request, "table", getCardString(apiResp));
+	}
+	
+	private static void endGame(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Map<String, String[]> cardPiles = new HashMap<>();
+		
+		JsonNode cards_Table = makeHttpRequest(
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
+				+ "/pile/table/list").get("table").get("cards");
+		cardPiles.put("table", new String[cards_Table.size()]);
+		for (int i = 0; i < cards_Table.size(); i++)
+			cardPiles.get("table")[i] = cards_Table.get(i).get("code").asText();
+		
+		List<User> players = UserDaoImplementation.getUserDao().getUsers(
+				((User) request.getSession().getAttribute("user")).getCurrentGame());
+		for (User player : players) {
+			JsonNode cards_Player = makeHttpRequest(
+					((User) request.getSession().getAttribute("user")).getCurrentGame()
+					+ "/pile/" + player.getUsername() + "/list").get(player.getUsername()).get("cards");
+			cardPiles.put(player.getUsername(), new String[cards_Player.size()]);
+			for (int i = 0; i < cards_Player.size(); i++)
+				cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
+		}
+		
+		String winner = GameService.compareHands(cardPiles);
+		GameDaoImplementation.getGameDao().endGame(
+				((User) request.getSession().getAttribute("user")).getCurrentGame(), winner);
 	}
 	
 	private static void addCardsToPile(HttpServletRequest request, String pile, String cards) throws IOException {

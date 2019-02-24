@@ -148,5 +148,23 @@ public class GameDaoImplementation implements GameDao{
 		}
 		return 0.0;
 	}
-	
+
+	@Override
+	public void endGame(String gameId, String winner) {
+		Connection conn = null;
+		conn = pool.getConnection();
+		
+		try (CallableStatement cs = conn.prepareCall("{call end_game(?,?)}");) {
+			cs.setString(1, gameId);
+			cs.setString(2, winner);
+
+			cs.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+		}finally {
+			pool.freeConnection(conn);
+		}
+	}
 }

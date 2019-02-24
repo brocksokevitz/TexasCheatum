@@ -12,13 +12,13 @@ drop public synonym start_game;
 drop public synonym make_bet;
 drop public synonym change_turn;
 drop public synonym change_status;
+drop public synonym end_game;
 drop public synonym encrypt_password;
 drop table users;
 drop table games;
 drop sequence new_user_id;
 --drop sequence new_game_id;
 drop user super;
-drop user brock;
 
 --create sequence new_game_id
 --minvalue 1
@@ -159,7 +159,7 @@ temp_varchar varchar(15);
 begin
 select count(username) into number_players from users,games where game_id=game and username=in_user and current_turn=turn_number;
 select status into temp_varchar from games where game_id=game;
-if number_players>0 and temp_varchar!='pending' then
+if number_players>0 and temp_varchar!='pending' and temp_varchar!='closed' then
     select round_started into round_begun from games where game_id=game;
     difference := 0;
     if in_action='call' and round_begun=1 then
@@ -183,9 +183,10 @@ if number_players>0 and temp_varchar!='pending' then
     if number_players=players_at_min and round_begun=1 then
         update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
         update users set round_bet=0 where current_game=game;
-        temp_varchar := change_status(game);
-        if out_difference=0 then
-            out_difference := 0.001;
+        if change_status(game)='closed' then
+            out_difference := out_difference+0.002;
+        else
+            out_difference := out_difference+0.001;
         end if;
         out_difference := out_difference*-1;
     else
@@ -225,22 +226,38 @@ begin
 select status into current_status from games where game_id=game;
 update users set round_bet=0 where current_game=game;
 if current_status='pending' then
-    update games set status='pre-flop' where game_id=game;
     current_status := 'pre-flop';
 elsif current_status='pre-flop' then
-    update games set status='flop' where game_id=game;
     current_status := 'flop';
 elsif current_status='flop' then
-    update games set status='turn' where game_id=game;
     current_status := 'turn';
 elsif current_status='turn' then
-    update games set status='river' where game_id=game;
     current_status := 'river';
 elsif current_status='river' then
-    update games set status='closed' where game_id=game;
     current_status := 'closed';
 end if;
+update games set status=current_status where game_id=game;
 return current_status;
+commit;-- saves changes
+end;
+/
+create or replace procedure end_game(game in varchar, winner in varchar)
+as
+number_players number(1);
+winnings decimal(15,2);
+begin
+if winner='tie' then
+    select count(*) into number_players from users where current_game=game;
+    select pot/number_players into winnings from games where game_id=game;
+    update games set current_turn=-1 where game_id=game;
+    update users set balance=balance+winnings where current_game=game;
+else
+    select turn_number into number_players from users where current_game=game and username=winner;
+    select pot into winnings from games where game_id=game;
+    update games set current_turn=number_players where game_id=game;
+    update users set balance=balance+winnings where current_game=game and username=winner;
+end if;
+update games set pot=winnings where game_id=game;
 commit;-- saves changes
 end;
 /
@@ -260,6 +277,7 @@ create public synonym start_game for admin01.start_game;
 create public synonym make_bet for admin01.make_bet;
 create public synonym change_turn for admin01.change_turn;
 create public synonym change_status for admin01.change_status;
+create public synonym end_game for admin01.end_game;
 create public synonym encrypt_password for admin01.encrypt_password;
 
 call insert_user('super', 'fuksyr@gmail.com', 'superpass');
