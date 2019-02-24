@@ -90,41 +90,41 @@ export class TableContainerComponent implements OnInit {
     );
   }
 
-  getFlop() {
-    console.log("inside getFlop method in table-container.component");
-    this.gameService.getFlop().subscribe(
-      data => {
-        console.log(data);
-        for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards[this.i] = data[this.i].image; 
-        }
-      }
-    );
-  }
+  // getFlop() {
+  //   console.log("inside getFlop method in table-container.component");
+  //   this.gameService.getFlop().subscribe(
+  //     data => {
+  //       console.log(data);
+  //       for(this.i = 0; this.i < data.length; this.i += 1) {
+  //         this.tableCards[this.i] = data[this.i].image; 
+  //       }
+  //     }
+  //   );
+  // }
 
-  getTurn() {
-    console.log("inside getTurn method in table-container.component");
-    this.gameService.getTurn().subscribe(
-      data => {
-        console.log(data);
-        for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards[this.i] = data[this.i].image; 
-        }
-      }
-    );
-  }
+  // getTurn() {
+  //   console.log("inside getTurn method in table-container.component");
+  //   this.gameService.getTurn().subscribe(
+  //     data => {
+  //       console.log(data);
+  //       for(this.i = 0; this.i < data.length; this.i += 1) {
+  //         this.tableCards[this.i] = data[this.i].image; 
+  //       }
+  //     }
+  //   );
+  // }
 
-  getRiver() {
-    console.log("inside getRiver method in table-container.component");
-    this.gameService.getRiver().subscribe(
-      data => {
-        console.log(data);
-        for(this.i = 0; this.i < data.length; this.i += 1) {
-          this.tableCards[this.i] = data[this.i].image; 
-        }
-      }
-    );
-  }
+  // getRiver() {
+  //   console.log("inside getRiver method in table-container.component");
+  //   this.gameService.getRiver().subscribe(
+  //     data => {
+  //       console.log(data);
+  //       for(this.i = 0; this.i < data.length; this.i += 1) {
+  //         this.tableCards[this.i] = data[this.i].image; 
+  //       }
+  //     }
+  //   );
+  // }
 
   cheat() {
     console.log("inside cheat method in table-container.component");

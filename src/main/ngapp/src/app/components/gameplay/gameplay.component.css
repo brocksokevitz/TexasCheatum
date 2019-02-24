@@ -1,0 +1,13 @@
+#tableCard {
+    width: 100%;
+    padding: 3px;
+}
+
+#tableCell {
+    width: 20%;
+}
+
+#tableRegion {
+    border: 3px solid whitesmoke;
+    margin: auto;
+}

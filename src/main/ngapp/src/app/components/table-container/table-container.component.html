@@ -25,7 +25,7 @@
 <div *ngIf="gameView">
   <div class="container rounded">
 
-      <div class="col-lg-6 offset-lg-3 rounded" id="tableRegion">
+      <!-- <div class="col-lg-6 offset-lg-3 rounded" id="tableRegion">
         <h3>Table Cards</h3>
         <table>
           <tr>
@@ -34,16 +34,16 @@
             </td>
           </tr>
         </table>
-      </div>
+      </div> -->
     
-    <br>
-    <div>
+    <!-- <br>
+    <div> -->
       <!-- <button class="btn btn-outline-light" (click)="getFlop()">Get Flop</button>
       <button class="btn btn-outline-light" (click)="getTurn()">Get Turn</button>
       <button class="btn btn-outline-light" (click)="getRiver()">Get River</button> -->
-      <button class="btn btn-outline-light" (click)="cheat()">Cheat</button>
-    </div>
-    <br>
+      
+    <!-- </div>
+    <br> -->
   
     <div>
       <app-gameplay></app-gameplay>
@@ -72,6 +72,8 @@
     </div>
     <p>Click "Start Game" to manually begin play without four players</p>
     <button class="btn btn-outline-light" (click)="startGame()">Start Game</button>
+    <br>
+    <button class="btn btn-outline-light" (click)="cheat()">Cheat</button>
     <br>
     <button class="btn btn-outline-light" (click)="pause()">Pause</button>
 
