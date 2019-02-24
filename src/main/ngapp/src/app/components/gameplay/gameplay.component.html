@@ -19,8 +19,12 @@
   </div>
 
   <div *ngIf="status.status !== 'pending'">
-    <h4>It's currently {{status.turn}}'s turn!</h4>
-    <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
+    <div *ngIf="status.status !== 'closed'">
+      <h4>It's currently {{status.turn}}'s turn!</h4>
+      <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
+    </div>
+
+    <h4 *ngIf="status.status === 'closed'">{{status.turn}} won the game with total winnings of {{status.pot}}!</h4>
 
     <div class="col-lg-10 offset-lg-1" *ngIf="(!folded) | (status.game !== '')">
       <div class="row">
