@@ -35,8 +35,7 @@ public class GameDaoImplementation implements GameDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call create_game(?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call create_game(?,?)}");) {
 			cs.setString(1, gameId);
 			cs.setString(2, username);
 
@@ -60,8 +59,7 @@ public class GameDaoImplementation implements GameDao{
 		conn = pool.getConnection();
 		
 		Game foundGame = null;
-		try {
-			PreparedStatement cs = conn.prepareStatement("select * from games where game_id=?");	
+		try (PreparedStatement cs = conn.prepareStatement("select * from games where game_id=?");) {
 			cs.setString(1, gameId);
 
 			ResultSet results = cs.executeQuery();
@@ -86,8 +84,7 @@ public class GameDaoImplementation implements GameDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call join_game(?,?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call join_game(?,?,?)}");) {
 			cs.setString(1, gameId);
 			cs.setString(2, userId);
 			cs.registerOutParameter(3, Types.INTEGER);
@@ -110,8 +107,7 @@ public class GameDaoImplementation implements GameDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call start_game(?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call start_game(?,?)}");) {
 			cs.setString(1, gameId);
 			cs.registerOutParameter(2, Types.VARCHAR);
 
@@ -133,8 +129,7 @@ public class GameDaoImplementation implements GameDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call make_bet(?,?,?,?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call make_bet(?,?,?,?,?)}");) {
 			cs.setString(1, gameId);
 			cs.setString(2, userId);
 			cs.setDouble(3, amount);

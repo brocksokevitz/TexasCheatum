@@ -41,13 +41,11 @@ public class UserDaoImplementation implements UserDao{
 		System.out.println(1);
 		conn = pool.getConnection();
 		System.out.println(2);
-		try {
-			CallableStatement cs = conn.prepareCall("{call insert_user(?,?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call insert_user(?,?,?)}");) {
 			cs.setString(1, username);
 			cs.setString(2, email);
 			cs.setString(3, password);
 			cs.execute();
-			
 
 			return true;
 			
@@ -65,8 +63,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call get_user(?,?,?,?,?,?,?,?,?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call get_user(?,?,?,?,?,?,?,?,?)}");) {
 			cs.setString(1, username);
 			cs.setString(2, password);
 			cs.registerOutParameter(3, Types.INTEGER);
@@ -100,8 +97,8 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			PreparedStatement cs = conn.prepareStatement("select username from users,games where current_game=? and game_id=current_game and current_turn=turn_number");	
+		try (PreparedStatement cs = conn.prepareStatement("select username from users,games where current_game=?"
+				+ " and game_id=current_game and current_turn=turn_number");) {
 			cs.setString(1, gameID);
 			ResultSet username = cs.executeQuery();
 			username.next();
@@ -122,10 +119,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 
-		try {
-			String sql = "select * from users where current_game = ?";
-			PreparedStatement ps;
-			ps = conn.prepareStatement(sql);	
+		try (PreparedStatement ps = conn.prepareStatement("select * from users where current_game = ?");) {
 			ps.setString(1, gameId);
 			ResultSet results = ps.executeQuery();
 			
@@ -151,8 +145,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call promote_user(?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call promote_user(?)}");) {
 			cs.setString(1, username);
 			boolean output = cs.execute();
 			
@@ -173,8 +166,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			PreparedStatement cs = conn.prepareStatement("update users set turn_number=? where username=?");	
+		try (PreparedStatement cs = conn.prepareStatement("update users set turn_number=? where username=?");) {
 			cs.setInt(1, turnNumber);
 			cs.setString(2, username);
 			int output = cs.executeUpdate();
@@ -196,8 +188,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call delete_user(?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call delete_user(?)}");) {
 			cs.setString(1, username);
 			boolean output = cs.execute();
 			
@@ -218,8 +209,7 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
-			CallableStatement cs = conn.prepareCall("{call won_game(?)}");	
+		try (CallableStatement cs = conn.prepareCall("{call won_game(?)}");) {
 			cs.setString(1, username);
 			cs.execute();
 			
@@ -240,11 +230,10 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try {
+		try (CallableStatement cs = conn.prepareCall("{call lost_game(?)}");) {
 			for(int i = 0; i < username.length; i++) {
-			CallableStatement cs = conn.prepareCall("{call lost_game(?)}");	
-			cs.setString(1, username[i]);
-			cs.execute();
+				cs.setString(1, username[i]);
+				cs.execute();
 			}
 
 			return true;
