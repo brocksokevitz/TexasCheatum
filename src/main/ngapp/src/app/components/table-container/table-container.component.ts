@@ -10,7 +10,7 @@ import { SettingsService } from '../../services/settings.service';
   styleUrls: ['./table-container.component.css']
 })
 export class TableContainerComponent implements OnInit {
-  private tableCards: any = [];
+  //private tableCards: any = [];
   private handCards: any = [];
   private game: any = {};
   private chart: any = {
@@ -59,9 +59,9 @@ export class TableContainerComponent implements OnInit {
             this.handCards[this.i] = data.hand[this.i].image;
           }
 
-          for(this.i = 0; this.i < data.table.length; this.i++) {
-            this.tableCards[this.i] = data.table[this.i].image;
-          }
+          // for(this.i = 0; this.i < data.table.length; this.i++) {
+          //   this.tableCards[this.i] = data.table[this.i].image;
+          // }
         }
         else {
           this.visible = true;
