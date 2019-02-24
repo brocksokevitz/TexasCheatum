@@ -15,14 +15,17 @@ export class GameplayComponent implements OnInit {
   private status: any = {};
   private action: string;
   private tableCards: any = [];
-  private notFolded: boolean = true;
+  private folded: boolean;
 
   constructor(
     private gameServ: GameService
-  ) {this.alive = true;}
+  ) {
+    this.alive = true;
+    this.folded = false;
+  }
 
   ngOnInit() {
-    IntervalObservable.create(2500).takeWhile(
+    IntervalObservable.create(1000).takeWhile(
       () => this.alive).subscribe(
         () => {
           this.gameServ.whosTurnIsItAnyways().subscribe(
@@ -34,6 +37,7 @@ export class GameplayComponent implements OnInit {
               this.status.turn = data.turn;
               this.status.game = data.game;
               this.status.playerBet = data.playerBet;
+              this.status.status = data.status;
               this.status.hand = data.hand;
               this.status.table = data.table;
               this.tableCards = this.status.table;
@@ -45,6 +49,11 @@ export class GameplayComponent implements OnInit {
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  startGame() {
+    console.log("inside startGame method in thable-container.component");
+    this.gameServ.startGame().subscribe();
   }
 
   checking() {
@@ -77,6 +86,6 @@ export class GameplayComponent implements OnInit {
     console.log("inside the folding method of gameplay.component");
     this.action = "fold";
     this.gameServ.folding(this.action).subscribe();
-    this.notFolded = false;
+    this.folded = true;
   }
 }

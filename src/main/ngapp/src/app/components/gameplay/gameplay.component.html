@@ -13,50 +13,57 @@
   </div>
   <br>
 
-  <h4>It's currently {{status.turn}}'s turn!</h4>
-  <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
+  <div *ngIf="status.status === 'pending'">
+    <p>Click "Start Game" to begin once all players have joined the session:</p>
+    <button class="btn btn-outline-light" (click)="startGame()">Start Game</button>
+  </div>
 
-  <div class="col-lg-10 offset-lg-1" *ngIf="notFolded">
-    <div class="row">
-      <div *ngIf="tableCards.length > 0" class="col-lg-5">
-        <div class="row">
-          <div class="col-lg-6">
-            <form class="form-group" (ngSubmit)="checking()" method="POST" *ngIf="status.playerBet >= status.minimum">
-              <button class="btn btn-outline-light">Check</button>
-            </form>
-          </div>
+  <div *ngIf="status.status !== 'pending'">
+    <h4>It's currently {{status.turn}}'s turn!</h4>
+    <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
 
-          <div class="col-lg-6">
-            <form class="form-group" (ngSubmit)="betting()" method="POST">
-              <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" step="25" placeholder="Bet Amount" required><br>
-              <button class="btn btn-outline-light">Bet</button>
-            </form>
+    <div class="col-lg-10 offset-lg-1" *ngIf="(!folded) | (status.game !== '')">
+      <div class="row">
+        <div *ngIf="tableCards.length > 0" class="col-lg-5">
+          <div class="row">
+            <div class="col-lg-6">
+              <form class="form-group" (ngSubmit)="checking()" method="POST" *ngIf="status.playerBet >= status.minimum">
+                <button class="btn btn-outline-light">Check</button>
+              </form>
+            </div>
+
+            <div class="col-lg-6">
+              <form class="form-group" (ngSubmit)="betting()" method="POST" *ngIf="status.balance > status.minimum">
+                <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" [max]="status.balance" step="25" placeholder="Bet Amount" required><br>
+                <button class="btn btn-outline-light">Bet</button>
+              </form>
+            </div>
           </div>
         </div>
+
+          <div class="col-lg-2">
+            <form class="form-group" (ngSubmit)="calling()" method="POST" *ngIf="(status.balance >= status.minimum) & (status.minimum > 0)">
+              <button class="btn btn-outline-light">Call</button>
+            </form>
+          </div>
+
+          <div class="col-lg-2">
+            <form class="form-group" (ngSubmit)="raising()" method="POST" *ngIf="status.balance > status.minimum">
+              <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" [max]="status.balance" step="25" placeholder="Raise Amount" required><br>
+              <button class="btn btn-outline-light">Raise</button>
+            </form>
+          </div>
+
+          <div class="col-lg-3">
+            <form class="form-group" (ngSubmit)="folding()" method="POST">
+              <button class="btn btn-outline-light">Fold</button>
+            </form>
+          </div>
       </div>
-
-        <div class="col-lg-2">
-          <form class="form-group" (ngSubmit)="calling()" method="POST">
-            <button class="btn btn-outline-light">Call</button>
-          </form>
-        </div>
-
-        <div class="col-lg-2">
-          <form class="form-group" (ngSubmit)="raising()" method="POST">
-            <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" step="25" placeholder="Raise Amount" required><br>
-            <button class="btn btn-outline-light">Raise</button>
-          </form>
-        </div>
-
-        <div class="col-lg-3">
-          <form class="form-group" (ngSubmit)="folding()" method="POST">
-            <button class="btn btn-outline-light">Fold</button>
-          </form>
-        </div>
     </div>
   </div>
 
-  <div *ngIf="!notFolded">
+  <div *ngIf="(folded) | (status.game === '')">
     <br>
     <h4 id="youFold">You folded! Stay and watch the rest of the game, or exit through the pause menu.</h4>
   </div>
