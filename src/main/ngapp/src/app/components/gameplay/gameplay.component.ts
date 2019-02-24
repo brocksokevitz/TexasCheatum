@@ -32,6 +32,7 @@ export class GameplayComponent implements OnInit {
               this.status.balance = data.balance;
               this.status.minimum = data.minimum;
               this.status.turn = data.turn;
+              this.status.game = data.game;
               this.status.hand = data.hand;
               this.status.table = data.table;
               this.tableCards = this.status.table;
