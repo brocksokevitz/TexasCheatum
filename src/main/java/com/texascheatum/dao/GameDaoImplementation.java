@@ -54,13 +54,25 @@ public class GameDaoImplementation implements GameDao{
 	}
 	
 	@Override
-	public Game readGame(String gameId) {
+	public Game readGame(String gameIdOrUsername) {
 		Connection conn = null;
 		conn = pool.getConnection();
 		
+		try(PreparedStatement cs = conn.prepareStatement("select current_game from users where username=?");){
+			cs.setString(1, gameIdOrUsername);
+			ResultSet results = cs.executeQuery();
+			if (results.next()) {
+				gameIdOrUsername = results.getString(1);
+				System.out.println(gameIdOrUsername);
+			}
+			
+		}catch(SQLException e){
+			log.error(e.getMessage());
+		}
+		
 		Game foundGame = null;
 		try (PreparedStatement cs = conn.prepareStatement("select * from games where game_id=?");) {
-			cs.setString(1, gameId);
+			cs.setString(1, gameIdOrUsername);
 
 			ResultSet results = cs.executeQuery();
 			if (results.next())
@@ -83,6 +95,17 @@ public class GameDaoImplementation implements GameDao{
 	public boolean joinGame(String gameId, String userId) {
 		Connection conn = null;
 		conn = pool.getConnection();
+		
+		try(PreparedStatement cs = conn.prepareStatement("select current_game from users where username=?");){
+			cs.setString(1, gameId);
+			ResultSet results = cs.executeQuery();
+			if (results.next()) {
+				gameId = results.getString(1);
+			}
+			System.out.println(gameId);
+		}catch(SQLException e){
+			log.error(e.getMessage());
+		}
 		
 		try (CallableStatement cs = conn.prepareCall("{call join_game(?,?,?)}");) {
 			cs.setString(1, gameId);
