@@ -89,8 +89,8 @@ public class DeckService {
 		
 		response.getWriter().write("\"game\" : ");
 		if (game.getStatus().equals("closed")
-				&& !((User) request.getSession().getAttribute("user")).getCurrentGame().equals("")) {
-			((User) request.getSession().getAttribute("user")).setCurrentGame("");
+				&& ((User) request.getSession().getAttribute("user")).getRoundBet() == -1) {
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);;
 			String winner = UserDaoImplementation.getUserDao().getUsernameForTurn(
 					((User) request.getSession().getAttribute("user")).getCurrentGame());
 			if (winner.equals(((User) request.getSession().getAttribute("user")).getUsername())
@@ -121,6 +121,10 @@ public class DeckService {
 		
 		response.getWriter().write("\"balance\" : ");
 		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getBalance());
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"playerBet\" : ");
+		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getRoundBet());
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"pot\" : ");
@@ -196,7 +200,11 @@ public class DeckService {
 				endGame(request, response);
 			}
 			difference *= -1;
-		}
+			
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);
+		} else
+			((User) request.getSession().getAttribute("user")).setRoundBet(
+					((User) request.getSession().getAttribute("user")).getRoundBet() + difference);
 
 		log.info(difference);
 		((User) request.getSession().getAttribute("user")).setBalance(
@@ -238,7 +246,7 @@ public class DeckService {
 		
 		JsonNode cards_Table = makeHttpRequest(
 				((User) request.getSession().getAttribute("user")).getCurrentGame()
-				+ "/pile/table/list").get("table").get("cards");
+				+ "/pile/table/list").get("piles").get("table").get("cards");
 		cardPiles.put("table", new String[cards_Table.size()]);
 		for (int i = 0; i < cards_Table.size(); i++)
 			cardPiles.get("table")[i] = cards_Table.get(i).get("code").asText();
@@ -248,7 +256,7 @@ public class DeckService {
 		for (User player : players) {
 			JsonNode cards_Player = makeHttpRequest(
 					((User) request.getSession().getAttribute("user")).getCurrentGame()
-					+ "/pile/" + player.getUsername() + "/list").get(player.getUsername()).get("cards");
+					+ "/pile/" + player.getUsername() + "/list").get("piles").get(player.getUsername()).get("cards");
 			cardPiles.put(player.getUsername(), new String[cards_Player.size()]);
 			for (int i = 0; i < cards_Player.size(); i++)
 				cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
@@ -257,6 +265,7 @@ public class DeckService {
 		String winner = GameService.compareHands(cardPiles);
 		GameDaoImplementation.getGameDao().endGame(
 				((User) request.getSession().getAttribute("user")).getCurrentGame(), winner);
+		((User) request.getSession().getAttribute("user")).setRoundBet(-1);
 	}
 	
 	private static void addCardsToPile(HttpServletRequest request, String pile, String cards) throws IOException {
