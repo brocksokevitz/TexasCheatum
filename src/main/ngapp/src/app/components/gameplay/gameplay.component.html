@@ -55,6 +55,13 @@
         </div>
     </div>
   </div>
+
+  <div *ngIf="!notFolded">
+    <br>
+    <h4 id="youFold">You folded! Stay and watch the rest of the game, or exit through the pause menu.</h4>
+  </div>
+  
+
 </div>
 <br>
 <h4>Player Balance: {{status.balance}}</h4>
