@@ -156,6 +156,7 @@ public class DeckService {
 	public static void action(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonNode actionJson = mapper.readTree(request.getReader().readLine());
 		double change = 0.0;
+		log.info(actionJson.get("action").asText());
 		switch (actionJson.get("action").asText()) {
 		case "bet":
 		case "raise":
@@ -181,6 +182,7 @@ public class DeckService {
 		case "fold":
 			break;
 		}
+		log.info(change);
 		if (change < 0) {
 			if (getTableCardNum(request) == 0)
 				flop(request, response);
@@ -200,6 +202,7 @@ public class DeckService {
 			return 0;
 	}
 	public static void flop(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("flop");
 		JsonNode apiResp = makeHttpRequest(
 				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/draw/?count=3");
@@ -207,6 +210,7 @@ public class DeckService {
 		addCardsToPile(request, "table", getCardString(apiResp));
 	}
 	public static void turn_river(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("turn_river");
 		JsonNode apiResp = makeHttpRequest(
 				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/draw/?count=1");
@@ -234,7 +238,6 @@ public class DeckService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
-		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());

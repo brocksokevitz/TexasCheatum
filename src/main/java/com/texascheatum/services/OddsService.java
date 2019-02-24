@@ -71,7 +71,6 @@ public class OddsService {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		int responseCode = con.getResponseCode();
-		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
@@ -89,7 +88,6 @@ public class OddsService {
 		con.setRequestProperty("X-RapidAPI-Key", "1d95a66c75msh21130080aae1bc5p16ce1cjsnc37a36087fbf");
 		
 		int responseCode = con.getResponseCode();
-		System.out.println(responseCode);
 		
 		if (responseCode >= 200 && responseCode <= 299)
 			return mapper.readTree(con.getInputStream());
