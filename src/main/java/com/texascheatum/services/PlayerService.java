@@ -73,10 +73,12 @@ public class PlayerService {
 		response.setHeader("status", "200");
 	}
 	
-	public static boolean sendEmail(String username,String password,String email) {
+	public static boolean sendEmail(String username, String email,String password) {
 		
 		final String senderEmail = "erstestemail7@gmail.com";// change with your sender email
 		final String senderPassword = "p4ssw0rd.";// change with your sender password
+		
+		System.out.println("email: " + email);
 		
 		String title = "new user";
 		
@@ -86,7 +88,7 @@ public class PlayerService {
 				"<html>" + 
 				"<body>"
 				+ "<p>Username: "+username+"<br>Password: "+password+"<br><br>Please have fun playing poker at <a href=\"http://ec2-18-218-85-44.us-east-2.compute.amazonaws.com:8080/TexasCheatum/\">Texas Cheatum</a>!"
-						+ "<b>This email was formatted using HTML.</p>"
+						+ "<br>This email was formatted using HTML.</p>"
 						+ "</body>"
 						+ "</html>";
 
