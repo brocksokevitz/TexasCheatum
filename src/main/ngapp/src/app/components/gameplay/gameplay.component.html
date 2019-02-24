@@ -17,7 +17,7 @@
   <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
 
   <div class="row">
-    <div *ngIf="postFlop" class="col-lg-4">
+    <div *ngIf="tableCards.length > 0" class="col-lg-4">
       <div class="row">
         <div class="col-lg-6">
           <form class="form-group" (ngSubmit)="checking()" method="POST">
