@@ -22,7 +22,7 @@ public class OddsService {
 	public static void cheat(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JsonNode apiResp_Deck_Hand = makeHttpRequest_Deck(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/" + ((User) request.getSession().getAttribute("user")).getUsername()
 				+ "/list");
 		String hand = getCardString(apiResp_Deck_Hand.get("piles")
@@ -30,7 +30,7 @@ public class OddsService {
 		hand = hand.replace('0', 'T');
 		
 		JsonNode apiResp_Deck_Table = makeHttpRequest_Deck(
-				request.getSession().getAttribute("gameID")
+				((User) request.getSession().getAttribute("user")).getCurrentGame()
 				+ "/pile/table/list");
 
 		JsonNode apiResp_Odds = null;
