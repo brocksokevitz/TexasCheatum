@@ -616,7 +616,7 @@ module.exports = "#handCard {\r\n    width: 100%;\r\n    padding: 3px;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n        <br>\r\n\r\n        <div id=\"invalidGame\" *ngIf=\"visible\">\r\n          <p>Invalid Game Session. Try again, or start a new game.</p>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player 1 Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n    </div>\r\n     \r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div *ngIf=\"lobbyView\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n\r\n        <button class=\"btn btn-outline-light\" (click)=\"newGame()\">New Game</button>\r\n        <br>\r\n        <br>\r\n        <form class=\"form-group\" (ngSubmit)=\"joinGame()\" method=\"POST\">\r\n          <label>Enter an existing game session id:</label><br>\r\n          <input type=\"text\" name=\"sesh\" [(ngModel)]=\"game.sesh\" #sesh=\"ngModel\" required>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\">Join Game</button>\r\n        </form>\r\n\r\n        <div id=\"invalidGame\" *ngIf=\"visible\">\r\n          <p>Invalid Game Session. Try again, or start a new game.</p>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-outline-light\" (click)=\"goBack()\">Back</button>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"gameView\">\r\n  <div class=\"container rounded\">\r\n\r\n      <div class=\"col-lg-6 offset-lg-3 rounded\" id=\"tableRegion\">\r\n        <h3>Table Cards</h3>\r\n        <table>\r\n          <tr>\r\n            <td *ngFor=\"let card of tableCards\" id=\"tableCell\">\r\n              <img src={{card}} id=\"tableCard\">\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    \r\n    <br>\r\n    <div>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getFlop()\">Get Flop</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getTurn()\">Get Turn</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"getRiver()\">Get River</button>\r\n      <button class=\"btn btn-outline-light\" (click)=\"cheat()\">Cheat</button>\r\n    </div>\r\n    <br>\r\n  \r\n    <div>\r\n      <app-gameplay></app-gameplay>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 rounded\" id=\"handRegion\">\r\n      <h3>Player 1 Hand</h3>\r\n      <table>\r\n        <tr>\r\n          <td *ngFor=\"let card of handCards\" id=\"handCell\">\r\n            <img src={{card}} id=\"handCard\">\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4\" id=\"chart\">\r\n      <div *ngIf=\"chart.data\">\r\n        <google-chart\r\n          [title]=\"chart.title\"\r\n          [type]=\"chart.type\"\r\n         [data]=\"chart.data\">\r\n        </google-chart>\r\n      </div>\r\n    </div>\r\n    <p>Click \"Start Game\" to manually begin play without four players</p>\r\n    <button class=\"btn btn-outline-light\" (click)=\"startGame()\">Start Game</button>\r\n    <br>\r\n    <button class=\"btn btn-outline-light\" (click)=\"pause()\">Pause</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"pauseMenu\">\r\n  <div class=\"row\">\r\n    <div class=\"container rounded col-lg-4 offset-lg-4\">\r\n          <button class=\"btn btn-outline-light\" (click)=\"resume()\">Resume Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" routerLink=\"/home\">Quit Game</button><br>\r\n          <br>\r\n          <button class=\"btn btn-outline-light\" (click)=\"logout()\">Logout</button>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -677,7 +677,7 @@ var TableContainerComponent = /** @class */ (function () {
         console.log("inside joinGame method in table-container.component");
         this.settingServ.joinGame(this.game.sesh).subscribe(function (data) {
             console.log(data);
-            if (data !== {}) {
+            if (data !== null) {
                 _this.lobbyView = false;
                 _this.gameView = true;
                 for (_this.i = 0; _this.i < data.hand.length; _this.i++) {
@@ -694,6 +694,10 @@ var TableContainerComponent = /** @class */ (function () {
                 _this.game.sesh = "";
             }
         });
+    };
+    TableContainerComponent.prototype.startGame = function () {
+        console.log("inside startGame method in thable-container.component");
+        this.gameService.startGame().subscribe();
     };
     TableContainerComponent.prototype.getHand = function () {
         var _this = this;
@@ -847,6 +851,10 @@ var GameService = /** @class */ (function () {
     function GameService(http) {
         this.http = http;
     }
+    GameService.prototype.startGame = function () {
+        console.log("inside startGame method of game.service");
+        return this.http.get("/TexasCheatum/servlet/startGame");
+    };
     GameService.prototype.getHand = function () {
         console.log("inside the getHand method of game.service");
         return this.http.get("/TexasCheatum/servlet/getHand");
