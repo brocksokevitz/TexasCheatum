@@ -49,27 +49,32 @@
       <app-gameplay></app-gameplay>
     </div>
 
-    <div class="col-lg-4 rounded" id="handRegion">
-      <h3>Player Hand</h3>
-      <table>
-        <tr>
-          <td *ngFor="let card of handCards" id="handCell">
-            <img src={{card}} id="handCard">
-          </td>
-        </tr>
-      </table>
+    <div class="col-lg-8 offset-lg-2">
+      <div class="row">
+        <div class="col-lg-6 rounded" id="handRegion">
+          <h3>Player Hand</h3>
+          <table>
+            <tr>
+              <td *ngFor="let card of handCards" id="handCell">
+                <img src={{card}} id="handCard">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-6 " id="chart">
+          <div *ngIf="chart.data">
+            <google-chart
+              [title]="chart.title"
+              [type]="chart.type"
+            [data]="chart.data">
+            </google-chart>
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
 
-    <div class="col-lg-4" id="chart">
-      <div *ngIf="chart.data">
-        <google-chart
-          [title]="chart.title"
-          [type]="chart.type"
-         [data]="chart.data">
-        </google-chart>
-      </div>
-      <br>
-    </div>
     <p>Click "Start Game" to manually begin play without four players</p>
     <button class="btn btn-outline-light" (click)="startGame()">Start Game</button>
     <br>

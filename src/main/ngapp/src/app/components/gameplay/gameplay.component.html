@@ -16,43 +16,44 @@
   <h4>It's currently {{status.turn}}'s turn!</h4>
   <h4>Current Bet: {{status.minimum}}, Total Pot: {{status.pot}}</h4>
 
-  <div class="row">
-    <div *ngIf="tableCards.length > 0" class="col-lg-4">
-      <div class="row">
-        <div class="col-lg-6">
-          <form class="form-group" (ngSubmit)="checking()" method="POST">
-            <button class="btn btn-outline-light">Check</button>
+  <div class="col-lg-10 offset-lg-1">
+    <div class="row">
+      <div *ngIf="tableCards.length > 0" class="col-lg-5">
+        <div class="row">
+          <div class="col-lg-6">
+            <form class="form-group" (ngSubmit)="checking()" method="POST">
+              <button class="btn btn-outline-light">Check</button>
+            </form>
+          </div>
+
+          <div class="col-lg-6">
+            <form class="form-group" (ngSubmit)="betting()" method="POST">
+              <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" step="25" placeholder="Bet Amount" required><br>
+              <button class="btn btn-outline-light">Bet</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-lg-2">
+          <form class="form-group" (ngSubmit)="calling()" method="POST">
+            <button class="btn btn-outline-light">Call</button>
           </form>
         </div>
 
-        <div class="col-lg-6">
-          <form class="form-group" (ngSubmit)="betting()" method="POST">
-            <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" step="25" placeholder="Bet Amount" required><br>
-            <button class="btn btn-outline-light">Bet</button>
+        <div class="col-lg-2">
+          <form class="form-group" (ngSubmit)="raising()" method="POST">
+            <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" step="25" placeholder="Raise Amount" required><br>
+            <button class="btn btn-outline-light">Raise</button>
           </form>
         </div>
-      </div>
+
+        <div class="col-lg-3">
+          <form class="form-group" (ngSubmit)="folding()" method="POST">
+            <button class="btn btn-outline-light">Fold</button>
+          </form>
+        </div>
     </div>
-
-      <div class="col-lg-3">
-        <form class="form-group" (ngSubmit)="calling()" method="POST">
-          <button class="btn btn-outline-light">Call</button>
-        </form>
-      </div>
-
-      <div class="col-lg-3">
-        <form class="form-group" (ngSubmit)="raising()" method="POST">
-          <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" step="25" placeholder="Raise Amount" required><br>
-          <button class="btn btn-outline-light">Raise</button>
-        </form>
-      </div>
-
-      <div class="col-lg-2">
-        <form class="form-group" (ngSubmit)="folding()" method="POST">
-          <button class="btn btn-outline-light">Fold</button>
-        </form>
-      </div>
-    
   </div>
 </div>
 <br>
