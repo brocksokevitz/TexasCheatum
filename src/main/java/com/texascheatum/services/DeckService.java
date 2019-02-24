@@ -123,6 +123,10 @@ public class DeckService {
 		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getBalance());
 		response.getWriter().write(",");
 		
+		response.getWriter().write("\"playerBet\" : ");
+		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getRoundBet());
+		response.getWriter().write(",");
+		
 		response.getWriter().write("\"pot\" : ");
 		response.getWriter().write("" + game.getPot());
 		response.getWriter().write(",");
@@ -196,7 +200,11 @@ public class DeckService {
 				endGame(request, response);
 			}
 			difference *= -1;
-		}
+			
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);
+		} else
+			((User) request.getSession().getAttribute("user")).setRoundBet(
+					((User) request.getSession().getAttribute("user")).getRoundBet() + difference);
 
 		log.info(difference);
 		((User) request.getSession().getAttribute("user")).setBalance(
