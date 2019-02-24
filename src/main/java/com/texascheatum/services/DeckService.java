@@ -85,6 +85,10 @@ public class DeckService {
 		
 		response.getWriter().write("{");
 		
+		response.getWriter().write("\"game\" : ");
+		response.getWriter().write("\"" + ((User) request.getSession().getAttribute("user")).getCurrentGame() + "\"");
+		response.getWriter().write(",");
+		
 		response.getWriter().write("\"hand\" : ");
 		getHand(request, response);
 		response.getWriter().write(",");

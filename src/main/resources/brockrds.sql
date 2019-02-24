@@ -199,7 +199,7 @@ loop
     if next_turn>max_turn then
         next_turn := 0;
     end if;
-    select count(*) into have_next from users where current_game=game and turn_number=next_turn;
+    select count(username) into have_next from users where current_game=game and turn_number=next_turn;
 end loop;
 commit;-- saves changes
 return next_turn;
