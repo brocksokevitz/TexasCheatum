@@ -40,7 +40,7 @@ public class FrontController extends DefaultServlet {
 		
 		if (uri.contains("/servlet/"))
 			MasterDispatcher.processGET(request, response);
-		else if (uri.equals("/TexasCheatum/") || uri.equals("/TexasCheatum"))
+		else if (uri.equals("/TexasCheatum/") || uri.endsWith("/TexasCheatum"))
 			request.getRequestDispatcher("/ng/index.html").forward(request, response);
 		else
 			super.doGet(request, response);
