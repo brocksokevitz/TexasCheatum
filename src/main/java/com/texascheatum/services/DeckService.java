@@ -85,20 +85,23 @@ public class DeckService {
 		Game game = GameDaoImplementation.getGameDao().readGame(
 				((User) request.getSession().getAttribute("user")).getCurrentGame());
 		
-		response.getWriter().write("{");
-		
-		response.getWriter().write("\"game\" : ");
 		if (game.getStatus().equals("closed")
 				&& ((User) request.getSession().getAttribute("user")).getRoundBet() == -1) {
-			((User) request.getSession().getAttribute("user")).setRoundBet(0);;
-			String winner = UserDaoImplementation.getUserDao().getUsernameForTurn(
+			
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);
+			String winners = UserDaoImplementation.getUserDao().getUsernameForTurn(
 					((User) request.getSession().getAttribute("user")).getCurrentGame());
-			if (winner.equals(((User) request.getSession().getAttribute("user")).getUsername())
-					|| winner.equals(""))
+
+			if (winners.equals(((User) request.getSession().getAttribute("user")).getUsername())
+					|| winners.equals(""))
 				((User) request.getSession().getAttribute("user")).setBalance(
 						((User) request.getSession().getAttribute("user")).getBalance()
 						+ game.getPot());
 		}
+		
+		response.getWriter().write("{");
+		
+		response.getWriter().write("\"game\" : ");
 		response.getWriter().write("\"" + ((User) request.getSession().getAttribute("user")).getCurrentGame() + "\"");
 		response.getWriter().write(",");
 		
@@ -262,9 +265,9 @@ public class DeckService {
 				cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
 		}
 		
-		String winner = GameService.compareHands(cardPiles);
+		List<String> winners = GameService.compareHands(cardPiles);
 		GameDaoImplementation.getGameDao().endGame(
-				((User) request.getSession().getAttribute("user")).getCurrentGame(), winner);
+				((User) request.getSession().getAttribute("user")).getCurrentGame(), winners);
 		((User) request.getSession().getAttribute("user")).setRoundBet(-1);
 	}
 	

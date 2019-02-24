@@ -38,7 +38,7 @@ create table games
     status varchar(15) default('pending') not null,
     pot Decimal(15,2) default(0) not null,
     current_target Decimal(15,2) default(100) not null,
-    current_turn number(1) not null,
+    current_turn number(4) not null,
     round_started number(1) not null,
     --
     constraint game_id_pk primary key(game_id)
@@ -248,23 +248,26 @@ return current_status;
 commit;-- saves changes
 end;
 /
-create or replace procedure end_game(game in varchar, winner in varchar)
+create or replace procedure end_game(game in varchar, winners in varchar)
 as
-number_players number(1);
+number_winners number(1);
 winnings decimal(15,2);
 begin
-if winner='tie' then
-    select count(*) into number_players from users where current_game=game;
-    select pot/number_players into winnings from games where game_id=game;
-    update games set current_turn=-1 where game_id=game;
-    update users set balance=balance+winnings where current_game=game;
-else
-    select turn_number into number_players from users where current_game=game and username=winner;
-    select pot into winnings from games where game_id=game;
-    update games set current_turn=number_players where game_id=game;
-    update users set balance=balance+winnings where current_game=game and username=winner;
+select length(winners) into number_winners from dual;
+select pot/number_winners into winnings from games where game_id=game;
+update games set pot=winnings,current_turn=cast(winners as number(4)) where game_id=game;
+if instr('0',1,1)>0 then
+    update users set balance=balance+winnings where current_game=game and turn_number=0;
 end if;
-update games set pot=winnings where game_id=game;
+if instr('1',1,1)>0 then
+    update users set balance=balance+winnings where current_game=game and turn_number=1;
+end if;
+if instr('2',1,1)>0 then
+    update users set balance=balance+winnings where current_game=game and turn_number=2;
+end if;
+if instr('3',1,1)>0 then
+    update users set balance=balance+winnings where current_game=game and turn_number=3;
+end if;
 commit;-- saves changes
 end;
 /

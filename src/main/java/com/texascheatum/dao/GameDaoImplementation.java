@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.texascheatum.model.Game;
+import com.texascheatum.model.User;
 import com.texascheatum.utils.TomcatConnectionPool;
 
 public class GameDaoImplementation implements GameDao{
@@ -173,13 +175,21 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public void endGame(String gameId, String winner) {
+	public void endGame(String gameId, List<String> winners) {
+		List<User> players = UserDaoImplementation.getUserDao().getUsers(gameId);
+		StringBuilder winningNumbers = new StringBuilder("");
+		for (User player : players)
+			if (winners.contains(player.getUsername()))
+				winningNumbers.append(player.getTurnNumber());
+		if (winningNumbers.charAt(0) == '0')
+			winningNumbers.reverse();
+		
 		Connection conn = null;
 		conn = pool.getConnection();
 		
 		try (CallableStatement cs = conn.prepareCall("{call end_game(?,?)}");) {
 			cs.setString(1, gameId);
-			cs.setString(2, winner);
+			cs.setString(2, winningNumbers.toString());
 
 			cs.execute();
 			
