@@ -11,7 +11,6 @@ import 'rxjs/add/operator/takeWhile';
 export class GameplayComponent implements OnInit {
   private betAmount: number;
   private raiseAmount: number;
-  private postFlop: boolean;
   private alive: boolean;
   private status: any = {};
   private action: string;
