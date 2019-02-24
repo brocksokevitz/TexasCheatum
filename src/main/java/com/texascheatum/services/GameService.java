@@ -28,8 +28,8 @@ public class GameService {
 				gameJson.get("username").asText());
 	}
 
-	public static String compareHands(Map<String, String[]> playerMap) {
-		String winner = "";
+	public static List<String> compareHands(Map<String, String[]> playerMap) {
+		List<String> winner = new ArrayList<>();
 		int[] highestScore = { 0, 0, 0, 0 };
 		int[] currentScore = { 0, 0, 0, 0 };
 		String[] tableCards = playerMap.remove("table");
@@ -43,12 +43,13 @@ public class GameService {
 			
 			if (currentScore[0] == highestScore[0] && currentScore[1] == highestScore[1]
 					&& currentScore[2] == highestScore[2] && currentScore[3] == highestScore[3]) { // this is a tie
-				winner = "tie";
+				winner.add(listOfNames.get(i));
 			} else { // compare scores
 				highestScore = compareScores(currentScore, highestScore);
 
 				if (highestScore.equals(currentScore)) {
-					winner = listOfNames.get(i);
+					winner = new ArrayList<>();
+					winner.add(listOfNames.get(i));
 				}
 
 			}

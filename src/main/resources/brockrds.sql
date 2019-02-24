@@ -126,6 +126,7 @@ create or replace procedure start_game(game in varchar, current_status out varch
 as
 begin
 current_status := change_status(game);
+update users set total_games=total_games+1 where current_game=game;
 update games set round_started=1 where game_id=game;
 commit;-- saves changes
 end;
