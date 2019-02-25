@@ -121,6 +121,10 @@ public class DeckService {
 		getTable(request, response);
 		response.getWriter().write(",");
 		
+		response.getWriter().write("\"player\" : ");
+		response.getWriter().write("\"" + ((User) request.getSession().getAttribute("user")).getUsername() + "\"");
+		response.getWriter().write(",");
+		
 		response.getWriter().write("\"turn\" : ");
 		response.getWriter().write("\"" +  UserDaoImplementation.getUserDao().getUsernameForTurn(
 				((User) request.getSession().getAttribute("user")).getCurrentGame()) + "\"");
