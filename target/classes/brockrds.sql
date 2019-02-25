@@ -256,18 +256,9 @@ begin
 select length(winners) into number_winners from dual;
 select pot/number_winners into winnings from games where game_id=game;
 update games set pot=winnings,current_turn=cast(winners as number(4)) where game_id=game;
-if instr('0',1,1)>0 then
-    update users set balance=balance+winnings where current_game=game and turn_number=0;
-end if;
-if instr('1',1,1)>0 then
-    update users set balance=balance+winnings where current_game=game and turn_number=1;
-end if;
-if instr('2',1,1)>0 then
-    update users set balance=balance+winnings where current_game=game and turn_number=2;
-end if;
-if instr('3',1,1)>0 then
-    update users set balance=balance+winnings where current_game=game and turn_number=3;
-end if;
+for i in 1..number_winners loop
+    update users set balance=balance+winnings,total_wins=total_wins+1 where current_game=game and turn_number=cast(substr(winners,i,1) as number);
+end loop;
 commit;-- saves changes
 end;
 /

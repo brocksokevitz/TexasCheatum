@@ -98,7 +98,7 @@ public class UserDaoImplementation implements UserDao{
 		conn = pool.getConnection();
 		
 		try (PreparedStatement cs = conn.prepareStatement("select current_turn from games where game_id=?");
-			PreparedStatement cs2 = conn.prepareStatement("select username from users where current_game=? and current_turn=?");) {
+			PreparedStatement cs2 = conn.prepareStatement("select username from users where current_game=? and turn_number=?");) {
 			cs.setString(1, gameID);
 			ResultSet turnNumbers = cs.executeQuery();
 			if (turnNumbers.next()) {
@@ -108,7 +108,7 @@ public class UserDaoImplementation implements UserDao{
 					cs2.setString(1, gameID);
 					cs2.setInt(2, Integer.valueOf(turnString.substring(i, i + 1)));
 
-					ResultSet username = cs.executeQuery();
+					ResultSet username = cs2.executeQuery();
 					username.next();
 					names.append(username.getString(1) + ",");
 				}

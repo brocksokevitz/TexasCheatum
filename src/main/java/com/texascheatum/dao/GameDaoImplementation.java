@@ -177,6 +177,7 @@ public class GameDaoImplementation implements GameDao{
 	@Override
 	public void endGame(String gameId, List<String> winners) {
 		List<User> players = UserDaoImplementation.getUserDao().getUsers(gameId);
+		System.out.println(players.size());
 		StringBuilder winningNumbers = new StringBuilder("");
 		for (User player : players)
 			if (winners.contains(player.getUsername()))

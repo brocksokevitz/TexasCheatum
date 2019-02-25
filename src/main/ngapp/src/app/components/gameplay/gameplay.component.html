@@ -47,7 +47,7 @@
             </div>
           </div>
           
-          <div *ngIf="status.minimum > 0"></div>
+          <div *ngIf="status.minimum > 0">
             <div class="col-lg-3">
               <form class="form-group" (ngSubmit)="raising()" method="POST" *ngIf="status.balance > status.minimum">
                 <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" [max]="status.balance" step="25" placeholder="Raise Amount" required><br>
