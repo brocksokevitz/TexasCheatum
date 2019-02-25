@@ -69,7 +69,8 @@ public class DeckService {
 	
 	public static void joinGame(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		String gameID = GameDaoImplementation.getGameDao().readGame(mapper.readTree(request.getReader().readLine()).get("gameID").asText()).getGameID();
+		String gameID = GameDaoImplementation.getGameDao().readGame(
+				mapper.readTree(request.getReader().readLine()).get("gameID").asText()).getGameID();
 		if (GameDaoImplementation.getGameDao().joinGame(
 				gameID,
 				((User) request.getSession().getAttribute("user")).getUsername())) {
