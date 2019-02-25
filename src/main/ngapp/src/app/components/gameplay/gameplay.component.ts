@@ -33,6 +33,7 @@ export class GameplayComponent implements OnInit {
               this.status.balance = data.balance;
               this.status.minimum = data.minimum;
               this.status.turn = data.turn;
+              this.status.player = data.player;
               this.status.game = data.game;
               this.status.playerBet = data.playerBet;
               this.status.status = data.status;

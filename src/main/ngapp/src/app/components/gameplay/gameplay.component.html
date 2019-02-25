@@ -26,7 +26,7 @@
 
     <h4 *ngIf="status.status === 'closed'">{{status.turn}} won the game with total winnings of {{status.pot}}!</h4>
     
-      <div class="col-lg-8 offset-lg-2" *ngIf="!status.folded && status.status !== 'closed'">
+      <div class="col-lg-8 offset-lg-2" *ngIf="!status.folded && status.status !== 'closed' && status.player === status.turn">
         <div class="row">
 
           <div class="col-lg-3">
