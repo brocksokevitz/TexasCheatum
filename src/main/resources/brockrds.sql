@@ -139,8 +139,11 @@ begin
 select count(*) into number_players from users where current_game=game and username=in_user;
 if number_players=0 then
     update users set current_game=game where username=in_user and exists(select game_id from games where game_id=game);
-    success := SQL%ROWCOUNT;
     select count(*) into number_players from users where current_game=game;
+    if number_players=4 then
+        start_game(game,temp_varchar);
+    end if;
+    success := number_players;
 else
     success := 1;
 end if;

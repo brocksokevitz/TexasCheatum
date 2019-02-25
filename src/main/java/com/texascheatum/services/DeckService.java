@@ -50,8 +50,8 @@ public class DeckService {
 	
 	public static void beginGame(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		assignTurns(request, response);
 		GameDaoImplementation.getGameDao().startGame(((User) request.getSession().getAttribute("user")).getCurrentGame());
+		assignTurns(request, response);
 	}
 	private static void assignTurns(HttpServletRequest request, HttpServletResponse response) {
 		List<User> users = UserDaoImplementation.getUserDao().getUsers(
@@ -71,9 +71,12 @@ public class DeckService {
 			throws IOException, ServletException {
 		String gameID = GameDaoImplementation.getGameDao().readGame(
 				mapper.readTree(request.getReader().readLine()).get("gameID").asText()).getGameID();
-		if (GameDaoImplementation.getGameDao().joinGame(
+		int success = GameDaoImplementation.getGameDao().joinGame(
 				gameID,
-				((User) request.getSession().getAttribute("user")).getUsername())) {
+				((User) request.getSession().getAttribute("user")).getUsername());
+		if (success > 0) {
+			if (success == 4)
+				assignTurns(request, response);
 			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);
 			((User) request.getSession().getAttribute("user")).setTurnNumber(0);
 			getGame(request, response);

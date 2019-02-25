@@ -94,7 +94,7 @@ public class GameDaoImplementation implements GameDao{
 	}
 
 	@Override
-	public boolean joinGame(String gameId, String userId) {
+	public int joinGame(String gameId, String userId) {
 		Connection conn = null;
 		conn = pool.getConnection();
 		
@@ -116,7 +116,7 @@ public class GameDaoImplementation implements GameDao{
 
 			cs.execute();
 			
-			return cs.getInt(3) > 0;
+			cs.getInt(3);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -124,7 +124,7 @@ public class GameDaoImplementation implements GameDao{
 		}finally {
 			pool.freeConnection(conn);
 		}
-	return false;
+	return 0;
 	}
 
 	@Override
