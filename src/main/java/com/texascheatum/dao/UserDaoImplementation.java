@@ -139,6 +139,7 @@ public class UserDaoImplementation implements UserDao{
 			while(results.next()) {				
 				allUsers.add(new User(results.getInt("user_id"), results.getString("username"), results.getDouble("balance"), results.getString("email"), "n/a", 
 						results.getInt("superuser"), results.getString("current_game"),results.getInt("total_games"),results.getInt("total_wins")));
+				allUsers.get(allUsers.size() - 1).setTurnNumber(results.getInt("turn_number"));
 			}
 			return allUsers;
 			

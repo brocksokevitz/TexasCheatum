@@ -266,12 +266,14 @@ public class DeckService {
 		List<User> players = UserDaoImplementation.getUserDao().getUsers(
 				((User) request.getSession().getAttribute("user")).getCurrentGame());
 		for (User player : players) {
-			JsonNode cards_Player = makeHttpRequest(
-					((User) request.getSession().getAttribute("user")).getCurrentGame()
-					+ "/pile/" + player.getUsername() + "/list").get("piles").get(player.getUsername()).get("cards");
-			cardPiles.put(player.getUsername(), new String[cards_Player.size()]);
-			for (int i = 0; i < cards_Player.size(); i++)
-				cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
+			if (player.getTurnNumber() >= 0) {
+				JsonNode cards_Player = makeHttpRequest(
+						((User) request.getSession().getAttribute("user")).getCurrentGame()
+						+ "/pile/" + player.getUsername() + "/list").get("piles").get(player.getUsername()).get("cards");
+				cardPiles.put(player.getUsername(), new String[cards_Player.size()]);
+				for (int i = 0; i < cards_Player.size(); i++)
+					cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
+			}
 		}
 		
 		List<String> winners = GameService.compareHands(cardPiles);
