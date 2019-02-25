@@ -25,9 +25,8 @@
     </div>
 
     <h4 *ngIf="status.status === 'closed'">{{status.turn}} won the game with total winnings of {{status.pot}}!</h4>
-
-    <div *ngIf="status.status !== 'closed'">
-      <div class="col-lg-8 offset-lg-2" *ngIf="!folded || status.game !== ''">
+    
+      <div class="col-lg-8 offset-lg-2" *ngIf="!status.folded && status.status !== 'closed'">
         <div class="row">
 
           <div class="col-lg-3">
@@ -41,7 +40,7 @@
           <div *ngIf="status.minimum === 0">
             <div class="col-lg-3">
               <form class="form-group" (ngSubmit)="betting()" method="POST" *ngIf="status.balance > status.minimum">
-                <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" [max]="status.balance" step="25" placeholder="Bet Amount" required><br>
+                <input type="number" name="bet" [(ngModel)]="betAmount" #bet="ngModel" min="100" [max]="status.balance" step="25" required><br>
                 <button class="btn btn-outline-light">Bet</button>
               </form>
             </div>
@@ -50,17 +49,19 @@
           <div *ngIf="status.minimum > 0">
             <div class="col-lg-3">
               <form class="form-group" (ngSubmit)="raising()" method="POST" *ngIf="status.balance > status.minimum">
-                <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" [max]="status.balance" step="25" placeholder="Raise Amount" required><br>
+                <input type="number" name="raise" [(ngModel)]="raiseAmount" #raise="ngModel" min="100" [max]="status.balance" step="25" required><br>
                 <button class="btn btn-outline-light">Raise</button>
               </form>
             </div>
           </div>
 
-          <div class="col-lg-3">
-            <form class="form-group" (ngSubmit)="calling()" method="POST" *ngIf="status.balance >= status.minimum && status.minimum > 0">
+        <div class="col-lg-3">
+          <div *ngIf="status.minimum > 0">
+            <form class="form-group" (ngSubmit)="calling()" method="POST" *ngIf="status.balance >= status.minimum">
               <button class="btn btn-outline-light">Call</button>
             </form>
           </div>
+        </div>
                   
           <div class="col-lg-3">
             <form class="form-group" (ngSubmit)="folding()" method="POST">
@@ -70,15 +71,14 @@
 
         </div>
       </div>
-    </div>
+    
   </div>
 
-  <div *ngIf="folded || status.game === ''">
+  <div *ngIf="status.folded">
     <br>
     <h4 id="youFold">You folded! Stay and watch the rest of the game, or exit through the pause menu.</h4>
   </div>
   
-
 </div>
 <br>
 <h4>Player Balance: {{status.balance}}</h4>

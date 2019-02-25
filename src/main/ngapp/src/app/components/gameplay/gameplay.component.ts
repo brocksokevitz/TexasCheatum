@@ -15,13 +15,11 @@ export class GameplayComponent implements OnInit {
   private status: any = {};
   private action: string;
   private tableCards: any = [];
-  private folded: boolean;
 
   constructor(
     private gameServ: GameService
   ) {
     this.alive = true;
-    this.folded = false;
   }
 
   ngOnInit() {
@@ -38,6 +36,7 @@ export class GameplayComponent implements OnInit {
               this.status.game = data.game;
               this.status.playerBet = data.playerBet;
               this.status.status = data.status;
+              this.status.folded = data.folded;
               this.status.hand = data.hand;
               this.status.table = data.table;
               this.tableCards = this.status.table;
@@ -86,6 +85,5 @@ export class GameplayComponent implements OnInit {
     console.log("inside the folding method of gameplay.component");
     this.action = "fold";
     this.gameServ.folding(this.action).subscribe();
-    this.folded = true;
   }
 }
