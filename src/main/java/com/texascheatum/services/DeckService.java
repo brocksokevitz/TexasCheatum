@@ -3,6 +3,7 @@ package com.texascheatum.services;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,21 +85,27 @@ public class DeckService {
 			throws IOException, ServletException {
 		Game game = GameDaoImplementation.getGameDao().readGame(
 				((User) request.getSession().getAttribute("user")).getCurrentGame());
-		
-		response.getWriter().write("{");
-		
-		response.getWriter().write("\"game\" : ");
+
+		System.out.println(game.getStatus().equals("closed") + ":" + (((User) request.getSession().getAttribute("user")).getRoundBet() == -1));
 		if (game.getStatus().equals("closed")
 				&& ((User) request.getSession().getAttribute("user")).getRoundBet() == -1) {
-			((User) request.getSession().getAttribute("user")).setRoundBet(0);;
-			String winner = UserDaoImplementation.getUserDao().getUsernameForTurn(
-					((User) request.getSession().getAttribute("user")).getCurrentGame());
-			if (winner.equals(((User) request.getSession().getAttribute("user")).getUsername())
-					|| winner.equals(""))
+			System.out.println("closing game");
+			
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);
+			List<String> winners = Arrays.asList(UserDaoImplementation.getUserDao().getUsernameForTurn(
+					((User) request.getSession().getAttribute("user")).getCurrentGame()).split(","));
+
+			for (String winner : winners)
+				System.out.println(winner);
+			if (winners.contains(((User) request.getSession().getAttribute("user")).getUsername()))
 				((User) request.getSession().getAttribute("user")).setBalance(
 						((User) request.getSession().getAttribute("user")).getBalance()
 						+ game.getPot());
 		}
+		
+		response.getWriter().write("{");
+		
+		response.getWriter().write("\"game\" : ");
 		response.getWriter().write("\"" + ((User) request.getSession().getAttribute("user")).getCurrentGame() + "\"");
 		response.getWriter().write(",");
 		
@@ -125,6 +132,11 @@ public class DeckService {
 		
 		response.getWriter().write("\"playerBet\" : ");
 		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getRoundBet());
+		response.getWriter().write(",");
+		
+		response.getWriter().write("\"folded\" : ");
+		response.getWriter().write(""
+				+ (((User) request.getSession().getAttribute("user")).getTurnNumber() == -1 ? true : false));
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"pot\" : ");
@@ -188,6 +200,8 @@ public class DeckService {
 		
 		log.info(difference);
 		if (difference < 0) {
+			((User) request.getSession().getAttribute("user")).setRoundBet(0);
+			
 			String changeString = Double.toString(difference);
 			if (changeString.charAt(changeString.length() - 1) == '1') {
 				difference += 0.001;
@@ -200,8 +214,6 @@ public class DeckService {
 				endGame(request, response);
 			}
 			difference *= -1;
-			
-			((User) request.getSession().getAttribute("user")).setRoundBet(0);
 		} else
 			((User) request.getSession().getAttribute("user")).setRoundBet(
 					((User) request.getSession().getAttribute("user")).getRoundBet() + difference);
@@ -211,7 +223,7 @@ public class DeckService {
 				((User) request.getSession().getAttribute("user")).getBalance()
 				- difference);
 		if (actionJson.get("action").asText().equals("fold"))
-			((User) request.getSession().getAttribute("user")).setCurrentGame("");
+			((User) request.getSession().getAttribute("user")).setTurnNumber(-1);
 	}
 	public static int getTableCardNum(HttpServletRequest request) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
@@ -262,9 +274,9 @@ public class DeckService {
 				cardPiles.get(player.getUsername())[i] = cards_Player.get(i).get("code").asText();
 		}
 		
-		String winner = GameService.compareHands(cardPiles);
+		List<String> winners = GameService.compareHands(cardPiles);
 		GameDaoImplementation.getGameDao().endGame(
-				((User) request.getSession().getAttribute("user")).getCurrentGame(), winner);
+				((User) request.getSession().getAttribute("user")).getCurrentGame(), winners);
 		((User) request.getSession().getAttribute("user")).setRoundBet(-1);
 	}
 	

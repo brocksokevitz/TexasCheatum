@@ -38,7 +38,7 @@ create table games
     status varchar(15) default('pending') not null,
     pot Decimal(15,2) default(0) not null,
     current_target Decimal(15,2) default(100) not null,
-    current_turn number(1) not null,
+    current_turn number(4) not null,
     round_started number(1) not null,
     --
     constraint game_id_pk primary key(game_id)
@@ -172,31 +172,28 @@ if number_players>0 and temp_varchar!='pending' and temp_varchar!='closed' then
         select in_target-round_bet into difference from users where username=in_user;
         update games set current_target=in_target where game_id=game;
     elsif in_action='fold' then
-        update users set current_game=0 where user_id=in_user;
+        update users set turn_number=-1 where username=in_user;
     end if;
     update games set pot=pot+difference where game_id=game;
     update users set round_bet=round_bet+difference,balance=balance-difference where username=in_user;
     
-    select count(username) into number_players from users where current_game=game;
-    select count(username) into players_at_min from users,(select current_target from games where game_id=game) where current_game=game and round_bet=current_target;
+    select count(username) into number_players from users where current_game=game and turn_number>=0;
+    select count(username) into players_at_min from users,(select current_target from games where game_id=game)
+        where current_game=game and turn_number>=0 and round_bet=current_target;
     
-    dbms_output.put_line(number_players);
-    dbms_output.put_line(players_at_min);
     out_difference := difference;
-    if number_players=players_at_min and round_begun=1 then
+    if number_players=0 then
+        update games set status='closed' where game_id=game;
+        out_difference := -0.0003;
+    elsif number_players=players_at_min and round_begun=1 then
         update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
         update users set round_bet=0 where current_game=game;
         if change_status(game)='closed' then
-            dbms_output.put_line('closed');
             out_difference := out_difference+0.002;
-            dbms_output.put_line(out_difference);
         else
-            dbms_output.put_line('not closed');
             out_difference := out_difference+0.001;
-            dbms_output.put_line(out_difference);
         end if;
         out_difference := out_difference*-1;
-        dbms_output.put_line(out_difference);
     else
         number_players := change_turn(game);
         update games set current_turn=number_players where game_id=game;
@@ -248,23 +245,17 @@ return current_status;
 commit;-- saves changes
 end;
 /
-create or replace procedure end_game(game in varchar, winner in varchar)
+create or replace procedure end_game(game in varchar, winners in varchar)
 as
-number_players number(1);
+number_winners number(1);
 winnings decimal(15,2);
 begin
-if winner='tie' then
-    select count(*) into number_players from users where current_game=game;
-    select pot/number_players into winnings from games where game_id=game;
-    update games set current_turn=-1 where game_id=game;
-    update users set balance=balance+winnings where current_game=game;
-else
-    select turn_number into number_players from users where current_game=game and username=winner;
-    select pot into winnings from games where game_id=game;
-    update games set current_turn=number_players where game_id=game;
-    update users set balance=balance+winnings where current_game=game and username=winner;
-end if;
-update games set pot=winnings where game_id=game;
+select length(winners) into number_winners from dual;
+select pot/number_winners into winnings from games where game_id=game;
+update games set pot=winnings,current_turn=cast(winners as number(4)) where game_id=game;
+for i in 1..number_winners loop
+    update users set balance=balance+winnings,total_wins=total_wins+1 where current_game=game and turn_number=cast(substr(winners,i,1) as number);
+end loop;
 commit;-- saves changes
 end;
 /

@@ -170,8 +170,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -184,8 +184,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -198,8 +199,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -212,8 +213,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -226,8 +227,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -240,8 +242,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -254,8 +256,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -268,8 +270,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -282,8 +284,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -296,8 +299,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -310,8 +313,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -324,8 +327,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -338,8 +342,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -352,8 +356,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -366,8 +371,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -380,8 +385,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -394,8 +400,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -408,8 +414,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -422,8 +428,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("1", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("1", winner.get(0));
 	}
 	
 	@Test
@@ -436,8 +442,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -450,8 +456,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -464,8 +471,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -478,8 +485,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 	@Test
@@ -492,8 +500,8 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("2", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertEquals("2", winner.get(0));
 	}
 	
 	@Test
@@ -506,8 +514,9 @@ public class UserDaoTest {
 		map.put("2", hand2);
 		map.put("table", table);
 		
-		String winner = GameService.compareHands(map);
-		Assert.assertEquals("tie", winner);
+		List<String> winner = GameService.compareHands(map);
+		Assert.assertTrue(winner.contains("1"));
+		Assert.assertTrue(winner.contains("2"));
 	}
 	
 //	

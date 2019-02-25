@@ -97,12 +97,24 @@ public class UserDaoImplementation implements UserDao{
 		Connection conn = null;
 		conn = pool.getConnection();
 		
-		try (PreparedStatement cs = conn.prepareStatement("select username from users,games where current_game=?"
-				+ " and game_id=current_game and current_turn=turn_number");) {
+		try (PreparedStatement cs = conn.prepareStatement("select current_turn from games where game_id=?");
+			PreparedStatement cs2 = conn.prepareStatement("select username from users where current_game=? and turn_number=?");) {
 			cs.setString(1, gameID);
-			ResultSet username = cs.executeQuery();
-			if (username.next())
-				return username.getString(1);
+			ResultSet turnNumbers = cs.executeQuery();
+			if (turnNumbers.next()) {
+				StringBuilder names = new StringBuilder("");
+				String turnString = Integer.toString(turnNumbers.getInt(1));
+				for (int i = 0; i < turnString.length(); i++) {
+					cs2.setString(1, gameID);
+					cs2.setInt(2, Integer.valueOf(turnString.substring(i, i + 1)));
+
+					ResultSet username = cs2.executeQuery();
+					username.next();
+					names.append(username.getString(1) + ",");
+				}
+				names.deleteCharAt(names.length() - 1);
+				return names.toString();
+			}
 			return "";
 			
 		} catch (SQLException e) {
@@ -147,7 +159,7 @@ public class UserDaoImplementation implements UserDao{
 		
 		try (CallableStatement cs = conn.prepareCall("{call promote_user(?)}");) {
 			cs.setString(1, username);
-			boolean output = cs.execute();
+			cs.execute();
 			
 
 			return true;
