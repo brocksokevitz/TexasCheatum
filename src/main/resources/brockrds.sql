@@ -118,7 +118,7 @@ create or replace procedure create_game(game_id varchar, host_username varchar)
 as
 begin
 insert into games values(game_id, 'pending', 0, 100, 0, 0);
-update users set current_game=game_id where username=host_username;
+update users set current_game=game_id,total_games=total_games+1 where username=host_username;
 commit;-- saves changes
 end;
 /
@@ -184,7 +184,7 @@ if number_players>0 and temp_varchar!='pending' and temp_varchar!='closed' then
     out_difference := difference;
     if number_players=0 then
         update games set status='closed' where game_id=game;
-        out_difference := -0.0003;
+        out_difference := -0.002;
     elsif number_players=players_at_min and round_begun=1 then
         update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
         update users set round_bet=0 where current_game=game;

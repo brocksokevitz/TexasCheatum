@@ -136,7 +136,7 @@ public class DeckService {
 		
 		response.getWriter().write("\"folded\" : ");
 		response.getWriter().write(""
-				+ (((User) request.getSession().getAttribute("user")).getTurnNumber() == -1 ? true : false));
+				+ (((User) request.getSession().getAttribute("user")).getTurnNumber() == -1));
 		response.getWriter().write(",");
 		
 		response.getWriter().write("\"pot\" : ");
