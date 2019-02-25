@@ -74,6 +74,7 @@ public class DeckService {
 				gameID,
 				((User) request.getSession().getAttribute("user")).getUsername())) {
 			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);
+			((User) request.getSession().getAttribute("user")).setTurnNumber(0);
 			getGame(request, response);
 		}
 		else {
