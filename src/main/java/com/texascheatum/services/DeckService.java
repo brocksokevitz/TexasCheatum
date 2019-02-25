@@ -3,7 +3,6 @@ package com.texascheatum.services;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,7 @@ public class DeckService {
 			GameDaoImplementation.getGameDao().createGame(gameID,
 					((User) request.getSession().getAttribute("user")).getUsername());
 			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);
+			((User) request.getSession().getAttribute("user")).setTurnNumber(0);
 			drawHand(request);
 			
 			response.setHeader("Content-Type", "text/plain");
@@ -92,11 +92,9 @@ public class DeckService {
 			System.out.println("closing game");
 			
 			((User) request.getSession().getAttribute("user")).setRoundBet(0);
-			List<String> winners = Arrays.asList(UserDaoImplementation.getUserDao().getUsernameForTurn(
-					((User) request.getSession().getAttribute("user")).getCurrentGame()).split(","));
+			String winners = UserDaoImplementation.getUserDao().getUsernameForTurn(
+					((User) request.getSession().getAttribute("user")).getCurrentGame());
 
-			for (String winner : winners)
-				System.out.println(winner);
 			if (winners.contains(((User) request.getSession().getAttribute("user")).getUsername()))
 				((User) request.getSession().getAttribute("user")).setBalance(
 						((User) request.getSession().getAttribute("user")).getBalance()

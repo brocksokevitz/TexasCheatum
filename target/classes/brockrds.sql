@@ -186,7 +186,7 @@ if number_players>0 and temp_varchar!='pending' and temp_varchar!='closed' then
         update games set status='closed' where game_id=game;
         out_difference := -0.002;
     elsif number_players=players_at_min and round_begun=1 then
-        update games set current_turn=0,current_target=0,round_started=0 where game_id=game;
+        update games set current_turn=-1,current_target=0,round_started=0 where game_id=game;
         number_players := change_turn(game);
         update games set current_turn=number_players where game_id=game;
         update users set round_bet=0 where current_game=game;
