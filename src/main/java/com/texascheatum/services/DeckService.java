@@ -54,6 +54,7 @@ public class DeckService {
 		assignTurns(request, response);
 	}
 	private static void assignTurns(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("called");
 		List<User> users = UserDaoImplementation.getUserDao().getUsers(
 				((User) request.getSession().getAttribute("user")).getCurrentGame());
 		List<Integer> turnNumbers = new ArrayList<>();
@@ -75,6 +76,7 @@ public class DeckService {
 				gameID,
 				((User) request.getSession().getAttribute("user")).getUsername());
 		if (success > 0) {
+			System.out.println(success);
 			if (success == 4)
 				assignTurns(request, response);
 			((User) request.getSession().getAttribute("user")).setCurrentGame(gameID);

@@ -116,7 +116,7 @@ public class GameDaoImplementation implements GameDao{
 
 			cs.execute();
 			
-			cs.getInt(3);
+			return cs.getInt(3);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
