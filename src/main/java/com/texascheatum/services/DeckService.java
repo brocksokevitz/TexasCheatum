@@ -134,6 +134,11 @@ public class DeckService {
 		response.getWriter().write("" + ((User) request.getSession().getAttribute("user")).getRoundBet());
 		response.getWriter().write(",");
 		
+		response.getWriter().write("\"folded\" : ");
+		response.getWriter().write(""
+				+ (((User) request.getSession().getAttribute("user")).getTurnNumber() == -1 ? true : false));
+		response.getWriter().write(",");
+		
 		response.getWriter().write("\"pot\" : ");
 		response.getWriter().write("" + game.getPot());
 		response.getWriter().write(",");
@@ -218,7 +223,7 @@ public class DeckService {
 				((User) request.getSession().getAttribute("user")).getBalance()
 				- difference);
 		if (actionJson.get("action").asText().equals("fold"))
-			((User) request.getSession().getAttribute("user")).setCurrentGame("");
+			((User) request.getSession().getAttribute("user")).setTurnNumber(-1);
 	}
 	public static int getTableCardNum(HttpServletRequest request) throws IOException {
 		JsonNode apiResp = makeHttpRequest(
